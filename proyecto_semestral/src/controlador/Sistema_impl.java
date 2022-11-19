@@ -121,7 +121,51 @@ public class Sistema_impl {
         
         lVideojugo.add(vi1);
         lUsuario.add(u1);
-    }       
+    }      
+    public boolean ingresarUsuario(String rut, String nombre, String direccion, String correo, String fecha_de_nacimiento, String comuna, String telefono){
+    // rut y correo unico
+        if(!rut_unico(rut)){
+            throw new NullPointerException("El rut ya existe en el sistema.");
+        }
+        if(!correo_unico(correo)){
+            throw new NullPointerException("El correo ya existe en el sistema.");
+        }
+    // verificar fecha
+        Fecha f = new Fecha();
+        Date date = null;
+        try{
+            date = f.verificarFecha(fecha_de_nacimiento);
+        }catch(Exception e){
+            throw new NullPointerException(e.getMessage());
+        }
+    // ingresar el usuario
+        Usuario u = new Usuario(rut, nombre, direccion, correo, date, comuna, telefono);
+        return lUsuario.add(u);
+    }
+    public boolean ingresarVendedor(String rut, String nombre, String direccion, String correo, String fono){
+    // rut y correo unico
+        if(!rut_unico(rut)){
+            throw new NullPointerException("El rut ya existe en el sistema.");
+        }
+        if(!correo_unico(correo)){
+            throw new NullPointerException("El correo ya existe en el sistema.");
+        }
+    // ingresar el vendedor
+        Vendedor v = new Vendedor(rut, nombre, direccion, correo, fono);
+        return lVendedor.add(v);
+    }
+    public boolean ingresarDesarrollador( String rut, String nombre, String direccion, String correo, String fono){
+    // rut y correo unico
+        if(!rut_unico(rut)){
+            throw new NullPointerException("El rut ya existe en el sistema.");
+        }
+        if(!correo_unico(correo)){
+            throw new NullPointerException("El correo ya existe en el sistema.");
+        }
+    // ingresar el desarrollador
+        Desarrollador d = new Desarrollador(rut, nombre, direccion, correo, fono);
+        return lDesarrollador.add(d);
+    }
     public boolean ingresarArriendo(String codigo, String rutUsuario,String fechaA, String fechaE){
         int posicionV = -1;
         for(int i=0;i<lVideojugo.size();i++){
@@ -169,6 +213,7 @@ public class Sistema_impl {
         contrador_arriendos++;
         return true;
     }
+    
 //-------------------------------------BUSCAR-------------------------------------
     public int buscarUsuario(String rut){
         for(int i=0;i<lUsuario.size();i++){

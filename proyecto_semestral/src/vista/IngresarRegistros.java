@@ -4,28 +4,31 @@
  */
 package vista;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author thoma
  */
 public class IngresarRegistros extends javax.swing.JFrame {
 
-    /**
-     * Creates new form IngresarRegistros
-     */
+    private String tipo_registro;
     public IngresarRegistros(String nombre_registro) {
         initComponents();
         ocultarPaneles();
-        if(nombre_registro.equalsIgnoreCase("usuario")){
+        
+        tipo_registro = nombre_registro;
+        if(nombre_registro.equals("Usuario")){
+            tipo_registro = "persona";
             titulo_txt.setText("Ingresar Usuario");
             ingresarPersona.setVisible(true);
             ingresarUsuario.setVisible(true);
-        }else if(nombre_registro.equalsIgnoreCase("vendedor")){
-            titulo_txt.setText("Ingresar Vendedor");
+        }else if(nombre_registro.equals("Vendedor") || nombre_registro.equals("Desarrollador")){
+            tipo_registro = "persona";
+            titulo_txt.setText(titulo_txt.getText()+nombre_registro);
             ingresarPersona.setVisible(true);
-            ingresarVendedor.setVisible(true);
-        }else if(nombre_registro.equalsIgnoreCase("desarrollador")){
-
+            ingresarVend_Desarr.setVisible(true);
+        
         }else if(nombre_registro.equalsIgnoreCase("videojuego")){
 
         }else{
@@ -35,7 +38,8 @@ public class IngresarRegistros extends javax.swing.JFrame {
     private void ocultarPaneles(){
         ingresarPersona.setVisible(false);
         ingresarUsuario.setVisible(false);
-        ingresarVendedor.setVisible(false);
+        ingresarVend_Desarr.setVisible(false);
+
     }
 
     /**
@@ -64,9 +68,8 @@ public class IngresarRegistros extends javax.swing.JFrame {
         direccion_txt = new javax.swing.JLabel();
         direccion_input = new javax.swing.JTextField();
         jSeparator_direccion2 = new javax.swing.JSeparator();
-        jPanel_registrar2 = new javax.swing.JPanel();
-        jLabel_registrar2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        ingresar_button = new javax.swing.JButton();
+        registrar_button = new javax.swing.JButton();
         ingresarUsuario = new javax.swing.JPanel();
         telefono_txt = new javax.swing.JLabel();
         telefono_input = new javax.swing.JTextField();
@@ -74,13 +77,11 @@ public class IngresarRegistros extends javax.swing.JFrame {
         fechaNacimiento_txt = new javax.swing.JLabel();
         fechaNacimiento_input = new javax.swing.JTextField();
         jSeparator_fNac = new javax.swing.JSeparator();
-        jPanel_registrar = new javax.swing.JPanel();
-        jLabel_registrar = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        ingresarVendedor = new javax.swing.JPanel();
-        jLabel_telefono1 = new javax.swing.JLabel();
-        jTextField_telefono1 = new javax.swing.JTextField();
-        jSeparator_telefono1 = new javax.swing.JSeparator();
+        ingresarVend_Desarr = new javax.swing.JPanel();
+        fono_txt = new javax.swing.JLabel();
+        fono_input = new javax.swing.JTextField();
+        fono_separator = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(660, 460));
@@ -168,48 +169,21 @@ public class IngresarRegistros extends javax.swing.JFrame {
         ingresarPersona.add(direccion_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 270, -1));
         ingresarPersona.add(jSeparator_direccion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 270, 10));
 
-        jPanel_registrar2.setBackground(new java.awt.Color(0, 153, 153));
-
-        jLabel_registrar2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel_registrar2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_registrar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_registrar2.setText("Registrar");
-        jLabel_registrar2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel_registrar2MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel_registrar2Layout = new javax.swing.GroupLayout(jPanel_registrar2);
-        jPanel_registrar2.setLayout(jPanel_registrar2Layout);
-        jPanel_registrar2Layout.setHorizontalGroup(
-            jPanel_registrar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-            .addGroup(jPanel_registrar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_registrar2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel_registrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel_registrar2Layout.setVerticalGroup(
-            jPanel_registrar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 35, Short.MAX_VALUE)
-            .addGroup(jPanel_registrar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_registrar2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel_registrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
-        ingresarPersona.add(jPanel_registrar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, -1, -1));
-
-        jButton2.setText("Volver");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ingresar_button.setText("Volver");
+        ingresar_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ingresar_buttonActionPerformed(evt);
             }
         });
-        ingresarPersona.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, -1, -1));
+        ingresarPersona.add(ingresar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, -1, -1));
+
+        registrar_button.setText("Registrar");
+        registrar_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrar_buttonActionPerformed(evt);
+            }
+        });
+        ingresarPersona.add(registrar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, -1, -1));
 
         ingresarUsuario.setBackground(new java.awt.Color(51, 51, 51));
         ingresarUsuario.setMaximumSize(new java.awt.Dimension(660, 460));
@@ -245,41 +219,6 @@ public class IngresarRegistros extends javax.swing.JFrame {
         ingresarUsuario.add(fechaNacimiento_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, 270, -1));
         ingresarUsuario.add(jSeparator_fNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 270, 10));
 
-        jPanel_registrar.setBackground(new java.awt.Color(0, 153, 153));
-
-        jLabel_registrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel_registrar.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_registrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_registrar.setText("Registrar");
-        jLabel_registrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel_registrarMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel_registrarLayout = new javax.swing.GroupLayout(jPanel_registrar);
-        jPanel_registrar.setLayout(jPanel_registrarLayout);
-        jPanel_registrarLayout.setHorizontalGroup(
-            jPanel_registrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-            .addGroup(jPanel_registrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_registrarLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel_registrarLayout.setVerticalGroup(
-            jPanel_registrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 35, Short.MAX_VALUE)
-            .addGroup(jPanel_registrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_registrarLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
-        ingresarUsuario.add(jPanel_registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, -1, -1));
-
         jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,27 +229,27 @@ public class IngresarRegistros extends javax.swing.JFrame {
 
         ingresarPersona.add(ingresarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 460));
 
-        ingresarVendedor.setBackground(new java.awt.Color(51, 51, 51));
-        ingresarVendedor.setMaximumSize(new java.awt.Dimension(660, 460));
-        ingresarVendedor.setMinimumSize(new java.awt.Dimension(660, 460));
-        ingresarVendedor.setPreferredSize(new java.awt.Dimension(660, 460));
-        ingresarVendedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        ingresarVend_Desarr.setBackground(new java.awt.Color(51, 51, 51));
+        ingresarVend_Desarr.setMaximumSize(new java.awt.Dimension(660, 460));
+        ingresarVend_Desarr.setMinimumSize(new java.awt.Dimension(660, 460));
+        ingresarVend_Desarr.setPreferredSize(new java.awt.Dimension(660, 460));
+        ingresarVend_Desarr.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel_telefono1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel_telefono1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel_telefono1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_telefono1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel_telefono1.setText("Fono:");
-        ingresarVendedor.add(jLabel_telefono1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 247, 130, -1));
+        fono_txt.setBackground(new java.awt.Color(255, 255, 255));
+        fono_txt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        fono_txt.setForeground(new java.awt.Color(255, 255, 255));
+        fono_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        fono_txt.setText("Fono:");
+        ingresarVend_Desarr.add(fono_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 247, 130, -1));
 
-        jTextField_telefono1.setBackground(new java.awt.Color(51, 51, 51));
-        jTextField_telefono1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField_telefono1.setText("+56 9 0000 0000");
-        jTextField_telefono1.setBorder(null);
-        ingresarVendedor.add(jTextField_telefono1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 270, -1));
-        ingresarVendedor.add(jSeparator_telefono1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, 270, 10));
+        fono_input.setBackground(new java.awt.Color(51, 51, 51));
+        fono_input.setForeground(new java.awt.Color(102, 102, 102));
+        fono_input.setText("+56 9 0000 0000");
+        fono_input.setBorder(null);
+        ingresarVend_Desarr.add(fono_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 270, -1));
+        ingresarVend_Desarr.add(fono_separator, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, 270, 10));
 
-        ingresarPersona.add(ingresarVendedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 460));
+        ingresarPersona.add(ingresarVend_Desarr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -324,7 +263,7 @@ public class IngresarRegistros extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 460, Short.MAX_VALUE)
+            .addGap(0, 472, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(ingresarPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -334,49 +273,54 @@ public class IngresarRegistros extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel_registrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_registrarMouseClicked
-        /*
-        String nombre = jTextField_nombre.getText();
-        verificarCamposEnBlanco(nombre, "nombre");
-
-        String fecha = fechaNacimiento_input.getText();
-        verificarCamposEnBlanco(fecha, "fecha");
-
-        String direccion = jTextField_direccion.getText();
-        verificarCamposEnBlanco(direccion, "direccion");
-
-        String comuna = jTextField_comuna.getText();
-        verificarCamposEnBlanco(comuna, "comuna");
-
-        String telefono = telefono_input.getText();
-        verificarCamposEnBlanco(telefono, "telefono");
-
-        String rut = jTextField_rut.getText();
-        verificarCamposEnBlanco(rut, "rut");
-
-        String correo = jTextField_correo.getText();
-        verificarCamposEnBlanco(correo, "correo");
-        */
-        /*
-        try{
-            Visualizador.sistema.ingresarUsuario(fecha, comuna, telefono, rut, nombre, direccion, correo);
-            JOptionPane.showMessageDialog(null,"Usuario ingresado.");
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e.getMessage());
-        }*/
-    }//GEN-LAST:event_jLabel_registrarMouseClicked
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jLabel_registrar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_registrar2MouseClicked
+    private void ingresar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresar_buttonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel_registrar2MouseClicked
+    }//GEN-LAST:event_ingresar_buttonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void registrar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrar_buttonActionPerformed
+        System.out.println(tipo_registro);
+        if(tipo_registro.equalsIgnoreCase("persona")){
+            String rut = rut_input.getText();
+            String nombre = nombre_input.getText();
+            String correo = correo_input.getText();
+            String direccion= direccion_input.getText();
+            String tipo_persona = titulo_txt.getText().replace("Ingresar ", "");
+            System.out.println(tipo_persona);
+            if(tipo_persona.equals("Usuario")){
+                String comuna = comuna_input.getText();
+                String telefono = telefono_input.getText();
+                String fecha_de_nacimiento = fechaNacimiento_input.getText();
+                try{
+                    Visualizador.sistema.ingresarUsuario(rut, nombre, direccion, correo, fecha_de_nacimiento, comuna, telefono);
+                    JOptionPane.showMessageDialog(null, tipo_persona+" ingresado", "Validación", 1);
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Validación", 1);
+                }
+                
+            }else{
+                String fono = fono_input.getText();
+                String titulo = titulo_txt.getText().replaceAll("Menu ", "");
+                try{
+                    if(tipo_persona.equals("Vendedor")){
+                        Visualizador.sistema.ingresarVendedor(rut, nombre, direccion, correo, fono);
+                    }else{
+                        Visualizador.sistema.ingresarDesarrollador(rut, nombre, direccion, correo, fono);
+                    }
+                    JOptionPane.showMessageDialog(null, tipo_persona+" ingresado", "Validación", 1);
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Validación", 1);
+                }
+            }
+        }else if(tipo_registro.equals("Videojuego")){
+
+        }else{
+                
+        }
+    }//GEN-LAST:event_registrar_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -392,16 +336,14 @@ public class IngresarRegistros extends javax.swing.JFrame {
     private javax.swing.JLabel direccion_txt;
     private javax.swing.JTextField fechaNacimiento_input;
     private javax.swing.JLabel fechaNacimiento_txt;
+    private javax.swing.JTextField fono_input;
+    private javax.swing.JSeparator fono_separator;
+    private javax.swing.JLabel fono_txt;
     private javax.swing.JPanel ingresarPersona;
     private javax.swing.JPanel ingresarUsuario;
-    private javax.swing.JPanel ingresarVendedor;
+    private javax.swing.JPanel ingresarVend_Desarr;
+    private javax.swing.JButton ingresar_button;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel_registrar;
-    private javax.swing.JLabel jLabel_registrar2;
-    private javax.swing.JLabel jLabel_telefono1;
-    private javax.swing.JPanel jPanel_registrar;
-    private javax.swing.JPanel jPanel_registrar2;
     private javax.swing.JSeparator jSeparator_comuna1;
     private javax.swing.JSeparator jSeparator_correo2;
     private javax.swing.JSeparator jSeparator_direccion2;
@@ -409,10 +351,9 @@ public class IngresarRegistros extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator_nombre2;
     private javax.swing.JSeparator jSeparator_rut2;
     private javax.swing.JSeparator jSeparator_telefono;
-    private javax.swing.JSeparator jSeparator_telefono1;
-    private javax.swing.JTextField jTextField_telefono1;
     private javax.swing.JTextField nombre_input;
     private javax.swing.JLabel nombre_txt;
+    private javax.swing.JButton registrar_button;
     private javax.swing.JTextField rut_input;
     private javax.swing.JLabel rut_txt;
     private javax.swing.JTextField telefono_input;

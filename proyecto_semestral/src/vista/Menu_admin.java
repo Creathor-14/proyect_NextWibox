@@ -355,11 +355,11 @@ public class Menu_admin extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, titulo+" eliminado", "Validación", 1);
             model.removeRow(fila);
-            if(titulo.equalsIgnoreCase("usuario")){
+            if(titulo.equals("Usuario")){
                 Visualizador.sistema.eliminar_usuario(rut);      
-            }else if(titulo.equalsIgnoreCase("vendedor")){
+            }else if(titulo.equals("Vendedor")){
                 Visualizador.sistema.eliminar_vendedor(rut);          
-            }else if(titulo.equalsIgnoreCase("desarrollador")){
+            }else if(titulo.equals("Desarrollador")){
                 Visualizador.sistema.eliminar_desarrollador(rut);
             }else{
                 Visualizador.sistema.eliminar_videojuego(rut);
@@ -375,16 +375,7 @@ public class Menu_admin extends javax.swing.JFrame {
         String titulo = titulo_texto.getText().replaceAll("Menu ", "");
         new IngresarRegistros(titulo).setVisible(true);
     }//GEN-LAST:event_ingresar_bottonActionPerformed
-    private void abrir_ingresar_usuario(){
-        IngresarObj ingresarUsuario = new IngresarObj();
-        ingresarUsuario.setSize(660, 460);
-        ingresarUsuario.setLocation(0,0);
 
-        menu.removeAll();
-        menu.add(ingresarUsuario,new org.netbeans.lib.awtextra.AbsoluteConstraints(0,0,-1,-1));
-        menu.revalidate();
-        menu.repaint();
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraTareas_menu;
     private javax.swing.JButton buscar_botton;
