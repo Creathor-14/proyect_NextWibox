@@ -122,6 +122,11 @@ public class Menu_admin extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         ingresar_botton.setText("Ingresar");
+        ingresar_botton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ingresar_bottonActionPerformed(evt);
+            }
+        });
 
         modificar_botton.setText("Modificar");
 
@@ -129,6 +134,11 @@ public class Menu_admin extends javax.swing.JFrame {
         eliminar_botton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 eliminar_bottonMouseClicked(evt);
+            }
+        });
+        eliminar_botton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminar_bottonActionPerformed(evt);
             }
         });
 
@@ -309,24 +319,7 @@ public class Menu_admin extends javax.swing.JFrame {
     }//GEN-LAST:event_videojuegos_menuMouseClicked
 
     private void eliminar_bottonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminar_bottonMouseClicked
-        int fila = jTable1.getSelectedRow();
-        String titulo = titulo_texto.getText().replaceAll("Menu ", "");
-        System.out.println(titulo);
-        if(fila != -1){
-            if(titulo.equalsIgnoreCase("usuario")){
-                    Visualizador.sistema.eliminar_usuario("");      
-            }else if(titulo.equalsIgnoreCase("vendedor")){
-                    Visualizador.sistema.eliminar_vendedor("");          
-            }else if(titulo.equalsIgnoreCase("desarrollador")){
-                    Visualizador.sistema.eliminar_desarrollador("");
-            }else{
-                    Visualizador.sistema.eliminar_videojuego("");
-            }
-            model.removeRow(fila);
-            JOptionPane.showMessageDialog(null, titulo+" eliminado", "Validación", 1);
-        }else{
-            JOptionPane.showMessageDialog(null, "Seleccione un campo de la tabla", "Validación", 1);
-        }
+
     }//GEN-LAST:event_eliminar_bottonMouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -353,7 +346,45 @@ public class Menu_admin extends javax.swing.JFrame {
         //new Visualizador().setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenu1MouseClicked
-    
+
+    private void eliminar_bottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_bottonActionPerformed
+        int fila = jTable1.getSelectedRow();
+        if(fila != -1){
+            String titulo = titulo_texto.getText().replaceAll("Menu ", "");
+            String rut = jTable1.getValueAt(fila, 0)+"";
+
+            JOptionPane.showMessageDialog(null, titulo+" eliminado", "Validación", 1);
+            model.removeRow(fila);
+            if(titulo.equalsIgnoreCase("usuario")){
+                Visualizador.sistema.eliminar_usuario(rut);      
+            }else if(titulo.equalsIgnoreCase("vendedor")){
+                Visualizador.sistema.eliminar_vendedor(rut);          
+            }else if(titulo.equalsIgnoreCase("desarrollador")){
+                Visualizador.sistema.eliminar_desarrollador(rut);
+            }else{
+                Visualizador.sistema.eliminar_videojuego(rut);
+            }
+            
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione un campo de la tabla", "Validación", 1);
+        }
+    }//GEN-LAST:event_eliminar_bottonActionPerformed
+
+    private void ingresar_bottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresar_bottonActionPerformed
+        String titulo = titulo_texto.getText().replaceAll("Menu ", "");
+        new IngresarRegistros(titulo).setVisible(true);
+    }//GEN-LAST:event_ingresar_bottonActionPerformed
+    private void abrir_ingresar_usuario(){
+        IngresarObj ingresarUsuario = new IngresarObj();
+        ingresarUsuario.setSize(660, 460);
+        ingresarUsuario.setLocation(0,0);
+
+        menu.removeAll();
+        menu.add(ingresarUsuario,new org.netbeans.lib.awtextra.AbsoluteConstraints(0,0,-1,-1));
+        menu.revalidate();
+        menu.repaint();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraTareas_menu;
     private javax.swing.JButton buscar_botton;

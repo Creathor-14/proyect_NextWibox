@@ -34,6 +34,10 @@ public class Visualizador extends javax.swing.JFrame {
     public Visualizador() {
         initComponents();
         this.setLocationRelativeTo(null);//hace que la pestaña se vea al centro
+        
+        sistema.ingresarDatosPrueba();
+        new Menu_admin().setVisible(true); //Admin version pestaña
+        /*
         cargar_login();
         base_de_datos.conectar();
         
@@ -62,6 +66,7 @@ public class Visualizador extends javax.swing.JFrame {
             sistema.ingresarDatosPrueba();
             JOptionPane.showMessageDialog(null, sistema.como_entrar_menu_vendedor(), "Funcionamiento Aplicación", 1);
         }     
+        */
     }
     public void cargar_login(){
         Login login = new Login();

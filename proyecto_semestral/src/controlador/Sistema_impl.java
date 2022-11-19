@@ -170,7 +170,52 @@ public class Sistema_impl {
         return true;
     }
 //-------------------------------------BUSCAR-------------------------------------
-
+    public int buscarUsuario(String rut){
+        for(int i=0;i<lUsuario.size();i++){
+            Usuario u = lUsuario.get(i);
+            if(u.getRut().equalsIgnoreCase(rut)){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public int buscarVendedor(String rut){
+        for(int i=0;i<lVendedor.size();i++){
+            Vendedor u = lVendedor.get(i);
+            if(u.getRut().equalsIgnoreCase(rut)){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public int buscarDesarrollador(String rut){
+        for(int i=0;i<lDesarrollador.size();i++){
+            Desarrollador u = lDesarrollador.get(i);
+            if(u.getRut().equalsIgnoreCase(rut)){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public int buscarVideoJuego(String codigo){
+        for(int i=0;i<lVideojugo.size();i++){
+            VideoJuego v = lVideojugo.get(i);
+            if(v.getCodigo().equals(codigo)){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public int buscarArriendo(String nro_arriendo){
+        for(int i=0;i<lArriendo.size();i++){
+            Arriendo a = lArriendo.get(i);
+            String numero_de_arriendo = a.getNumero_de_arriendo()+"";
+            if(nro_arriendo.equalsIgnoreCase(numero_de_arriendo)){
+                return i;
+            }
+        }
+        return -1;
+    }    
 //-------------------------------------ACTUALIZAR-------------------------------------
     public void actualizarArriendo(String num_arriendo, String fechaA, String  fechaE){
         for(int b=0;b<lArriendo.size();b++){
@@ -320,55 +365,50 @@ public class Sistema_impl {
     }
 //-------------------------------------ELIMINAR-------------------------------------
     public void eliminar_usuario(String rut){
-        for(Usuario u : lUsuario){
-            if(u.getRut().equalsIgnoreCase(rut)){
-                lUsuario.remove(u);
-                if(Visualizador.base_de_datos.isConected()){
-                    //Visualizador.base_de_datos.eliminarBD(rut);
-                }
+        int posicion = buscarUsuario(rut);
+        if(posicion != -1){
+            if(Visualizador.base_de_datos.isConected()){
+                        //Visualizador.base_de_datos.eliminarBD(rut);
             }
+            lUsuario.remove(posicion);
         }
-
     }
     public void eliminar_vendedor(String rut){
-        for(Vendedor v : lVendedor){
-            if(v.getRut().equalsIgnoreCase(rut)){
-                lVendedor.remove(v);
-                if(Visualizador.base_de_datos.isConected()){
-                    //Visualizador.base_de_datos.eliminarBD(rut);
-                }
+        int posicion = buscarVendedor(rut);
+        if(posicion != -1){
+            if(Visualizador.base_de_datos.isConected()){
+                        //Visualizador.base_de_datos.eliminarBD(rut);
             }
+            lVendedor.remove(posicion);
         }
     }
     public void eliminar_desarrollador(String rut){
-        for(Desarrollador d : lDesarrollador){
-            if(d.getRut().equalsIgnoreCase(rut)){
-                lDesarrollador.remove(d);
-                if(Visualizador.base_de_datos.isConected()){
-                    //Visualizador.base_de_datos.eliminarBD(rut);
-                }
+        int posicion = buscarDesarrollador(rut);
+        if(posicion != -1){
+            if(Visualizador.base_de_datos.isConected()){
+                        //Visualizador.base_de_datos.eliminarBD(rut);
             }
+        lDesarrollador.remove(posicion);
         }
     }
     public void eliminar_videojuego(String codigo){
-        for(VideoJuego v: lVideojugo){
-            if(v.getCodigo().equals(codigo)){
-                lVideojugo.remove(v);
-                if(Visualizador.base_de_datos.isConected()){
-                    //Visualizador.base_de_datos.eliminarBD(codigo);
-                }
+        int posicion = buscarVideoJuego(codigo);
+        if(posicion != -1){
+            if(Visualizador.base_de_datos.isConected()){
+                        //Visualizador.base_de_datos.eliminarBD(rut);
             }
+            lVideojugo.remove(posicion);
         }
     }
     public void eliminar_arriendo(String num_arriendo){
-        for(Arriendo a: lArriendo){
-            if(num_arriendo.equals(a.getNumero_de_arriendo())){
-                lVideojugo.add(a.getVideoJuego());
-                lArriendo.remove(a);
-                if(Visualizador.base_de_datos.isConected()){
-                    //Visualizador.base_de_datos.eliminarBD(codigo);
-                }
+        int posicion = buscarArriendo(num_arriendo);
+        if(posicion != -1){
+            if(Visualizador.base_de_datos.isConected()){
+                        //Visualizador.base_de_datos.eliminarBD(rut);
             }
+            VideoJuego v = lArriendo.get(posicion).getVideoJuego();
+            lVideojugo.add(v);
+            lArriendo.remove(posicion);
         }
     }
 }
