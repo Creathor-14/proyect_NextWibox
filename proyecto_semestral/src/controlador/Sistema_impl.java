@@ -104,7 +104,8 @@ public class Sistema_impl {
             System.out.println(e.getMessage());
         }
         Usuario u = new Usuario("0", "0", "0", "0", date, "0", "0");
-        Vendedor v = new Vendedor("1", "1", "1", "1", "1");
+        Vendedor v = new Vendedor("rut vendedor 1", "nombre vendedor 1", "direccion vendedor 1", "correo vendedor 1", "fono vendedor 1");
+        Vendedor v1 = new Vendedor("20.574.150-K", "Thomas Rene Quiroga Espinoza", "callao lacra 1", "th.alf.a@xd.com", "+56 9 1111 1111");
         Desarrollador d = new Desarrollador("2", "2", "2", "2", "2");
         VideoJuego vi = new VideoJuego("3", "3", "3", date, "3", "3", 0, d);
         Arriendo a = new Arriendo(0, vi, u, date, date);
@@ -114,6 +115,7 @@ public class Sistema_impl {
         Usuario u1 = new Usuario("00.000.000-0", "0", "0", "0", date, "0", "0");
         lUsuario.add(u);
         lVendedor.add(v);
+        lVendedor.add(v1);
         lDesarrollador.add(d);
         lVideojugo.add(vi);
         lArriendo.add(a);
@@ -300,6 +302,60 @@ public class Sistema_impl {
         return -1;
     }    
 //-------------------------------------ACTUALIZAR-------------------------------------
+     public void actualizarUsuario(int posicionUsuario,String fechaN, String comuna, String telefono, String nombre, String direccion){
+        Fecha f = new Fecha();
+        Date date = null;
+        try{
+            date = f.verificarFecha(fechaN);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        Usuario u = lUsuario.get(posicionUsuario);
+        u.setFecha_de_nacimiento(date);
+        u.setComuna(comuna);
+        u.setTelefono(telefono);
+        u.setNombre(nombre);
+        u.setDireccion(direccion);
+    }
+    public void actualizarVendedor(int posicionUsuario, String fono, String nombre, String direccion, String clave){
+        Vendedor v = lVendedor.get(posicionUsuario);
+        v.setFono(fono);
+        v.setNombre(nombre);
+        v.setDireccion(direccion);
+        v.setClave(clave);
+    }
+    public void actualizarDesarrollador(int posicionUsuario, String fono, String nombre, String direccion){
+        Desarrollador d = lDesarrollador.get(posicionUsuario);
+        d.setFono(fono);
+        d.setNombre(nombre);
+        d.setDireccion(direccion);
+    }
+    public void actualizarVideoJuego(int posicionVideoJuego, String nombre, String version, String fechaD, String categoria, String genero, String valor){
+        int precio;
+        try{
+            precio= Integer.parseInt(valor);
+        }catch(Exception e){
+            throw new NullPointerException("El precio del viedeoJuego debe ser un valor numerico.");
+        }
+        if(precio<0){
+            throw new NullPointerException("El valor del videoJuego no puede ser negativo.");
+        }
+        Fecha f = new Fecha();
+        Date date = null;
+        try{
+            date = f.verificarFecha(fechaD);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        VideoJuego v = lVideojugo.get(posicionVideoJuego);
+        v.setNombre(nombre);
+        v.setVersion(version);
+        v.setFecha_de_desarrollo(date);
+        v.setCategoria(categoria);
+        v.setGenero(genero);
+        v.setPrecio(precio);
+    }
     public void actualizarArriendo(String num_arriendo, String fechaA, String  fechaE){
         for(int b=0;b<lArriendo.size();b++){
             Arriendo a = lArriendo.get(b);
@@ -323,7 +379,7 @@ public class Sistema_impl {
             }
         }
     }
-//-------------------------------------OBTENER-------------------------------------    
+//-------------------------------------OBTENER-TODOS-------------------------------------    
     public List<String []> obtenerDatosTodos(){
         List<String[]> matriz = new ArrayList<>();
         for(int i=0;i<lUsuario.size();i++){
@@ -360,7 +416,7 @@ public class Sistema_impl {
         }
         return matriz;
     }
-    public List<String []> obtenerUsuarios(){
+    public List<String[]> obtenerUsuarios(){
         List<String[]> matriz = new ArrayList<>();
         for(int i=0;i<lUsuario.size();i++){
             Usuario p = lUsuario.get(i);             
@@ -370,6 +426,7 @@ public class Sistema_impl {
             datos[1] = p.getNombre();
             datos[2] = p.getDireccion();
             datos[3] = p.getCorreo();
+            
             matriz.add(datos); 
         }
         return matriz;
@@ -388,7 +445,7 @@ public class Sistema_impl {
         }
         return matriz;
     }
-    public List<String []> obtenerDesarrollador(){
+    public List<String []> obtenerDesarrolladores(){
         List<String[]> matriz = new ArrayList<>();
         for(int i=0;i<lDesarrollador.size();i++){
             Desarrollador p = lDesarrollador.get(i);             
@@ -402,7 +459,7 @@ public class Sistema_impl {
         }
         return matriz;
     }
-    public List<String []> obtenerVideojuego(){
+    public List<String []> obtenerVideojuegos(){
         List<String[]> matriz = new ArrayList<>();
         SimpleDateFormat form = new SimpleDateFormat("dd-MM-yy");
         for(int i=0;i<lVideojugo.size();i++){
@@ -444,6 +501,55 @@ public class Sistema_impl {
                 datos[3] = formato.format(a.getFecha_entrega());
             }
         }
+        return datos;
+    }
+//-------------------------------------OBTENER-UNO-------------------------------------  
+    public String [] obtenerDatosUsuario(int posicionUsuario){
+        Usuario u = lUsuario.get(posicionUsuario);
+        String [] datos = new String[7];
+        datos[0] = u.getRut();
+        datos[1] = u.getNombre();
+        datos[2] = u.getCorreo();
+        datos[3] = u.getDireccion();
+        datos[4] = u.getComuna();
+        datos[5] = u.getTelefono();
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yy");
+        datos[6] = formato.format(u.getFecha_de_nacimiento());
+        return datos;
+    }
+    public String [] obtenerDatosVendedor(int posicionVendedor){
+        Vendedor v = lVendedor.get(posicionVendedor);
+        String [] datos = new String[6];
+        datos[0] = v.getRut();
+        datos[1] = v.getNombre();
+        datos[2] = v.getCorreo();
+        datos[3] = v.getDireccion();
+        datos[4] = v.getClave();
+        datos[5] = v.getFono();
+        return datos;
+    }
+    public String [] obtenerDatosDesarrollador(int posicionDesarrollador){
+        Desarrollador d = lDesarrollador.get(posicionDesarrollador);
+        String [] datos = new String[5];
+        datos[0] = d.getRut();
+        datos[1] = d.getNombre();
+        datos[2] = d.getCorreo();
+        datos[3] = d.getDireccion();
+        datos[4] = d.getFono();   
+        return datos;
+    }
+    public String [] obtenerDatosVideoJuego(int posicionVideoJuego){
+        VideoJuego v = lVideojugo.get(posicionVideoJuego);
+        String [] datos = new String[8];
+        datos[0] = v.getCodigo();
+        datos[1] = v.getNombre();
+        datos[2] = v.getVersion();
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yy");
+        datos[3] = formato.format(v.getFecha_de_desarrollo());
+        datos[4] = v.getCategoria();
+        datos[5] = v.getGenero();
+        datos[6] = v.getPrecio()+"";
+        datos[7] = v.getDesarrollador().getRut();
         return datos;
     }
 //-------------------------------------ELIMINAR-------------------------------------

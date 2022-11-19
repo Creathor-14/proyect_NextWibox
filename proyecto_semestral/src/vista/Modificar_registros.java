@@ -10,15 +10,18 @@ import javax.swing.JOptionPane;
  *
  * @author thoma
  */
-public class IngresarRegistros extends javax.swing.JFrame {
+public class Modificar_registros extends javax.swing.JFrame {
 
     private String tipo_registro;
-    public IngresarRegistros(String nombre_registro) {
+    private int posicion_registro;
+    public Modificar_registros(String nombre_registro, int posicion_identificador) {
         initComponents();
         tipo_registro = nombre_registro;
+        posicion_registro = posicion_identificador;
         if(nombre_registro.equals("Usuario")){
             tipo_registro = "persona";
             titulo_txt.setText("Ingresar Usuario");
+            dar_datos_usuario();
             
             ingresarVideoJuego.removeAll();
             ingresarVideoJuego.setVisible(false);
@@ -30,10 +33,19 @@ public class IngresarRegistros extends javax.swing.JFrame {
             ingresarVideoJuego.removeAll();
             ingresarVideoJuego.setVisible(false);
             
-            telefono_txt.setText("Fono");
+            telefono_txt.setText("Fono:");
             fechaNacimiento_input.setVisible(false);
             fechaNacimiento_txt.setVisible(false);
             jSeparator_fNac.setVisible(false);
+            if(nombre_registro.equals("Vendedor")){
+                comuna_txt.setText("Contraseña:");
+                dar_datos_vendedor();
+            }else{
+                comuna_txt.setVisible(false);
+                comuna_input.setVisible(false);
+                jSeparator_direccion2.setVisible(false);
+                dar_datos_desarrollador();
+            }
             
         }else if(nombre_registro.equalsIgnoreCase("videojuego")){
             tipo_registro = "videojuego";
@@ -44,7 +56,44 @@ public class IngresarRegistros extends javax.swing.JFrame {
                 
         }
     }
-
+    private void dar_datos_usuario(){
+        String [] datos = Visualizador.sistema.obtenerDatosUsuario(posicion_registro);
+        rut_input.setText(datos[0]);
+        nombre_input.setText(datos[1]);
+        correo_input.setText(datos[2]);
+        direccion_input.setText(datos[3]);
+        comuna_input.setText(datos[4]);
+        telefono_input.setText(datos[5]);
+        fechaNacimiento_input.setText(datos[6]);
+    }
+    private void dar_datos_vendedor(){
+        String [] datos = Visualizador.sistema.obtenerDatosVendedor(posicion_registro);
+        rut_input.setText(datos[0]);
+        nombre_input.setText(datos[1]);
+        correo_input.setText(datos[2]);
+        direccion_input.setText(datos[3]);
+        comuna_input.setText(datos[4]);
+        telefono_input.setText(datos[5]);
+    }
+    private void dar_datos_desarrollador(){
+        String [] datos = Visualizador.sistema.obtenerDatosDesarrollador(posicion_registro);
+        rut_input.setText(datos[0]);
+        nombre_input.setText(datos[1]);
+        correo_input.setText(datos[2]);
+        direccion_input.setText(datos[3]);
+        telefono_input.setText(datos[4]);
+    }
+    private void dar_datos_videojuego(){
+        String [] datos = Visualizador.sistema.obtenerDatosVideoJuego(posicion_registro);
+        codigo_input.setText(datos[0]);
+        nombreJ_input.setText(datos[1]);
+        version_input.setText(datos[2]);
+        fechaDesarrollo_input.setText(datos[3]);
+        categoria_input.setText(datos[4]);
+        genero_input.setText(datos[5]);
+        precio_input.setText(datos[6]);
+        rutDesarrollador_input.setText(datos[7]);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,7 +105,7 @@ public class IngresarRegistros extends javax.swing.JFrame {
 
         ingresar = new javax.swing.JPanel();
         titulo_txt = new javax.swing.JLabel();
-        registrar_button = new javax.swing.JButton();
+        actualizar_button = new javax.swing.JButton();
         ingresar_button = new javax.swing.JButton();
         Remplazar = new javax.swing.JPanel();
         ingresarPersona = new javax.swing.JPanel();
@@ -123,13 +172,13 @@ public class IngresarRegistros extends javax.swing.JFrame {
         titulo_txt.setText("Ingresar ");
         ingresar.add(titulo_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
 
-        registrar_button.setText("Registrar");
-        registrar_button.addActionListener(new java.awt.event.ActionListener() {
+        actualizar_button.setText("Actualizar");
+        actualizar_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrar_buttonActionPerformed(evt);
+                actualizar_buttonActionPerformed(evt);
             }
         });
-        ingresar.add(registrar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, -1, -1));
+        ingresar.add(actualizar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, -1, -1));
 
         ingresar_button.setText("Volver");
         ingresar_button.addActionListener(new java.awt.event.ActionListener() {
@@ -157,6 +206,7 @@ public class IngresarRegistros extends javax.swing.JFrame {
         rut_txt.setText("Rut:");
         ingresarPersona.add(rut_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, -1));
 
+        rut_input.setEditable(false);
         rut_input.setBackground(new java.awt.Color(51, 51, 51));
         rut_input.setForeground(new java.awt.Color(102, 102, 102));
         rut_input.setText("00.000.000-K");
@@ -185,6 +235,7 @@ public class IngresarRegistros extends javax.swing.JFrame {
         correo_txt.setText("Correo:");
         ingresarPersona.add(correo_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 130, 20));
 
+        correo_input.setEditable(false);
         correo_input.setBackground(new java.awt.Color(51, 51, 51));
         correo_input.setForeground(new java.awt.Color(102, 102, 102));
         correo_input.setText("correoFalso@dominioFalso.cl");
@@ -288,6 +339,7 @@ public class IngresarRegistros extends javax.swing.JFrame {
         codigo_txt.setText("Codigo:");
         ingresarVideoJuego.add(codigo_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, -1));
 
+        codigo_input.setEditable(false);
         codigo_input.setBackground(new java.awt.Color(51, 51, 51));
         codigo_input.setForeground(new java.awt.Color(102, 102, 102));
         codigo_input.setText("0001");
@@ -386,6 +438,7 @@ public class IngresarRegistros extends javax.swing.JFrame {
         rutDesarrollador_txt.setText("Rut desarrollador:");
         ingresarVideoJuego.add(rutDesarrollador_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 130, -1));
 
+        rutDesarrollador_input.setEditable(false);
         rutDesarrollador_input.setBackground(new java.awt.Color(51, 51, 51));
         rutDesarrollador_input.setForeground(new java.awt.Color(102, 102, 102));
         rutDesarrollador_input.setText("11.111.111-1");
@@ -415,33 +468,30 @@ public class IngresarRegistros extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ingresar_buttonActionPerformed
 
-    private void registrar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrar_buttonActionPerformed
+    private void actualizar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizar_buttonActionPerformed
         
         if(tipo_registro.equalsIgnoreCase("persona")){
             String rut = rut_input.getText();
             String nombre = nombre_input.getText();
-            String correo = correo_input.getText();
-           String direccion = direccion_input.getText();
+            String direccion = direccion_input.getText();
             String tipo_persona = titulo_txt.getText().replace("Ingresar ", "");
             if(tipo_persona.equals("Usuario")){
-
-                String comuna= comuna_input.getText();
+                String comuna = comuna_input.getText();
                 String telefono = telefono_input.getText();
                 String fecha_de_nacimiento = fechaNacimiento_input.getText();
                 try{
-                    Visualizador.sistema.ingresarUsuario(rut, nombre, comuna, correo, fecha_de_nacimiento, direccion, telefono);
+                    Visualizador.sistema.actualizarUsuario(posicion_registro, fecha_de_nacimiento, comuna, telefono, nombre, direccion);
                     JOptionPane.showMessageDialog(null, tipo_persona+" ingresado", "Validación", 1);
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Validación", 1);
                 } 
             }else{
                 String fono = telefono_input.getText();
-                String titulo = titulo_txt.getText().replaceAll("Menu ", "");
                 try{
                     if(tipo_persona.equals("Vendedor")){
-                        Visualizador.sistema.ingresarVendedor(rut, nombre, direccion, correo, fono);
+                        Visualizador.sistema.actualizarVendedor(posicion_registro, fono, nombre, direccion, direccion);
                     }else{
-                        Visualizador.sistema.ingresarDesarrollador(rut, nombre, direccion, correo, fono);
+                        Visualizador.sistema.actualizarDesarrollador(posicion_registro, fono, nombre, direccion);
                     }
                     JOptionPane.showMessageDialog(null, tipo_persona+" ingresado", "Validación", 1);
                 }catch(Exception e){
@@ -466,7 +516,7 @@ public class IngresarRegistros extends javax.swing.JFrame {
         }else{
                 
         }
-    }//GEN-LAST:event_registrar_buttonActionPerformed
+    }//GEN-LAST:event_actualizar_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -475,6 +525,7 @@ public class IngresarRegistros extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Remplazar;
+    private javax.swing.JButton actualizar_button;
     private javax.swing.JTextField categoria_input;
     private javax.swing.JLabel categoria_txt;
     private javax.swing.JTextField codigo_input;
@@ -518,7 +569,6 @@ public class IngresarRegistros extends javax.swing.JFrame {
     private javax.swing.JLabel nombre_txt;
     private javax.swing.JTextField precio_input;
     private javax.swing.JLabel precio_txt;
-    private javax.swing.JButton registrar_button;
     private javax.swing.JTextField rutDesarrollador_input;
     private javax.swing.JLabel rutDesarrollador_txt;
     private javax.swing.JTextField rut_input;

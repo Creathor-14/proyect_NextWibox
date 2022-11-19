@@ -16,6 +16,7 @@ public class Menu_admin extends javax.swing.JFrame {
 
     private DefaultTableModel model;
     private boolean logo = true;
+    
     public Menu_admin() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -129,6 +130,11 @@ public class Menu_admin extends javax.swing.JFrame {
         });
 
         modificar_botton.setText("Modificar");
+        modificar_botton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificar_bottonActionPerformed(evt);
+            }
+        });
 
         eliminar_botton.setText("Eliminar");
         eliminar_botton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -278,6 +284,8 @@ public class Menu_admin extends javax.swing.JFrame {
         jTable1.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("Direccion");
         jTable1.getTableHeader().getColumnModel().getColumn(3).setHeaderValue("Correo");
         eliminar_datos_tabla();
+        
+        
         List <String[]> matriz = Visualizador.sistema.obtenerUsuarios();
         for(int i = 0;i<matriz.size();i++){
             model.addRow(matriz.get(i));
@@ -308,7 +316,7 @@ public class Menu_admin extends javax.swing.JFrame {
         jTable1.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("Direccion");
         jTable1.getTableHeader().getColumnModel().getColumn(3).setHeaderValue("Correo");
         eliminar_datos_tabla();
-        List <String[]> matriz = Visualizador.sistema.obtenerDesarrollador();
+        List <String[]> matriz = Visualizador.sistema.obtenerDesarrolladores();
         for(int i = 0;i<matriz.size();i++){
             model.addRow(matriz.get(i));
         }
@@ -336,7 +344,7 @@ public class Menu_admin extends javax.swing.JFrame {
         
         
         System.out.println();
-        List <String[]> matriz = Visualizador.sistema.obtenerVideojuego();
+        List <String[]> matriz = Visualizador.sistema.obtenerVideojuegos();
         for(int i = 0;i<matriz.size();i++){
             model.addRow(matriz.get(i));
         }
@@ -375,6 +383,31 @@ public class Menu_admin extends javax.swing.JFrame {
         String titulo = titulo_texto.getText().replaceAll("Menu ", "");
         new IngresarRegistros(titulo).setVisible(true);
     }//GEN-LAST:event_ingresar_bottonActionPerformed
+
+    private void modificar_bottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_bottonActionPerformed
+        int fila = jTable1.getSelectedRow();
+        if(fila != -1){
+            String titulo = titulo_texto.getText().replaceAll("Menu ", "");
+            String identificador = jTable1.getValueAt(fila, 0)+"";
+            if(titulo.equals("Usuario")){
+                int posicion_usuario = Visualizador.sistema.buscarUsuario(identificador);
+                new Modificar_registros(titulo,posicion_usuario).setVisible(true);     
+            }else if(titulo.equals("Vendedor")){
+                int posicion_usuario = Visualizador.sistema.buscarVendedor(identificador);
+                new Modificar_registros(titulo,posicion_usuario).setVisible(true);     
+            }else if(titulo.equals("Desarrollador")){
+                int posicion_usuario = Visualizador.sistema.buscarDesarrollador(identificador);
+                new Modificar_registros(titulo,posicion_usuario).setVisible(true);    
+            }else{
+                int posicion_usuario = Visualizador.sistema.buscarVideoJuego(identificador);
+                new Modificar_registros(titulo,posicion_usuario).setVisible(true);
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione un campo de la tabla", "Validación", 1);
+        }
+        
+    }//GEN-LAST:event_modificar_bottonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraTareas_menu;
