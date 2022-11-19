@@ -166,6 +166,44 @@ public class Sistema_impl {
         Desarrollador d = new Desarrollador(rut, nombre, direccion, correo, fono);
         return lDesarrollador.add(d);
     }
+    public boolean ingresarVideojuego(String codigo, String nombre, String version, String fechaD, String categoria, String genero, String valor, String rutDesarrollador){
+        int precio;
+        try{
+            precio= Integer.parseInt(valor);
+        }catch(Exception e){
+            throw new NullPointerException("El precio del viedeoJuego debe ser un valor numerico.");
+        }
+    // precio negativo
+        if(precio<0){
+            throw new NullPointerException("El valor del videoJuego no puede ser negativo.");
+        }
+
+    // codigo unico
+        int posicion = 0;
+        for(VideoJuego v:lVideojugo){
+            if(v.getCodigo().equals("#"+codigo+"#")){
+                throw new NullPointerException("Este codigo ya existe en otro videojuego.");
+            }
+            posicion++;
+        }
+    // verificar que no exista un arriendo con ese codigo de videoJuego
+    // verificar fecha
+        Fecha f = new Fecha();
+        Date date = null;
+        try{
+            date = f.verificarFecha(fechaD);
+        }catch(Exception e){
+            throw new NullPointerException(e.getMessage());
+        }
+    // verificar si existe el desarollador, si existe ingresar videojuego
+        for(Desarrollador d:lDesarrollador){
+            if(d.getRut().equalsIgnoreCase(rutDesarrollador)){
+                VideoJuego v = new VideoJuego(codigo, nombre, version, date, categoria, genero, precio, d);
+                return lVideojugo.add(v);
+            }
+        }
+        throw new NullPointerException("No existe el desarrollador con el rut "+rutDesarrollador);
+    }
     public boolean ingresarArriendo(String codigo, String rutUsuario,String fechaA, String fechaE){
         int posicionV = -1;
         for(int i=0;i<lVideojugo.size();i++){
