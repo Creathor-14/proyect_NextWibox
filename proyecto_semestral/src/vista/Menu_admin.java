@@ -364,20 +364,31 @@ public class Menu_admin extends javax.swing.JFrame {
         if(fila != -1){
             String titulo = titulo_texto.getText().replaceAll("Menu ", "");
             String rut = jTable1.getValueAt(fila, 0)+"";
-
-            JOptionPane.showMessageDialog(null, titulo+" eliminado", "Validación", 1);
-            model.removeRow(fila);
+            boolean eliminado = true;
+            
             if(titulo.equals("Usuario")){
-                Visualizador.sistema.eliminar_usuario(rut);      
+                try{
+                    Visualizador.sistema.eliminar_usuario(rut);
+                }catch(Exception e){
+                    eliminado = false;
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Validación", 0);
+                }
             }else if(titulo.equals("Vendedor")){
                 Visualizador.sistema.eliminar_vendedor(rut);          
             }else if(titulo.equals("Desarrollador")){
-                Visualizador.sistema.eliminar_desarrollador(rut);
+                try{
+                    Visualizador.sistema.eliminar_desarrollador(rut);
+                }catch(Exception e){
+                    eliminado = false;
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Validación", 0);
+                }
             }else{
                 Visualizador.sistema.eliminar_videojuego(rut);
             }
-            
-            
+            if(eliminado){
+                JOptionPane.showMessageDialog(null, titulo+" eliminado", "Validación", 1);
+                model.removeRow(fila);                
+            } 
         }else{
             JOptionPane.showMessageDialog(null, "Seleccione un campo de la tabla", "Validación", 1);
         }

@@ -5,20 +5,10 @@
 package vista;
 
 
-import bd.Conexion;
+
 import controlador.Sistema_impl;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.util.Date;
-import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import modelo.Arriendo;
-import modelo.Desarrollador;
-import modelo.Fecha;
-import modelo.Usuario;
-import modelo.Vendedor;
-import modelo.VideoJuego;
 
 /**
  *

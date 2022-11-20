@@ -15,7 +15,6 @@ import modelo.Fecha;
 import modelo.Usuario;
 import modelo.Vendedor;
 import modelo.VideoJuego;
-import vista.Visualizador;
 
 
 public class Sistema_impl {
@@ -40,8 +39,15 @@ public class Sistema_impl {
 //-------------------------------------BASE_DE_DATOS-------------------------------------
     public void cargar_datos_BD(){
         bd.crear_tablas();
-        //this.lista = conexion.obtenerBD();
         //bd.borrar_tablas(); 
+        
+        /*
+        this.lUsuario = bd.obtener_usuarios_BD();
+        this.lVendedor = bd.obtener_vendedores_BD();
+        this.lDesarrollador = bd.obtener_desarrolladores_BD();
+        this.lVideojugo = bd.obtener_videojuegos_BD();
+        this.lArriendo = bd.obtener_arriendos_BD();
+        */
     }
     public boolean isConected(){
         return conectado;
@@ -148,6 +154,9 @@ public class Sistema_impl {
         
     // ingresar el usuario
         Usuario u = new Usuario(rut, nombre, direccion, correo, date, comuna, telefono);
+        if(this.conectado){
+            bd.agregar_usuario_BD(u);
+        }
         return lUsuario.add(u);
     }
     public boolean ingresarVendedor(String rut, String nombre, String direccion, String correo, String fono){
@@ -160,6 +169,9 @@ public class Sistema_impl {
         }
     // ingresar el vendedor
         Vendedor v = new Vendedor(rut, nombre, direccion, correo, fono);
+        if(this.conectado){
+            //bd.agregar_vendedor_BD(v);
+        }
         return lVendedor.add(v);
     }
     public boolean ingresarDesarrollador( String rut, String nombre, String direccion, String correo, String fono){
@@ -172,6 +184,9 @@ public class Sistema_impl {
         }
     // ingresar el desarrollador
         Desarrollador d = new Desarrollador(rut, nombre, direccion, correo, fono);
+        if(this.conectado){
+            //bd.agregar_desarrollador_BD(d);
+        }
         return lDesarrollador.add(d);
     }
     public boolean ingresarVideojuego(String codigo, String nombre, String version, String fechaD, String categoria, String genero, String valor, String rutDesarrollador){
@@ -207,6 +222,9 @@ public class Sistema_impl {
         for(Desarrollador d:lDesarrollador){
             if(d.getRut().equalsIgnoreCase(rutDesarrollador)){
                 VideoJuego v = new VideoJuego(codigo, nombre, version, date, categoria, genero, precio, d);
+                if(this.conectado){
+                    //bd.agregar_videojuego_BD(v);
+                }
                 return lVideojugo.add(v);
             }
         }
@@ -253,6 +271,13 @@ public class Sistema_impl {
         
         Arriendo a = new Arriendo(this.contrador_arriendos,videojuego, usuario,fecha_arriendo,fecha_entrega);
         lArriendo.add(a);
+        if(this.conectado){
+            //bd.agregar_arriendo_BD(a);
+        }
+        if(this.conectado){
+            String codigo = lVideojugo.get(posicionV).getCodigo();
+            //bd.eliminar_videojuego_BD(codigo);
+        }
         lVideojugo.remove(posicionV);
         contrador_arriendos++;
         return true;
@@ -319,6 +344,9 @@ public class Sistema_impl {
         u.setTelefono(telefono);
         u.setNombre(nombre);
         u.setDireccion(direccion);
+        if(this.conectado){
+            //bd.actualizar_usuario_BD(v);
+        }
     }
     public void actualizarVendedor(int posicionUsuario, String fono, String nombre, String direccion, String clave){
         Vendedor v = lVendedor.get(posicionUsuario);
@@ -327,12 +355,18 @@ public class Sistema_impl {
         v.setNombre(nombre);
         v.setDireccion(direccion);
         v.setClave(clave);
+        if(this.conectado){
+            //bd.actualizar_vendedor_BD(v);
+        }        
     }
     public void actualizarDesarrollador(int posicionUsuario, String fono, String nombre, String direccion){
         Desarrollador d = lDesarrollador.get(posicionUsuario);
         d.setFono(fono);
         d.setNombre(nombre);
         d.setDireccion(direccion);
+        if(this.conectado){
+            //bd.actualizar_desarrollador_BD(v);
+        } 
     }
     public void actualizarVideoJuego(int posicionVideoJuego, String nombre, String version, String fechaD, String categoria, String genero, String valor){
         int precio;
@@ -358,12 +392,13 @@ public class Sistema_impl {
         v.setCategoria(categoria);
         v.setGenero(genero);
         v.setPrecio(precio);
+        if(this.conectado){
+            //bd.actualizar_videojuego_BD(v);
+        } 
     }
     public void actualizarArriendo(int posicion_arriendo, String fechaA, String  fechaE){
         Arriendo a = lArriendo.get(posicion_arriendo);
-        
- 
-        
+
         Fecha f = new Fecha();
         Date fecha_arriendo = null;
         try{
@@ -380,7 +415,9 @@ public class Sistema_impl {
             throw new NullPointerException(e.getMessage());
         }
         a.setFecha_entrega(fecha_entrega);
-        
+        if(this.conectado){
+            //bd.actualizar_arriendo_BD(v);
+        } 
                   
     }
 //-------------------------------------OBTENER-TODOS-------------------------------------    
@@ -493,7 +530,6 @@ public class Sistema_impl {
         }
         return matriz;
     }
-
 //-------------------------------------OBTENER-UNO-------------------------------------  
     public String [] obtenerDatosUsuario(int posicionUsuario){
         Usuario u = lUsuario.get(posicionUsuario);
@@ -543,7 +579,7 @@ public class Sistema_impl {
         datos[7] = v.getDesarrollador().getRut();
         return datos;
     }
-        public String [] obtener_arriendo(int posicionArriendo){
+    public String [] obtener_arriendo(int posicionArriendo){
         String [] datos = new String[5];
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yy");
         Arriendo a = lArriendo.get(posicionArriendo);
@@ -559,17 +595,28 @@ public class Sistema_impl {
     public void eliminar_usuario(String rut){
         int posicion = buscarUsuario(rut);
         if(posicion != -1){
-            if(this.conectado){
-                        //Visualizador.base_de_datos.eliminarBD(rut);
+            boolean tiene_arriendo = false;
+            for(Arriendo a:lArriendo){
+                if(a.getUsuario().getRut().equals(rut)){
+                    tiene_arriendo = true;
+                    break;
+                }
             }
-            lUsuario.remove(posicion);
+            if(!tiene_arriendo){
+                if(this.conectado){
+                    //bd.eliminar_usuario_BD(rut);
+                }
+                lUsuario.remove(posicion);
+            }else{
+                throw new NullPointerException("No se puede eliminar este usuario\nhasta que se elimine su arriendo.");
+            }
         }
-    }// no se puede eliminar hasta que se elimine el arriendo
+    }
     public void eliminar_vendedor(String rut){
         int posicion = buscarVendedor(rut);
         if(posicion != -1){
             if(this.conectado){
-                        //Visualizador.base_de_datos.eliminarBD(rut);
+                //bd.eliminar_vendedor_BD(rut);
             }
             lVendedor.remove(posicion);
         }
@@ -577,17 +624,28 @@ public class Sistema_impl {
     public void eliminar_desarrollador(String rut){
         int posicion = buscarDesarrollador(rut);
         if(posicion != -1){
-            if(this.conectado){
-                        //Visualizador.base_de_datos.eliminarBD(rut);
+            boolean tiene_videojuego = false;
+            for(VideoJuego v:lVideojugo){
+                if(v.getDesarrollador().getRut().equals(rut)){
+                    tiene_videojuego = true;
+                    break;
+                }
             }
-        lDesarrollador.remove(posicion);
+            if(!tiene_videojuego){
+                if(this.conectado){
+                    //bd.eliminar_desarrollador_BD(rut);
+                }
+                lDesarrollador.remove(posicion);
+            }else{
+                throw new NullPointerException("No se puede eliminar este desarrollador\nhasta que se elimine su videojuego.");
+            }
         }
-    }// no se puede eliminar hasta que se elimine los videojuegos
+    }
     public void eliminar_videojuego(String codigo){
         int posicion = buscarVideoJuego(codigo);
         if(posicion != -1){
             if(this.conectado){
-                        //Visualizador.base_de_datos.eliminarBD(rut);
+                        //bd.eliminar_videojuego_BD(rut);
             }
             lVideojugo.remove(posicion);
         }
@@ -596,7 +654,7 @@ public class Sistema_impl {
         int posicion = buscarArriendo(num_arriendo);
         if(posicion != -1){
             if(this.conectado){
-                        //Visualizador.base_de_datos.eliminarBD(rut);
+                //bd.eliminar_arriendo_BD(rut);
             }
             VideoJuego v = lArriendo.get(posicion).getVideoJuego();
             lVideojugo.add(v);

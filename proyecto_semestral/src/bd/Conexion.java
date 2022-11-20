@@ -4,6 +4,7 @@ package bd;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.Desarrollador;
 import modelo.Usuario;
 import modelo.Vendedor;
 
@@ -31,9 +32,21 @@ public class Conexion {
         }
     }
     public void borrar_tablas(){
-        try{//todavia no bo jaj j
+        try{
+            String borrar_arriendo = "DROP TABLE arriendo";
+            PreparedStatement ps = connection.prepareStatement(borrar_arriendo);
+            ps.execute();
+            System.out.println("Tabla arriendo borrada");
+            ps.close();
+            
+            String borrar_videojuego = "DROP TABLE videojuego";
+            ps = connection.prepareStatement(borrar_videojuego);
+            ps.execute();
+            System.out.println("Tabla videojuego borrada");
+            ps.close();        
+            
             String borrar_usuario = "DROP TABLE usuario";
-            PreparedStatement ps = connection.prepareStatement(borrar_usuario);
+            ps = connection.prepareStatement(borrar_usuario);
             ps.execute();
             System.out.println("Tabla usuario borrada");
             
@@ -47,14 +60,9 @@ public class Conexion {
             ps.execute();
             System.out.println("Tabla desarrollador borrada");
             
-            String borrar_videojuego = "DROP TABLE videojuego";
-            ps = connection.prepareStatement(borrar_videojuego);
-            ps.execute();
-            System.out.println("Tabla videojuego borrada");
-            ps.close();
-            
+
         }catch(Exception e){
-           System.out.println("Error al crear la tabla o ya existia"); 
+           System.out.println("Error al borrar las tablas"); 
         }
     }
     public void crear_tablas(){
@@ -206,6 +214,9 @@ public class Conexion {
         }
 
         return true;
+    }
+    public boolean agregar_desarrollador_BD(Desarrollador desarrollador){
+        return false;
     }
     /*
     public boolean eliminarBD(String rut){

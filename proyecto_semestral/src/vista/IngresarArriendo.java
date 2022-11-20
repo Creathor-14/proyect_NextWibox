@@ -261,7 +261,7 @@ public class IngresarArriendo extends javax.swing.JPanel {
             Visualizador.sistema.ingresarArriendo("#"+codigo_videojuego, rutUsuario, fechaA, fechaE);
             JOptionPane.showMessageDialog(null,"Arriendo ingresado.");
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e.getMessage());
+            JOptionPane.showMessageDialog(null,e.getMessage(),"Validación",0);
             
         }
     }//GEN-LAST:event_jLabel_registrarMouseClicked
