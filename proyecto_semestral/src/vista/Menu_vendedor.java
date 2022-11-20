@@ -190,7 +190,7 @@ public class Menu_vendedor extends javax.swing.JPanel {
         if(!dato.isBlank()){
             boolean encontrado=false;
             for(int fila=0;fila<jTable1.getRowCount();fila++){
-                String tabla_dato =  model.getValueAt(fila, 1)+"";
+                String tabla_dato =  model.getValueAt(fila, 0)+"";
                 if(dato.equals(tabla_dato)){
                     jTable1.setRowSelectionInterval(fila,fila);
                     encontrado=true;
@@ -198,12 +198,11 @@ public class Menu_vendedor extends javax.swing.JPanel {
                 }
             }
             if(!encontrado){
-                JOptionPane.showMessageDialog(null, "Rut - Codigo Inexistente", "Validación", 0);
+                JOptionPane.showMessageDialog(null, "Numero de arriendo Inexistente", "Validación", 0);
             }
         }else{
-            JOptionPane.showMessageDialog(null, "Ingrese Rut - Codigo", "Validación", 2);
+            JOptionPane.showMessageDialog(null, "Ingrese el numero del arriendo", "Validación", 2);
         }
-
     }//GEN-LAST:event_buscar_buttonMouseClicked
 
     private void ingresar_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresar_buttonMouseClicked

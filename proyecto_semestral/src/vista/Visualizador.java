@@ -30,42 +30,21 @@ public class Visualizador extends javax.swing.JFrame {
      * Creates new form Visualizador1
      */
     public static Sistema_impl sistema = new Sistema_impl();
-    public static Conexion base_de_datos = new Conexion();
     public Visualizador() {
         initComponents();
         this.setLocationRelativeTo(null);//hace que la pestaña se vea al centro
-        
-
         cargar_login();
-        base_de_datos.conectar();
         
-        if(base_de_datos.isConected()){
-            JOptionPane.showMessageDialog(null, "Conectado a la base de datos", "Funcionamiento Aplicación", 1);
-            base_de_datos.crear_tablas();
-            //base_de_datos.borrar_tablas();
-            Fecha f = new Fecha();
-            Date date = null;
-            try{
-                //date = f.verificarFecha("12-12-10");
-            }catch(Exception e){
-                System.out.println(e.getMessage());
-            }
-            Usuario u = new Usuario("0", "0", "0", "0", date, "0", "0");
-            Vendedor v = new Vendedor("1", "1", "1", "1", "1");
-            Desarrollador d = new Desarrollador("2", "2", "2", "2", "2");
-            VideoJuego vi = new VideoJuego("3", "3", "3", date, "3", "3", 0, d);
-            Arriendo a = new Arriendo(0, vi, u, date, date);
-            
-            base_de_datos.agregar_usuario_BD(u);
-            base_de_datos.agregar_vendedor_BD(v);
-            
+        if(sistema.isConected()){
+            JOptionPane.showMessageDialog(null, "Conectado a la base de datos", "Funcionamiento Aplicación", 1); 
+            sistema.cargar_datos_BD();
         }else{
             JOptionPane.showMessageDialog(null, "Modo sin conexión", "Funcionamiento Aplicación", 1);
             sistema.ingresarDatosPrueba();
             JOptionPane.showMessageDialog(null, sistema.como_entrar_menu_vendedor(), "Funcionamiento Aplicación", 1);
         }     
     }
-    public void cargar_login(){
+    private void cargar_login(){
         Login login = new Login();
         login.setSize(660, 460);
         login.setLocation(0,0);

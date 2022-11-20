@@ -4,11 +4,11 @@
  */
 package controlador;
 
+import bd.Conexion;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 import modelo.Arriendo;
 import modelo.Desarrollador;
 import modelo.Fecha;
@@ -25,6 +25,8 @@ public class Sistema_impl {
     private List <VideoJuego> lVideojugo; 
     private List <Arriendo> lArriendo; 
     private int contrador_arriendos;
+    private Conexion bd = new Conexion();
+    private boolean conectado;
     
     public Sistema_impl(){
         lDesarrollador = new ArrayList<>();
@@ -33,10 +35,17 @@ public class Sistema_impl {
         lVideojugo = new ArrayList<>();
         lArriendo = new ArrayList<>();
         contrador_arriendos=0;
+        conectado = bd.conectar();
     }
-
-    
-
+//-------------------------------------BASE_DE_DATOS-------------------------------------
+    public void cargar_datos_BD(){
+        bd.crear_tablas();
+        //this.lista = conexion.obtenerBD();
+        //bd.borrar_tablas(); 
+    }
+    public boolean isConected(){
+        return conectado;
+    }
 //-------------------------------------EXTRAS-------------------------------------
     public boolean rut_unico(String rut){
         for(Desarrollador d : lDesarrollador){
@@ -242,13 +251,12 @@ public class Sistema_impl {
         VideoJuego videojuego = lVideojugo.get(posicionV);
         Usuario usuario = lUsuario.get(posicionU);
         
-        Arriendo a = new Arriendo(contrador_arriendos,videojuego, usuario,fecha_arriendo,fecha_entrega);
+        Arriendo a = new Arriendo(this.contrador_arriendos,videojuego, usuario,fecha_arriendo,fecha_entrega);
         lArriendo.add(a);
         lVideojugo.remove(posicionV);
         contrador_arriendos++;
         return true;
     }
-    
 //-------------------------------------BUSCAR-------------------------------------
     public int buscarUsuario(String rut){
         for(int i=0;i<lUsuario.size();i++){
@@ -551,16 +559,16 @@ public class Sistema_impl {
     public void eliminar_usuario(String rut){
         int posicion = buscarUsuario(rut);
         if(posicion != -1){
-            if(Visualizador.base_de_datos.isConected()){
+            if(this.conectado){
                         //Visualizador.base_de_datos.eliminarBD(rut);
             }
             lUsuario.remove(posicion);
         }
-    }
+    }// no se puede eliminar hasta que se elimine el arriendo
     public void eliminar_vendedor(String rut){
         int posicion = buscarVendedor(rut);
         if(posicion != -1){
-            if(Visualizador.base_de_datos.isConected()){
+            if(this.conectado){
                         //Visualizador.base_de_datos.eliminarBD(rut);
             }
             lVendedor.remove(posicion);
@@ -569,16 +577,16 @@ public class Sistema_impl {
     public void eliminar_desarrollador(String rut){
         int posicion = buscarDesarrollador(rut);
         if(posicion != -1){
-            if(Visualizador.base_de_datos.isConected()){
+            if(this.conectado){
                         //Visualizador.base_de_datos.eliminarBD(rut);
             }
         lDesarrollador.remove(posicion);
         }
-    }
+    }// no se puede eliminar hasta que se elimine los videojuegos
     public void eliminar_videojuego(String codigo){
         int posicion = buscarVideoJuego(codigo);
         if(posicion != -1){
-            if(Visualizador.base_de_datos.isConected()){
+            if(this.conectado){
                         //Visualizador.base_de_datos.eliminarBD(rut);
             }
             lVideojugo.remove(posicion);
@@ -587,7 +595,7 @@ public class Sistema_impl {
     public void eliminar_arriendo(String num_arriendo){
         int posicion = buscarArriendo(num_arriendo);
         if(posicion != -1){
-            if(Visualizador.base_de_datos.isConected()){
+            if(this.conectado){
                         //Visualizador.base_de_datos.eliminarBD(rut);
             }
             VideoJuego v = lArriendo.get(posicion).getVideoJuego();

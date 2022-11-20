@@ -11,11 +11,8 @@ import modelo.Vendedor;
         
 public class Conexion {
     Connection connection = null;
-    boolean conectado = false;
-    public boolean isConected(){
-        return conectado;
-    }
-    public void conectar (){
+
+    public boolean conectar (){
         try {
         //jdbc = es el puerto
         //mysql = motor de base de datos
@@ -27,27 +24,33 @@ public class Conexion {
         String password = "";    
         connection = DriverManager.getConnection(url, user, password);
         System.out.println("Concxion correcta");
-        conectado = true;
-            
+        return true;
         } catch (Exception e) {
             System.out.println("No se pudo conectar a la base de datos");
+            return false;
         }
     }
     public void borrar_tablas(){
         try{//todavia no bo jaj j
-
-
             String borrar_usuario = "DROP TABLE usuario";
-            String borrar_vendedor = "DROP TABLE vendedor";
-            
             PreparedStatement ps = connection.prepareStatement(borrar_usuario);
             ps.execute();
             System.out.println("Tabla usuario borrada");
             
-
+            String borrar_vendedor = "DROP TABLE vendedor";
             ps = connection.prepareStatement(borrar_vendedor);
             ps.execute();
             System.out.println("Tabla vendedor borrada");
+            
+            String borrar_desarrollador = "DROP TABLE desarrollador";
+            ps = connection.prepareStatement(borrar_desarrollador);
+            ps.execute();
+            System.out.println("Tabla desarrollador borrada");
+            
+            String borrar_videojuego = "DROP TABLE videojuego";
+            ps = connection.prepareStatement(borrar_videojuego);
+            ps.execute();
+            System.out.println("Tabla videojuego borrada");
             ps.close();
             
         }catch(Exception e){
@@ -63,8 +66,7 @@ public class Conexion {
         
         fk_videojuego_desarrollador();
         fk_arriendo_videojuego();
-        fk_arriendo_usuario();
-        
+        fk_arriendo_usuario(); 
     }
 
     private void crear_tabla_usuario(){
@@ -79,7 +81,6 @@ public class Conexion {
            System.out.println("Error al crear la tabla usuario, o ya existia"); 
         }
     }
-    
     private void crear_tabla_vendedor(){
         try{
             String SQL = "CREATE TABLE vendedor(rut VARCHAR(12) PRIMARY KEY,nombre VARCHAR(60) NOT NULL,direccion VARCHAR(45) NOT NULL,correo VARCHAR(45) NOT NULL,";
@@ -106,7 +107,7 @@ public class Conexion {
     private void crear_tabla_videojuego(){
         try{
             String SQL = "CREATE TABLE videojuego(codigo VARCHAR(12) PRIMARY KEY,nombre VARCHAR(60) NOT NULL,version VARCHAR(45) NOT NULL,fecha_de_desarrollo DATE NOT NULL,";
-            SQL+="categoria VARCHAR(20) NOT NULL, genero VARCHAR(20) NOT NULL, precio INT(20) NOT NULL, rut VARCHAR (12)";
+            SQL+="categoria VARCHAR(20) NOT NULL, genero VARCHAR(20) NOT NULL, precio INT(20) NOT NULL, rut VARCHAR (12)NOT NULL)";
             PreparedStatement ps = connection.prepareStatement(SQL);
             ps.execute();
             System.out.println("Tabla videojuego creada");
@@ -118,7 +119,7 @@ public class Conexion {
     private void crear_tabla_arriendo(){
         try{
             String SQL = "CREATE TABLE arriendo(numero_de_arriendo INT(12) PRIMARY KEY,fecha_arriendo DATE NOT NULL, fecha_entrega DATE NOT NULL,";
-            SQL+="codigo VARCHAR(12) NOT NULL, rut VARCHAR(12) NOT NULL";
+            SQL+="codigo VARCHAR(12) NOT NULL, rut VARCHAR(12) NOT NULL)";
             PreparedStatement ps = connection.prepareStatement(SQL);
             ps.execute();
             System.out.println("Tabla arriendo creada");
@@ -127,8 +128,7 @@ public class Conexion {
         }
         
     }
-    
-        public void fk_videojuego_desarrollador(){
+    public void fk_videojuego_desarrollador(){
         try{
             String SQL = "ALTER TABLE videojuego ADD CONSTRAINT fk_videojuego_desarrollador FOREIGN KEY (rut)REFERENCES desarrollador (rut)";
             PreparedStatement ps = connection.prepareStatement(SQL);

@@ -61,8 +61,8 @@ public class Menu_admin extends javax.swing.JFrame {
         menu = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         titulo_texto = new javax.swing.JLabel();
-        identificador_texto = new javax.swing.JLabel();
-        rut_input = new javax.swing.JTextField();
+        buscar_txt = new javax.swing.JLabel();
+        buscar_input = new javax.swing.JTextField();
         rut_separador = new javax.swing.JSeparator();
         buscar_botton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -93,15 +93,20 @@ public class Menu_admin extends javax.swing.JFrame {
         titulo_texto.setForeground(new java.awt.Color(255, 255, 255));
         titulo_texto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        identificador_texto.setBackground(new java.awt.Color(255, 255, 255));
-        identificador_texto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        identificador_texto.setForeground(new java.awt.Color(255, 255, 255));
+        buscar_txt.setBackground(new java.awt.Color(255, 255, 255));
+        buscar_txt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buscar_txt.setForeground(new java.awt.Color(255, 255, 255));
 
-        rut_input.setBackground(new java.awt.Color(51, 51, 51));
-        rut_input.setForeground(new java.awt.Color(102, 102, 102));
-        rut_input.setBorder(null);
+        buscar_input.setBackground(new java.awt.Color(51, 51, 51));
+        buscar_input.setForeground(new java.awt.Color(102, 102, 102));
+        buscar_input.setBorder(null);
 
         buscar_botton.setText("Buscar");
+        buscar_botton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscar_bottonActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -161,11 +166,11 @@ public class Menu_admin extends javax.swing.JFrame {
                             .addComponent(titulo_texto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(30, 30, 30)
-                            .addComponent(identificador_texto))
+                            .addComponent(buscar_txt))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(30, 30, 30)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(rut_input, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buscar_input, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(rut_separador, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(20, 20, 20)
                             .addComponent(buscar_botton))
@@ -186,11 +191,11 @@ public class Menu_admin extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(titulo_texto)
                     .addGap(30, 30, 30)
-                    .addComponent(identificador_texto)
+                    .addComponent(buscar_txt)
                     .addGap(20, 20, 20)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(rut_input, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buscar_input, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(0, 0, 0)
                             .addComponent(rut_separador, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(buscar_botton))
@@ -277,7 +282,7 @@ public class Menu_admin extends javax.swing.JFrame {
     private void usuarios_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarios_menuActionPerformed
         titulo_texto.setText("Menu Usuario");
         mostrarInfo();
-        identificador_texto.setText("Rut");
+        buscar_txt.setText("Rut:");
         jTable1.getTableHeader().getColumnModel().getColumn(0).setHeaderValue("Rut");
         jTable1.getTableHeader().getColumnModel().getColumn(1).setHeaderValue("Nombre");
         jTable1.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("Direccion");
@@ -294,7 +299,7 @@ public class Menu_admin extends javax.swing.JFrame {
     private void vendedores_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendedores_menuActionPerformed
         titulo_texto.setText("Menu Vendedor");
         mostrarInfo();
-        identificador_texto.setText("Rut");
+        buscar_txt.setText("Rut:");
         jTable1.getTableHeader().getColumnModel().getColumn(0).setHeaderValue("Rut");
         jTable1.getTableHeader().getColumnModel().getColumn(1).setHeaderValue("Nombre");
         jTable1.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("Direccion");
@@ -309,7 +314,7 @@ public class Menu_admin extends javax.swing.JFrame {
     private void desarrolladores_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desarrolladores_menuActionPerformed
         titulo_texto.setText("Menu Desarrollador");
         mostrarInfo();
-        identificador_texto.setText("Rut");
+        buscar_txt.setText("Rut:");
         jTable1.getTableHeader().getColumnModel().getColumn(0).setHeaderValue("Rut");
         jTable1.getTableHeader().getColumnModel().getColumn(1).setHeaderValue("Nombre");
         jTable1.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("Direccion");
@@ -332,7 +337,7 @@ public class Menu_admin extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         titulo_texto.setText("Menu Videojuego");
         mostrarInfo();
-        identificador_texto.setText("Codigo");
+        buscar_txt.setText("Codigo:");
         jTable1.getTableHeader().getColumnModel().getColumn(0).setHeaderValue("Codigo");
         jTable1.getTableHeader().getColumnModel().getColumn(1).setHeaderValue("Nombre");
         jTable1.getTableHeader().getColumnModel().getColumn(2).setHeaderValue("Precio");
@@ -408,12 +413,36 @@ public class Menu_admin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_modificar_bottonActionPerformed
 
+    private void buscar_bottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_bottonActionPerformed
+        String dato = buscar_input.getText();
+        String titulo = titulo_texto.getText().replaceAll("Menu ", "").toLowerCase();
+        //String identificador = jTable1.getValueAt(fila, 0)+"";
+        String identificador = buscar_txt.getText().replace(":", "");
+        if(!dato.isBlank()){
+            boolean encontrado=false;
+            for(int fila=0;fila<jTable1.getRowCount();fila++){
+                String tabla_dato =  model.getValueAt(fila, 0)+"";
+                if(dato.equals(tabla_dato)){
+                    jTable1.setRowSelectionInterval(fila,fila);
+                    encontrado=true;
+                    break;
+                }
+            }
+            if(!encontrado){
+                JOptionPane.showMessageDialog(null, identificador+" del "+titulo+" Inexistente", "Validación", 0);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Ingrese el "+identificador.toLowerCase()+" del "+titulo, "Validación", 2);
+        }
+    }//GEN-LAST:event_buscar_bottonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraTareas_menu;
     private javax.swing.JButton buscar_botton;
+    private javax.swing.JTextField buscar_input;
+    private javax.swing.JLabel buscar_txt;
     private javax.swing.JMenuItem desarrolladores_menu;
     private javax.swing.JButton eliminar_botton;
-    private javax.swing.JLabel identificador_texto;
     private javax.swing.JButton ingresar_botton;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -423,7 +452,6 @@ public class Menu_admin extends javax.swing.JFrame {
     private javax.swing.JPanel menu;
     private javax.swing.JButton modificar_botton;
     private javax.swing.JMenu personas_menu;
-    private javax.swing.JTextField rut_input;
     private javax.swing.JSeparator rut_separador;
     private javax.swing.JLabel titulo_texto;
     private javax.swing.JMenuItem usuarios_menu;

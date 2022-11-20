@@ -134,12 +134,12 @@
                               </Group>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
-                                  <Component id="identificador_texto" min="-2" max="-2" attributes="0"/>
+                                  <Component id="buscar_txt" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="rut_input" min="-2" pref="270" max="-2" attributes="0"/>
+                                      <Component id="buscar_input" min="-2" pref="270" max="-2" attributes="0"/>
                                       <Component id="rut_separador" min="-2" pref="270" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
@@ -167,11 +167,11 @@
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="titulo_texto" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
-                          <Component id="identificador_texto" min="-2" max="-2" attributes="0"/>
+                          <Component id="buscar_txt" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="rut_input" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="buscar_input" min="-2" pref="20" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   <Component id="rut_separador" min="-2" pref="10" max="-2" attributes="0"/>
                               </Group>
@@ -206,7 +206,7 @@
                 <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="identificador_texto">
+            <Component class="javax.swing.JLabel" name="buscar_txt">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -219,7 +219,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="rut_input">
+            <Component class="javax.swing.JTextField" name="buscar_input">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="33" red="33" type="rgb"/>
@@ -238,6 +238,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Buscar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscar_bottonActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
               <AuxValues>
