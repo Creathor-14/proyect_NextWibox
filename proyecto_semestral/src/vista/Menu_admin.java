@@ -346,8 +346,6 @@ public class Menu_admin extends javax.swing.JFrame {
         //String titl = jTable1.getTableHeader().getColumnModel().getColumn(0).getHeaderValue().toString();
         //Headers
         
-        
-        System.out.println();
         List <String[]> matriz = Visualizador.sistema.obtenerVideojuegos();
         for(int i = 0;i<matriz.size();i++){
             model.addRow(matriz.get(i));

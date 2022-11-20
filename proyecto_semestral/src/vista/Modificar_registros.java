@@ -108,7 +108,6 @@ public class Modificar_registros extends javax.swing.JFrame {
         ingresar = new javax.swing.JPanel();
         titulo_txt = new javax.swing.JLabel();
         actualizar_button = new javax.swing.JButton();
-        ingresar_button = new javax.swing.JButton();
         Remplazar = new javax.swing.JPanel();
         ingresarVideoJuego = new javax.swing.JPanel();
         codigo_txt = new javax.swing.JLabel();
@@ -181,14 +180,6 @@ public class Modificar_registros extends javax.swing.JFrame {
             }
         });
         ingresar.add(actualizar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, -1, -1));
-
-        ingresar_button.setText("Volver");
-        ingresar_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ingresar_buttonActionPerformed(evt);
-            }
-        });
-        ingresar.add(ingresar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, -1, -1));
 
         Remplazar.setMaximumSize(new java.awt.Dimension(440, 250));
         Remplazar.setMinimumSize(new java.awt.Dimension(440, 250));
@@ -451,10 +442,6 @@ public class Modificar_registros extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ingresar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresar_buttonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ingresar_buttonActionPerformed
-
     private void actualizar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizar_buttonActionPerformed
         if(tipo_registro.equalsIgnoreCase("persona")){
             String nombre = nombre_input.getText();
@@ -530,7 +517,6 @@ public class Modificar_registros extends javax.swing.JFrame {
     private javax.swing.JPanel ingresarPersona;
     private javax.swing.JPanel ingresarUsuario;
     private javax.swing.JPanel ingresarVideoJuego;
-    private javax.swing.JButton ingresar_button;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator_categoria;
     private javax.swing.JSeparator jSeparator_codigo;

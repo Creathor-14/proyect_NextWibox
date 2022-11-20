@@ -26,6 +26,7 @@ public class Sistema_impl {
     private int contrador_arriendos;
     private Conexion bd = new Conexion();
     private boolean conectado;
+    private boolean cargando_base_de_datos = true;
     
     public Sistema_impl(){
         lDesarrollador = new ArrayList<>();
@@ -41,13 +42,22 @@ public class Sistema_impl {
         bd.crear_tablas();
         //bd.borrar_tablas(); 
         
-        /*
+        
         this.lUsuario = bd.obtener_usuarios_BD();
         this.lVendedor = bd.obtener_vendedores_BD();
         this.lDesarrollador = bd.obtener_desarrolladores_BD();
-        this.lVideojugo = bd.obtener_videojuegos_BD();
-        this.lArriendo = bd.obtener_arriendos_BD();
-        */
+        List <String[]> listaVi = bd.obtener_videojuegos_BD();
+        for(int i=0;i<listaVi.size();i++){
+            String [] lVi = listaVi.get(i);
+            ingresarVideojuego(lVi[0], lVi[1], lVi[2], lVi[3], lVi[4], lVi[5], lVi[6], lVi[7]);
+        }
+        
+        List <String[]> listaA = bd.obtener_arriendos_BD();
+        for(int i=0;i<listaA.size();i++){
+            String [] lA = listaA.get(i);
+            ingresarArriendo(lA[0], lA[1], lA[2], lA[3], lA[4]);
+        }
+        cargando_base_de_datos = false;
     }
     public boolean isConected(){
         return conectado;
@@ -154,7 +164,7 @@ public class Sistema_impl {
         
     // ingresar el usuario
         Usuario u = new Usuario(rut, nombre, direccion, correo, date, comuna, telefono);
-        if(this.conectado){
+        if(!cargando_base_de_datos && this.conectado){
             bd.agregar_usuario_BD(u);
         }
         return lUsuario.add(u);
@@ -169,8 +179,8 @@ public class Sistema_impl {
         }
     // ingresar el vendedor
         Vendedor v = new Vendedor(rut, nombre, direccion, correo, fono);
-        if(this.conectado){
-            //bd.agregar_vendedor_BD(v);
+        if(!cargando_base_de_datos && this.conectado){
+            bd.agregar_vendedor_BD(v);
         }
         return lVendedor.add(v);
     }
@@ -184,8 +194,8 @@ public class Sistema_impl {
         }
     // ingresar el desarrollador
         Desarrollador d = new Desarrollador(rut, nombre, direccion, correo, fono);
-        if(this.conectado){
-            //bd.agregar_desarrollador_BD(d);
+        if(!cargando_base_de_datos && this.conectado){
+            bd.agregar_desarrollador_BD(d);
         }
         return lDesarrollador.add(d);
     }
@@ -222,8 +232,8 @@ public class Sistema_impl {
         for(Desarrollador d:lDesarrollador){
             if(d.getRut().equalsIgnoreCase(rutDesarrollador)){
                 VideoJuego v = new VideoJuego(codigo, nombre, version, date, categoria, genero, precio, d);
-                if(this.conectado){
-                    //bd.agregar_videojuego_BD(v);
+                if(!cargando_base_de_datos && this.conectado){
+                    bd.agregar_videojuego_BD(v);
                 }
                 return lVideojugo.add(v);
             }
@@ -272,11 +282,50 @@ public class Sistema_impl {
         Arriendo a = new Arriendo(this.contrador_arriendos,videojuego, usuario,fecha_arriendo,fecha_entrega);
         lArriendo.add(a);
         if(this.conectado){
-            //bd.agregar_arriendo_BD(a);
+            bd.agregar_arriendo_BD(a);
         }
-        if(this.conectado){
+        if(!cargando_base_de_datos && this.conectado){
             String codigo = lVideojugo.get(posicionV).getCodigo();
-            //bd.eliminar_videojuego_BD(codigo);
+            bd.eliminar_videojuego_BD(codigo);
+        }
+        lVideojugo.remove(posicionV);
+        contrador_arriendos++;
+        return true;
+    }
+    public boolean ingresarArriendo(String nro_arriendo, String fechaA, String fechaE, String codigoVideojuego, String rutUsuario){
+        int posicionV = buscarVideoJuego(codigoVideojuego);
+        if(posicionV == -1){
+            throw new NullPointerException("No existe un juego con este codigo.");
+        }
+        
+        int posicionU = buscarUsuario(rutUsuario);
+        if(posicionU == -1){
+            throw new NullPointerException("No usuario con este rut.");
+        }
+        Fecha f = new Fecha();
+        Date fecha_arriendo = null;
+        try{
+            fecha_arriendo = f.verificarFecha(fechaA);
+        }catch(Exception e){
+            throw new NullPointerException(e.getMessage());
+        }
+        Date fecha_entrega = null;
+        try{
+            fecha_entrega = f.verificarFecha(fechaE);
+        }catch(Exception e){
+            throw new NullPointerException(e.getMessage());
+        }
+        VideoJuego videojuego = lVideojugo.get(posicionV);
+        Usuario usuario = lUsuario.get(posicionU);
+        
+        Arriendo a = new Arriendo(this.contrador_arriendos,videojuego, usuario,fecha_arriendo,fecha_entrega);
+        lArriendo.add(a);
+        if(this.conectado){
+            bd.agregar_arriendo_BD(a);
+        }
+        if(!cargando_base_de_datos && this.conectado){
+            String codigo = lVideojugo.get(posicionV).getCodigo();
+            bd.eliminar_videojuego_BD(codigo);
         }
         lVideojugo.remove(posicionV);
         contrador_arriendos++;

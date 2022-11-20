@@ -1,15 +1,15 @@
-
 package bd;
-
+import controlador.Sistema_impl;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.Arriendo;
 import modelo.Desarrollador;
 import modelo.Usuario;
 import modelo.Vendedor;
-
-
-        
+import modelo.VideoJuego;
+   
 public class Conexion {
     Connection connection = null;
 
@@ -31,6 +31,7 @@ public class Conexion {
             return false;
         }
     }
+//-------------------------------------TABLAS-------------------------------------  FUNCIONA
     public void borrar_tablas(){
         try{
             String borrar_arriendo = "DROP TABLE arriendo";
@@ -76,7 +77,6 @@ public class Conexion {
         fk_arriendo_videojuego();
         fk_arriendo_usuario(); 
     }
-
     private void crear_tabla_usuario(){
         try{
             String SQL = "CREATE TABLE usuario(rut VARCHAR(12) PRIMARY KEY,nombre VARCHAR(60) NOT NULL,direccion VARCHAR(45) NOT NULL,";
@@ -169,131 +169,402 @@ public class Conexion {
            System.out.println("Error al ingresar fk, o ya existia"); 
         }
     }
-    
+//-------------------------------------INGRESAR-------------------------------------    FUNCIONA
     public boolean agregar_usuario_BD(Usuario usuario){
-        try {
-        String SQL = "INSERT INTO usuario (rut, nombre, direccion, correo, fecha_de_nacimiento, comuna, telefono) VALUES (?,?,?,?,?,?,?)";
-        PreparedStatement ps = connection.prepareStatement(SQL);
-        
-        ps.setString(1, usuario.getRut());
-        ps.setString(2,usuario.getNombre());
-        ps.setString(3,usuario.getDireccion());
-        ps.setString(4,usuario.getCorreo());
-        java.sql.Date sqlDate = new java.sql.Date(usuario.getFecha_de_nacimiento().getTime());
-        ps.setDate(5, sqlDate);
-        ps.setString(6,usuario.getComuna());
-        ps.setString(7,usuario.getTelefono());
+        try{
+            String SQL = "INSERT INTO usuario (rut, nombre, direccion, correo, fecha_de_nacimiento, comuna, telefono) VALUES (?,?,?,?,?,?,?)";
+            PreparedStatement ps = connection.prepareStatement(SQL);
 
-        ps.executeUpdate();
-        
-        ps.close();
+            ps.setString(1, usuario.getRut());
+            ps.setString(2,usuario.getNombre());
+            ps.setString(3,usuario.getDireccion());
+            ps.setString(4,usuario.getCorreo());
+            java.sql.Date sqlDate = new java.sql.Date(usuario.getFecha_de_nacimiento().getTime());
+            ps.setDate(5, sqlDate);
+            ps.setString(6,usuario.getComuna());
+            ps.setString(7,usuario.getTelefono());
+
+            ps.executeUpdate();
+
+            ps.close();
             System.out.println("Usuario agregado a la base de datos");
-        } catch (Exception e) {
-            System.out.println("Error al agregar usuario en la base de datos\n"+e.getMessage());
+            return true;
+        }catch (Exception e) {
+            System.out.println("Error al agregar usuario en la base de datos");
         }
-
-        return true;
+        return false;
     }
     public boolean agregar_vendedor_BD(Vendedor vendedor){
         try {
-        String SQL = "INSERT INTO vendedor (rut, nombre, direccion, correo, fono) VALUES (?,?,?,?,?)";
-        PreparedStatement ps = connection.prepareStatement(SQL);
-        
-        ps.setString(1, vendedor.getRut());
-        ps.setString(2,vendedor.getNombre());
-        ps.setString(3,vendedor.getDireccion());
-        ps.setString(4,vendedor.getCorreo());
-        ps.setString(5,vendedor.getFono());
+            String SQL = "INSERT INTO vendedor (rut, nombre, direccion, correo, fono) VALUES (?,?,?,?,?)";
+            PreparedStatement ps = connection.prepareStatement(SQL);
 
-        ps.executeUpdate();
-        
-        ps.close();
+            ps.setString(1, vendedor.getRut());
+            ps.setString(2,vendedor.getNombre());
+            ps.setString(3,vendedor.getDireccion());
+            ps.setString(4,vendedor.getCorreo());
+            ps.setString(5,vendedor.getFono());
+
+            ps.executeUpdate();
+
+            ps.close();
             System.out.println("Vendedor agregado a la base de datos");
+            return true;
         } catch (Exception e) {
-            System.out.println("Error al agregar vendedor en la base de datos\n"+e.getMessage());
+            System.out.println("Error al agregar vendedor en la base de datos");
         }
-
-        return true;
-    }
-    public boolean agregar_desarrollador_BD(Desarrollador desarrollador){
         return false;
     }
-    /*
-    public boolean eliminarBD(String rut){
+    public boolean agregar_desarrollador_BD(Desarrollador desarrollador){
+        try {
+            String SQL = "INSERT INTO desarrollador (rut, nombre, direccion, correo, fono) VALUES (?,?,?,?,?)";
+            PreparedStatement ps = connection.prepareStatement(SQL);
+
+            ps.setString(1, desarrollador.getRut());
+            ps.setString(2,desarrollador.getNombre());
+            ps.setString(3,desarrollador.getDireccion());
+            ps.setString(4,desarrollador.getCorreo());
+            ps.setString(5,desarrollador.getFono());
+
+            ps.executeUpdate();
+
+            ps.close();
+            System.out.println("desarrollador agregado a la base de datos");
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error al agregar desarrollador en la base de datos");
+        }
+        return false;
+    }
+    public boolean agregar_videojuego_BD(VideoJuego videojuego){
+        try {
+            String SQL = "INSERT INTO videojuego (codigo, nombre, version, fecha_de_desarrollo, categoria, genero, precio, rut) VALUES (?,?,?,?,?,?,?,?)";
+            PreparedStatement ps = connection.prepareStatement(SQL);
+
+            ps.setString(1, videojuego.getCodigo());
+            ps.setString(2,videojuego.getNombre());
+            ps.setString(3,videojuego.getVersion());
+            java.sql.Date sqlDate = new java.sql.Date(videojuego.getFecha_de_desarrollo().getTime());
+            ps.setDate(4,sqlDate);
+            ps.setString(5,videojuego.getCategoria());
+            ps.setString(6,videojuego.getGenero());
+            ps.setInt(7,videojuego.getPrecio());
+            ps.setString(8,videojuego.getDesarrollador().getRut());
+
+            ps.executeUpdate();
+
+            ps.close();
+            System.out.println("videojuego agregado a la base de datos");
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error al agregar videojuego en la base de datos");
+        }
+        return false;
+    }
+    public boolean agregar_arriendo_BD(Arriendo arriendo){
+        try {
+            String SQL = "INSERT INTO arriendo (numero_de_arriendo, fecha_arriendo, fecha_entrega, codigo, rut) VALUES (?,?,?,?,?)";
+            PreparedStatement ps = connection.prepareStatement(SQL);
+
+            ps.setInt(1, arriendo.getNumero_de_arriendo());
+            java.sql.Date sqlDate1 = new java.sql.Date(arriendo.getFecha_arriendo().getTime());
+            ps.setDate(2,sqlDate1);
+            java.sql.Date sqlDate2 = new java.sql.Date(arriendo.getFecha_entrega().getTime());
+            ps.setDate(3,sqlDate2);
+            ps.setString(4,arriendo.getVideoJuego().getCodigo());
+            ps.setString(5,arriendo.getUsuario().getRut());
+
+
+            ps.executeUpdate();
+
+            ps.close();
+            System.out.println("arriendo agregado a la base de datos");
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error al agregar arriendo en la base de datos");
+        }
+        return false;        
+    }
+//-------------------------------------OBTENER------------------------------------- PROBAR
+    public List <Usuario> obtener_usuarios_BD(){//(String rut){
+        try {
+        String SQL = "SELECT * From usuario"; //WHERE rut = ?";
+        PreparedStatement ps = connection.prepareStatement(SQL);
+        ResultSet rs = ps.executeQuery();
+        
+        String rut, nombre, direccion, correo, comuna, telefono;
+        Date fecha_de_nacimiento = null;
+        
+        List <Usuario> lista = new ArrayList<>();
+        while(rs.next()){
+
+            rut = rs.getString("rut");
+            nombre = rs.getString("nombre");
+            direccion = rs.getString("direccion");
+            correo = rs.getString("correo");
+            
+            fecha_de_nacimiento = rs.getDate("fecha_de_nacimiento");
+            
+            
+            comuna = rs.getString("comuna");
+            telefono = rs.getString("telefono");
+         
+            Usuario usuario = new Usuario(rut, nombre, direccion, correo, fecha_de_nacimiento, comuna, telefono);
+            lista.add(usuario);
+        }
+        
+        
+        ps.close();
+            System.out.println("Datos de los usuarios cargados correctamente");
+            return lista;
+        } catch (Exception e) {
+            System.out.println("Error al cargar los datos de los usuarios");
+        }
+        return null;
+    }    
+    public List <Vendedor> obtener_vendedores_BD(){//(String rut){
+        try {
+        String SQL = "SELECT * From vendedor"; //WHERE rut = ?";
+        PreparedStatement ps = connection.prepareStatement(SQL);
+        ResultSet rs = ps.executeQuery();
+        
+        String rut, nombre, direccion, correo, fono;
+        
+        List <Vendedor> lista = new ArrayList<>();
+        while(rs.next()){
+
+            rut = rs.getString("rut");
+            nombre = rs.getString("nombre");
+            direccion = rs.getString("direccion");
+            correo = rs.getString("correo");
+                                    
+            fono = rs.getString("fono");
+         
+            Vendedor vendedor = new Vendedor(rut, nombre, direccion, correo, fono);
+            lista.add(vendedor);
+        }
+     
+        ps.close();
+        System.out.println("Datos de los vendedores cargados correctamente");
+        return lista;
+        } catch (Exception e) {
+            System.out.println("Error al cargar los datos de los vendedores");
+        }
+        return null;
+    }   
+    public List <Desarrollador> obtener_desarrolladores_BD(){//(String rut){
+        try {
+        String SQL = "SELECT * From desarrollador"; //WHERE rut = ?";
+        PreparedStatement ps = connection.prepareStatement(SQL);
+        ResultSet rs = ps.executeQuery();
+        
+        String rut, nombre, direccion, correo, fono;
+        
+        List <Desarrollador> lista = new ArrayList<>();
+        while(rs.next()){
+
+            rut = rs.getString("rut");
+            nombre = rs.getString("nombre");
+            direccion = rs.getString("direccion");
+            correo = rs.getString("correo");
+                                    
+            fono = rs.getString("fono");
+         
+            Desarrollador desarrollador = new Desarrollador(rut, nombre, direccion, correo, fono);
+            lista.add(desarrollador);
+        }
+     
+        ps.close();
+        System.out.println("Datos de los desarrolladores cargados correctamente");
+        return lista;
+        } catch (Exception e) {
+            System.out.println("Error al cargar los datos de los desarrolladores");
+        }
+        return null;
+    }  
+    public List <String[]> obtener_videojuegos_BD(){
+        try {
+        String SQL = "SELECT * From videojuego"; //WHERE rut = ?";
+        PreparedStatement ps = connection.prepareStatement(SQL);
+        ResultSet rs = ps.executeQuery();
+        String codigo, nombre, version, categoria, genero, rut;
+        Date fecha_de_desarrollo = null;
+        int precio;
+        
+        List <String[]> matriz = new ArrayList<>();
+        SimpleDateFormat a = new SimpleDateFormat("dd-MM-yy");
+        while(rs.next()){
+            String [] lista = new String [8];
+            codigo = rs.getString("codigo");
+            nombre = rs.getString("nombre");
+            version = rs.getString("version");
+            fecha_de_desarrollo = rs.getDate("fecha_de_desarrollo");
+            categoria = rs.getString("categoria");
+            genero = rs.getString("genero");
+            precio = rs.getInt("precio");
+            rut = rs.getString("rut");
+
+            lista[0] = codigo;
+            lista[1] = nombre;
+            lista[2] = version;
+            lista[3] = a.format(fecha_de_desarrollo);
+            lista[4] = categoria;
+            lista[5] = genero;
+            lista[6] = precio+"";
+            lista[7] = rut;
+            
+            matriz.add(lista);
+        }
+     
+        ps.close();
+        System.out.println("Datos de los videojuegos cargados correctamente");
+        return matriz;
+        } catch (Exception e) {
+            System.out.println("Error al cargar los datos de los videojuegos");
+        }
+        return null;
+    }  
+    public List <String[]> obtener_arriendos_BD(){
+        try {
+        String SQL = "SELECT * From arriendo"; //WHERE rut = ?";
+        PreparedStatement ps = connection.prepareStatement(SQL);
+        ResultSet rs = ps.executeQuery();
+        //numero_de_arriendo, fecha_arriendo, fecha_entrega, codigo, rut
+        int numero_de_arriendo;
+        Date fecha_arriendo = null;
+        Date fecha_entrega = null;
+        String codigo, rut;
+        
+        
+        List <String[]> matriz = new ArrayList<>();
+        SimpleDateFormat a = new SimpleDateFormat("dd-MM-yy");
+        while(rs.next()){
+            String [] lista = new String [5];
+            numero_de_arriendo = rs.getInt("numero_de_arriendo");
+            fecha_arriendo = rs.getDate("fecha_arriendo");
+            fecha_entrega = rs.getDate("fecha_entrega");
+            
+            codigo = rs.getString("codigo");            
+            rut = rs.getString("rut");
+
+            lista[0] = numero_de_arriendo+"";
+            lista[1] = a.format(fecha_arriendo);
+            lista[2] = a.format(fecha_entrega);
+            lista[3] = codigo;
+            lista[4] = rut;
+            
+            matriz.add(lista);
+        }
+     
+        ps.close();
+        System.out.println("Datos de los arriendos cargados correctamente");
+        return matriz;
+        } catch (Exception e) {
+            System.out.println("Error al cargar los datos de los arriendos");
+        }
+        return null;
+    }  
+//-------------------------------------ACTUALIZAR-------------------------------------  PROBAR
+    public boolean actualizar_usuario_BD(Usuario usuario){
         try{
-            String SQL = "Delete From paciente WHERE rut = ?";
+            //nombre, direccion, correo, fecha_de_nacimiento, comuna, telefono
+            String SQL = "UPDATE usuario SET nombre = ?, direccion = ?, fecha_de_nacimiento = ?, comuna = ?, telefono = ? WHERE rut = ?";
+            PreparedStatement ps = connection.prepareStatement(SQL);
+
+            
+            ps.setString(1, usuario.getNombre());
+            ps.setString(2, usuario.getDireccion());
+            java.sql.Date sqlDate = new java.sql.Date(usuario.getFecha_de_nacimiento().getTime());
+            ps.setDate(3, sqlDate);
+            ps.setString(4, usuario.getComuna());
+            
+            ps.setString(5, usuario.getTelefono());
+
+            
+            ps.executeUpdate();        
+            ps.close();
+            System.out.println("Usuario Actualizado en la base de datos.");
+            return true;
+        }catch(Exception e ){
+            System.out.println("Error al actualizar el usuario en la base de datos");
+        } 
+        return false;
+    }   
+//-------------------------------------ELIMINAR-------------------------------------    PROBAR
+    public boolean eliminar_usuario_BD(String rut){
+        try{
+            String SQL = "DELETE FROM usuario WHERE rut = ?";
             PreparedStatement ps = connection.prepareStatement(SQL);
             ps.setString(1, rut);
             
             ps.executeUpdate();        
             ps.close();
-            System.out.println("Paciente eliminado de la base de datos.");
+            System.out.println("usuario eliminado de la base de datos.");
+            return true;
         }catch(Exception e ){
-            System.out.println("Error al eliminar de la base de datos");
+            System.out.println("Error al eliminar el usuario de la base de datos");
         } 
-        return true;
+        return false;
     }
-    public List <Paciente> obtenerBD(){//(String rut){
-        try {
-        String SQL = "SELECT * From paciente"; //WHERE rut = ?";
-        PreparedStatement ps = connection.prepareStatement(SQL);
-        
-
-        ResultSet rs = ps.executeQuery();
-        
-        String run, nombre, genero, direccion, ciudad, isapre;
-        int edad;
-        boolean donante;
-        
-        List <Paciente> lista = new ArrayList<>();
-        while(rs.next()){
-
-            run = rs.getString("rut");
-            nombre = nombre = rs.getString("nombre");
-            genero = genero = rs.getString("genero");
-            edad = rs.getInt("edad");
-            direccion = rs.getString("direccion");
-            ciudad = rs.getString("ciudad");
-            isapre = rs.getString("isapre");
-            donante = rs.getBoolean("donante");            
-            Paciente paciente = new Paciente(run, nombre, genero, edad, direccion, ciudad, isapre, donante);
-            lista.add(paciente);
-        }
-        
-        
-        ps.close();
-            System.out.println("Datos cargados correctamente");
-            return lista;
-        } catch (Exception e) {
-            System.out.println("Error al cargar los datos\n"+e.getMessage());
-        }
-
-        return null;
-    }
-    public boolean actualizarBD(Paciente paciente){
+    public boolean eliminar_vendedor_BD(String rut){
         try{
-            String SQL = "UPDATE paciente SET nombre = ?, genero = ?, edad = ?, direccion = ?, ciudad = ?, isapre = ?, donante = ? WHERE rut = ?";
+            String SQL = "DELETE FROM vendedor WHERE rut = ?";
             PreparedStatement ps = connection.prepareStatement(SQL);
-            //ResultSet rs = ps.executeQuery();
-            
-            ps.setString(1, paciente.getNombre());
-            ps.setString(2, paciente.getGenero());
-            ps.setInt(3, paciente.getEdad());
-            ps.setString(4, paciente.getDireccion());
-            ps.setString(5, paciente.getCiudad());
-            ps.setString(6, paciente.getIsapre());
-  
-            ps.setBoolean(7, paciente.isDonante()); 
-            
-            ps.setString(8, paciente.getRut());
+            ps.setString(1, rut);
             
             ps.executeUpdate();        
             ps.close();
-            System.out.println("Paciente Actualizado en la base de datos.");
+            System.out.println("vendedor eliminado de la base de datos.");
+            return true;
         }catch(Exception e ){
-            System.out.println("Error al actualizar de la base de datos\n"+e.getMessage());
+            System.out.println("Error al eliminar el vendedor de la base de datos");
         } 
-        return true;
-    }*/
+        return false;
+    }
+    public boolean eliminar_desarrollador_BD(String rut){
+        try{
+            String SQL = "DELETE FROM desarrollador WHERE rut = ?";
+            PreparedStatement ps = connection.prepareStatement(SQL);
+            ps.setString(1, rut);
+            
+            ps.executeUpdate();        
+            ps.close();
+            System.out.println("desarrollador eliminado de la base de datos.");
+            return true;
+        }catch(Exception e ){
+            System.out.println("Error al  eliminar el desarrollador de la base de datos");
+        } 
+        return false;
+    }   
+    public boolean eliminar_videojuego_BD(String codigo){
+        try{
+            String SQL = "DELETE FROM videojuego WHERE codigo = ?";
+            PreparedStatement ps = connection.prepareStatement(SQL);
+            ps.setString(1, codigo);
+            
+            ps.executeUpdate();        
+            ps.close();
+            System.out.println("videojuego eliminado de la base de datos.");
+            return true;
+        }catch(Exception e ){
+            System.out.println("Error al eliminar el videojuego de la base de datos");
+        } 
+        return false;
+    }
+    public boolean eliminar_arriendo_BD(int nro_arriendo){
+        try{
+            String SQL = "DELETE FROM arriendo WHERE numero_de_arriendo = ?";
+            PreparedStatement ps = connection.prepareStatement(SQL);
+            ps.setInt(1, nro_arriendo);
+            
+            ps.executeUpdate();        
+            ps.close();
+            System.out.println("arriendo eliminado de la base de datos.");
+            return true;
+        }catch(Exception e ){
+            System.out.println("Error al eliminar el arriendo de la base de datos");
+        } 
+        return false;
+    }       
 }
 
