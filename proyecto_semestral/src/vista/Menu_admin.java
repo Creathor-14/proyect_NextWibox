@@ -80,8 +80,7 @@ public class Menu_admin extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Manu Admin");
-        setUndecorated(true);
+        setTitle("Menu Admin");
         setResizable(false);
 
         menu.setBackground(new java.awt.Color(51, 51, 51));

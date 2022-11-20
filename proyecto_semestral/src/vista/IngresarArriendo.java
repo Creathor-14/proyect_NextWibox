@@ -48,6 +48,7 @@ public class IngresarArriendo extends javax.swing.JPanel {
         jSeparator_fechaE = new javax.swing.JSeparator();
         fechaEntrega_input = new javax.swing.JTextField();
         jSeparator_nombre3 = new javax.swing.JSeparator();
+        formato_txt = new javax.swing.JTextField();
 
         setMaximumSize(new java.awt.Dimension(138, 25));
         setMinimumSize(new java.awt.Dimension(138, 25));
@@ -92,10 +93,10 @@ public class IngresarArriendo extends javax.swing.JPanel {
 
         codigoVideojuego_input.setBackground(new java.awt.Color(51, 51, 51));
         codigoVideojuego_input.setForeground(new java.awt.Color(102, 102, 102));
-        codigoVideojuego_input.setText("#00001#");
+        codigoVideojuego_input.setText("00001");
         codigoVideojuego_input.setToolTipText("");
         codigoVideojuego_input.setBorder(null);
-        ingresarUsuario.add(codigoVideojuego_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 270, -1));
+        ingresarUsuario.add(codigoVideojuego_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 260, -1));
         ingresarUsuario.add(jSeparator_fechaA, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 270, 10));
 
         jPanel_menu.setBackground(new java.awt.Color(0, 153, 153));
@@ -197,6 +198,19 @@ public class IngresarArriendo extends javax.swing.JPanel {
         ingresarUsuario.add(fechaEntrega_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 270, -1));
         ingresarUsuario.add(jSeparator_nombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 270, 10));
 
+        formato_txt.setEditable(false);
+        formato_txt.setBackground(new java.awt.Color(51, 51, 51));
+        formato_txt.setForeground(new java.awt.Color(102, 102, 102));
+        formato_txt.setText("#");
+        formato_txt.setToolTipText("");
+        formato_txt.setBorder(null);
+        formato_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formato_txtActionPerformed(evt);
+            }
+        });
+        ingresarUsuario.add(formato_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 10, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -232,10 +246,10 @@ public class IngresarArriendo extends javax.swing.JPanel {
      */
     private void jLabel_registrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_registrarMouseClicked
         String rutUsuario = rutUsuario_input.getText();
-        verificarCamposEnBlanco(rutUsuario, "rutUsuario");
+        verificarCamposEnBlanco(rutUsuario, "Rut usuario");
         
-        String codigo = codigoVideojuego_input.getText();
-        verificarCamposEnBlanco(codigo, "codigo");
+        String codigo_videojuego = codigoVideojuego_input.getText().replace("#", "");
+        verificarCamposEnBlanco(codigo_videojuego, "codigo videojuego");
 
         String fechaA=fechaArriendo_input.getText();
         verificarCamposEnBlanco(fechaA, "fechaA");
@@ -244,7 +258,7 @@ public class IngresarArriendo extends javax.swing.JPanel {
         verificarCamposEnBlanco(fechaE, "fechaE");
 
         try{
-            Visualizador.sistema.ingresarArriendo(codigo, rutUsuario, fechaA, fechaE);
+            Visualizador.sistema.ingresarArriendo("#"+codigo_videojuego, rutUsuario, fechaA, fechaE);
             JOptionPane.showMessageDialog(null,"Arriendo ingresado.");
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e.getMessage());
@@ -260,11 +274,16 @@ public class IngresarArriendo extends javax.swing.JPanel {
         //BORRAR
     }//GEN-LAST:event_ingresarUsuarioMouseDragged
 
+    private void formato_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formato_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formato_txtActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField codigoVideojuego_input;
     private javax.swing.JTextField fechaArriendo_input;
     private javax.swing.JTextField fechaEntrega_input;
+    private javax.swing.JTextField formato_txt;
     private javax.swing.JPanel ingresarUsuario;
     private javax.swing.JLabel jLabel_Titulo;
     private javax.swing.JLabel jLabel_fechaA;

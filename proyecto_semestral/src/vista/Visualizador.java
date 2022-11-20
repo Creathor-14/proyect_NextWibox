@@ -35,9 +35,7 @@ public class Visualizador extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);//hace que la pestaña se vea al centro
         
-        sistema.ingresarDatosPrueba();
-        new Menu_admin().setVisible(true); //Admin version pestaña
-        /*
+
         cargar_login();
         base_de_datos.conectar();
         
@@ -48,7 +46,7 @@ public class Visualizador extends javax.swing.JFrame {
             Fecha f = new Fecha();
             Date date = null;
             try{
-                date = f.verificarFecha("12-12-10");
+                //date = f.verificarFecha("12-12-10");
             }catch(Exception e){
                 System.out.println(e.getMessage());
             }
@@ -66,7 +64,6 @@ public class Visualizador extends javax.swing.JFrame {
             sistema.ingresarDatosPrueba();
             JOptionPane.showMessageDialog(null, sistema.como_entrar_menu_vendedor(), "Funcionamiento Aplicación", 1);
         }     
-        */
     }
     public void cargar_login(){
         Login login = new Login();

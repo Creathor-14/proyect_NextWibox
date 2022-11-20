@@ -143,9 +143,8 @@ public class Login extends javax.swing.JPanel {
     private void acceder_botonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acceder_botonMouseClicked
         String usuario = usuario_input.getText();
         String contraseña = contraseña_input.getText();
-        if(usuario.equals("a") && contraseña.equals("a")){
-            abrir_menu_admin();
-            
+        if(usuario.equals("adm") && contraseña.equals("admin")){
+            new Menu_admin().setVisible(true);
         }else{
             if(usuario.isBlank()){
                 JOptionPane.showMessageDialog(null,"Ingrese un usuario");

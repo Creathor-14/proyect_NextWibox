@@ -17,10 +17,7 @@ import modelo.Vendedor;
 import modelo.VideoJuego;
 import vista.Visualizador;
 
-/**
- *
- * @author thoma
- */
+
 public class Sistema_impl {
     private List <Desarrollador> lDesarrollador; 
     private List <Usuario> lUsuario; 
@@ -104,22 +101,21 @@ public class Sistema_impl {
             System.out.println(e.getMessage());
         }
         Usuario u = new Usuario("0", "0", "0", "0", date, "0", "0");
-        Vendedor v = new Vendedor("rut vendedor 1", "nombre vendedor 1", "direccion vendedor 1", "correo vendedor 1", "fono vendedor 1");
-        Vendedor v1 = new Vendedor("20.574.150-K", "Thomas Rene Quiroga Espinoza", "callao lacra 1", "th.alf.a@xd.com", "+56 9 1111 1111");
+        Vendedor v = new Vendedor("1", "1", "1", "1", "1");
+        Vendedor v1 = new Vendedor("rut vendedor 1", "nombre vendedor 1", "direccion vendedor 1", "correo vendedor 1", "fono vendedor 1");
+        Vendedor v2 = new Vendedor("20.574.150-K", "Thomas Rene Quiroga Espinoza", "callao lacra 1", "th.alf.a@xd.com", "+56 9 1111 1111");
         Desarrollador d = new Desarrollador("2", "2", "2", "2", "2");
-        VideoJuego vi = new VideoJuego("3", "3", "3", date, "3", "3", 0, d);
-        Arriendo a = new Arriendo(0, vi, u, date, date);
-        Arriendo a1 = new Arriendo(1, vi, u, date, date);
+        VideoJuego vi = new VideoJuego("#3", "3", "3", date, "3", "3", 0, d);
         
-        VideoJuego vi1 = new VideoJuego("00001", "3", "3", date, "3", "3", 0, d);
+        VideoJuego vi1 = new VideoJuego("#00001", "3", "3", date, "3", "3", 0, d);
         Usuario u1 = new Usuario("00.000.000-0", "0", "0", "0", date, "0", "0");
         lUsuario.add(u);
         lVendedor.add(v);
         lVendedor.add(v1);
+        lVendedor.add(v2);
         lDesarrollador.add(d);
         lVideojugo.add(vi);
-        lArriendo.add(a);
-        lArriendo.add(a1);
+
         
         lVideojugo.add(vi1);
         lUsuario.add(u1);
@@ -140,6 +136,7 @@ public class Sistema_impl {
         }catch(Exception e){
             throw new NullPointerException(e.getMessage());
         }
+        
     // ingresar el usuario
         Usuario u = new Usuario(rut, nombre, direccion, correo, date, comuna, telefono);
         return lUsuario.add(u);
@@ -183,7 +180,7 @@ public class Sistema_impl {
     // codigo unico
         int posicion = 0;
         for(VideoJuego v:lVideojugo){
-            if(v.getCodigo().equals("#"+codigo+"#")){
+            if(v.getCodigo().equals(codigo)){
                 throw new NullPointerException("Este codigo ya existe en otro videojuego.");
             }
             posicion++;
@@ -206,11 +203,11 @@ public class Sistema_impl {
         }
         throw new NullPointerException("No existe el desarrollador con el rut "+rutDesarrollador);
     }
-    public boolean ingresarArriendo(String codigo, String rutUsuario,String fechaA, String fechaE){
+    public boolean ingresarArriendo(String codigoVideojuego, String rutUsuario,String fechaA, String fechaE){
         int posicionV = -1;
         for(int i=0;i<lVideojugo.size();i++){
             VideoJuego v= lVideojugo.get(i);
-                if(codigo.equals(v.getCodigo())){
+                if(codigoVideojuego.equals(v.getCodigo())){
                     posicionV = i;
                     break;
                 }
@@ -229,21 +226,19 @@ public class Sistema_impl {
         if(posicionU == -1){
             throw new NullPointerException("No usuario con este rut.");
         }
-        
         Fecha f = new Fecha();
         Date fecha_arriendo = null;
         try{
             fecha_arriendo = f.verificarFecha(fechaA);
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            throw new NullPointerException(e.getMessage());
         }
         Date fecha_entrega = null;
         try{
             fecha_entrega = f.verificarFecha(fechaE);
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            throw new NullPointerException(e.getMessage());
         }
-        
         VideoJuego videojuego = lVideojugo.get(posicionV);
         Usuario usuario = lUsuario.get(posicionU);
         
@@ -302,15 +297,14 @@ public class Sistema_impl {
         return -1;
     }    
 //-------------------------------------ACTUALIZAR-------------------------------------
-     public void actualizarUsuario(int posicionUsuario,String fechaN, String comuna, String telefono, String nombre, String direccion){
+    public void actualizarUsuario(int posicionUsuario,String fechaN, String comuna, String telefono, String nombre, String direccion){
         Fecha f = new Fecha();
         Date date = null;
         try{
             date = f.verificarFecha(fechaN);
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            throw new NullPointerException(e.getMessage());
         }
-
         Usuario u = lUsuario.get(posicionUsuario);
         u.setFecha_de_nacimiento(date);
         u.setComuna(comuna);
@@ -320,6 +314,7 @@ public class Sistema_impl {
     }
     public void actualizarVendedor(int posicionUsuario, String fono, String nombre, String direccion, String clave){
         Vendedor v = lVendedor.get(posicionUsuario);
+        System.out.println(v.getNombre());
         v.setFono(fono);
         v.setNombre(nombre);
         v.setDireccion(direccion);
@@ -346,7 +341,7 @@ public class Sistema_impl {
         try{
             date = f.verificarFecha(fechaD);
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            throw new NullPointerException(e.getMessage());
         }
         VideoJuego v = lVideojugo.get(posicionVideoJuego);
         v.setNombre(nombre);
@@ -356,28 +351,29 @@ public class Sistema_impl {
         v.setGenero(genero);
         v.setPrecio(precio);
     }
-    public void actualizarArriendo(String num_arriendo, String fechaA, String  fechaE){
-        for(int b=0;b<lArriendo.size();b++){
-            Arriendo a = lArriendo.get(b);
-            if(num_arriendo.equals(a.getNumero_de_arriendo())){
-                Fecha f = new Fecha();
-                Date fecha_arriendo = null;
-                try{
-                    fecha_arriendo = f.verificarFecha(fechaA);
-                }catch(Exception e){
-                    System.out.println(e.getMessage());
-                }
-                Date fecha_entrega = null;
-                try{
-                    fecha_entrega = f.verificarFecha(fechaE);
-                }catch(Exception e){
-                    System.out.println(e.getMessage());
-                }
-                a.setFecha_entrega(fecha_entrega);
-                a.setFecha_arriendo(fecha_arriendo);
-
-            }
+    public void actualizarArriendo(int posicion_arriendo, String fechaA, String  fechaE){
+        Arriendo a = lArriendo.get(posicion_arriendo);
+        
+ 
+        
+        Fecha f = new Fecha();
+        Date fecha_arriendo = null;
+        try{
+            fecha_arriendo = f.verificarFecha(fechaA);
+        }catch(Exception e){
+            throw new NullPointerException(e.getMessage());
         }
+        a.setFecha_arriendo(fecha_arriendo);
+        
+        Date fecha_entrega = null;
+        try{
+            fecha_entrega = f.verificarFecha(fechaE);
+        }catch(Exception e){
+            throw new NullPointerException(e.getMessage());
+        }
+        a.setFecha_entrega(fecha_entrega);
+        
+                  
     }
 //-------------------------------------OBTENER-TODOS-------------------------------------    
     public List<String []> obtenerDatosTodos(){
@@ -489,20 +485,7 @@ public class Sistema_impl {
         }
         return matriz;
     }
-    public String [] obtener_arriendo(String nro_arriendo){
-        String [] datos = new String[4];
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yy");
-        for(int i=0;i<lArriendo.size();i++){
-            Arriendo a = lArriendo.get(i);
-            if(nro_arriendo.equals(a.getNumero_de_arriendo()+"")){
-                datos[0] = a.getUsuario().getRut();
-                datos[1] = a.getVideoJuego().getCodigo();
-                datos[2] = formato.format(a.getFecha_arriendo());
-                datos[3] = formato.format(a.getFecha_entrega());
-            }
-        }
-        return datos;
-    }
+
 //-------------------------------------OBTENER-UNO-------------------------------------  
     public String [] obtenerDatosUsuario(int posicionUsuario){
         Usuario u = lUsuario.get(posicionUsuario);
@@ -550,6 +533,18 @@ public class Sistema_impl {
         datos[5] = v.getGenero();
         datos[6] = v.getPrecio()+"";
         datos[7] = v.getDesarrollador().getRut();
+        return datos;
+    }
+        public String [] obtener_arriendo(int posicionArriendo){
+        String [] datos = new String[5];
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yy");
+        Arriendo a = lArriendo.get(posicionArriendo);
+        datos[0] = a.getNumero_de_arriendo()+"";
+        datos[1] = a.getUsuario().getRut();
+        datos[2] = a.getVideoJuego().getCodigo();
+        datos[3] = formato.format(a.getFecha_arriendo());
+        datos[4] = formato.format(a.getFecha_entrega());
+            
         return datos;
     }
 //-------------------------------------ELIMINAR-------------------------------------

@@ -224,9 +224,14 @@ public class Menu_vendedor extends javax.swing.JPanel {
         int fila = jTable1.getSelectedRow();
         if(fila != -1){
             String num_arriendo = model.getValueAt(fila, 0)+"";
-            Visualizador.sistema.eliminar_arriendo(num_arriendo);
-            model.removeRow(fila);
-            JOptionPane.showMessageDialog(null, "Arriendo eliminado", "Validación", 1);
+            try{
+                Visualizador.sistema.eliminar_arriendo(num_arriendo);
+                model.removeRow(fila);
+                JOptionPane.showMessageDialog(null, "Arriendo eliminado", "Validación", 1);
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Validación", 1);
+            }
+
         }else{
             JOptionPane.showMessageDialog(null, "Seleccione un campo de la tabla", "Validación", 1);
         }
@@ -242,8 +247,8 @@ public class Menu_vendedor extends javax.swing.JPanel {
         menu.repaint();
     }
     private void abrir_modificar_arriendo(String num_arriendo){
-
-        ActualizarArriendo actualizarArriendo = new ActualizarArriendo(num_arriendo);
+        int posicion_arriendo = Visualizador.sistema.buscarArriendo(num_arriendo);
+        ActualizarArriendo actualizarArriendo = new ActualizarArriendo(posicion_arriendo);
         actualizarArriendo.setSize(660, 460);
         actualizarArriendo.setLocation(0,0);
 

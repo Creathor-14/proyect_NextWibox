@@ -15,15 +15,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ActualizarArriendo extends javax.swing.JPanel {
     
-
-    public ActualizarArriendo(String nro_arriendo) {
+    int posicion_arriendo;
+    public ActualizarArriendo(int posicion) {
         initComponents();
-        String [] datos = Visualizador.sistema.obtener_arriendo(nro_arriendo);
-        nroArriendo_input.setText(nro_arriendo);
-        rutUsuario_input.setText(datos[0]);
-        codigoVideojuego_input.setText(datos[1]);
-        fechaArriendo_input.setText(datos[2]);
-        fechaEntrega_input.setText(datos[3]);
+        posicion_arriendo = posicion;
+        String [] datos = Visualizador.sistema.obtener_arriendo(posicion_arriendo);
+        nroArriendo_input.setText(datos[0]);
+        rutUsuario_input.setText(datos[1]);
+        codigoVideojuego_input1.setText(datos[2]);
+        fechaArriendo_input.setText(datos[3]);
+        fechaEntrega_input.setText(datos[4]);
+        
 
     }
 
@@ -46,7 +48,6 @@ public class ActualizarArriendo extends javax.swing.JPanel {
         rutUsuario_input = new javax.swing.JTextField();
         jSeparator_rut = new javax.swing.JSeparator();
         jLabel_fechaA = new javax.swing.JLabel();
-        codigoVideojuego_input = new javax.swing.JTextField();
         jSeparator_fechaA = new javax.swing.JSeparator();
         jLabel_nombre1 = new javax.swing.JLabel();
         fechaArriendo_input = new javax.swing.JTextField();
@@ -58,6 +59,7 @@ public class ActualizarArriendo extends javax.swing.JPanel {
         jLabel_rut1 = new javax.swing.JLabel();
         nroArriendo_input = new javax.swing.JTextField();
         jSeparator_rut1 = new javax.swing.JSeparator();
+        codigoVideojuego_input1 = new javax.swing.JTextField();
 
         actualizarArriendo.setBackground(new java.awt.Color(51, 51, 51));
         actualizarArriendo.setPreferredSize(new java.awt.Dimension(610, 460));
@@ -140,10 +142,10 @@ public class ActualizarArriendo extends javax.swing.JPanel {
         jLabel_rut.setText("Rut usuario:");
         actualizarArriendo.add(jLabel_rut, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 130, -1));
 
+        rutUsuario_input.setEditable(false);
         rutUsuario_input.setBackground(new java.awt.Color(51, 51, 51));
         rutUsuario_input.setForeground(new java.awt.Color(102, 102, 102));
         rutUsuario_input.setBorder(null);
-        rutUsuario_input.setEnabled(false);
         actualizarArriendo.add(rutUsuario_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 270, -1));
         actualizarArriendo.add(jSeparator_rut, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 270, 10));
 
@@ -153,13 +155,6 @@ public class ActualizarArriendo extends javax.swing.JPanel {
         jLabel_fechaA.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel_fechaA.setText("Fecha arriendo:");
         actualizarArriendo.add(jLabel_fechaA, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 130, -1));
-
-        codigoVideojuego_input.setBackground(new java.awt.Color(51, 51, 51));
-        codigoVideojuego_input.setForeground(new java.awt.Color(102, 102, 102));
-        codigoVideojuego_input.setToolTipText("");
-        codigoVideojuego_input.setBorder(null);
-        codigoVideojuego_input.setEnabled(false);
-        actualizarArriendo.add(codigoVideojuego_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 270, -1));
         actualizarArriendo.add(jSeparator_fechaA, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 270, 10));
 
         jLabel_nombre1.setBackground(new java.awt.Color(255, 255, 255));
@@ -196,12 +191,19 @@ public class ActualizarArriendo extends javax.swing.JPanel {
         jLabel_rut1.setText("Numero De Arriendo:");
         actualizarArriendo.add(jLabel_rut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, -1));
 
+        nroArriendo_input.setEditable(false);
         nroArriendo_input.setBackground(new java.awt.Color(51, 51, 51));
         nroArriendo_input.setForeground(new java.awt.Color(102, 102, 102));
         nroArriendo_input.setBorder(null);
-        nroArriendo_input.setEnabled(false);
         actualizarArriendo.add(nroArriendo_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 270, -1));
         actualizarArriendo.add(jSeparator_rut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 270, 10));
+
+        codigoVideojuego_input1.setEditable(false);
+        codigoVideojuego_input1.setBackground(new java.awt.Color(51, 51, 51));
+        codigoVideojuego_input1.setForeground(new java.awt.Color(102, 102, 102));
+        codigoVideojuego_input1.setToolTipText("");
+        codigoVideojuego_input1.setBorder(null);
+        actualizarArriendo.add(codigoVideojuego_input1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 270, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -229,14 +231,14 @@ public class ActualizarArriendo extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel_menuMouseClicked
 
     private void jLabel_actualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_actualizarMouseClicked
-        String nro_arriendo = nroArriendo_input.getText();
         String fechaA = fechaArriendo_input.getText();
         String fechaE = fechaEntrega_input.getText();
+        
         try{
-            Visualizador.sistema.actualizarArriendo(nro_arriendo, fechaA, fechaE);
+            Visualizador.sistema.actualizarArriendo(posicion_arriendo, fechaA, fechaE);
             JOptionPane.showMessageDialog(null,"Arriendo modificado");
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null,e.getMessage());
         }
         
     }//GEN-LAST:event_jLabel_actualizarMouseClicked
@@ -249,7 +251,7 @@ public class ActualizarArriendo extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actualizarArriendo;
-    private javax.swing.JTextField codigoVideojuego_input;
+    private javax.swing.JTextField codigoVideojuego_input1;
     private javax.swing.JTextField fechaArriendo_input;
     private javax.swing.JTextField fechaEntrega_input;
     private javax.swing.JLabel jLabel_Titulo;

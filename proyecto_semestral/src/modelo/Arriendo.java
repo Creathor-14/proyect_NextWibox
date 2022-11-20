@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -76,7 +77,10 @@ public class Arriendo {
 
     @Override
     public String toString() {
-        return "Arriendo{" + "videoJuego=" + videoJuego + ", usuario=" + usuario + '}';
+        SimpleDateFormat a = new SimpleDateFormat("dd-MM-yy");
+        return "Arriendo{" + "numero_de_arriendo=" + numero_de_arriendo + ", fecha_arriendo=" + a.format(fecha_arriendo) + ", fecha_entrega=" + a.format(fecha_entrega) + ", videoJuego=" + videoJuego + ", usuario=" + usuario + '}';
     }
+
+
     
 }

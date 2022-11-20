@@ -64,8 +64,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Manu Admin"/>
-    <Property name="undecorated" type="boolean" value="true"/>
+    <Property name="title" type="java.lang.String" value="Menu Admin"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>

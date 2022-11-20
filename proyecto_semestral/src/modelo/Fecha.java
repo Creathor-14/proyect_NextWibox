@@ -54,7 +54,7 @@ public class Fecha {
             if((mes==4 || mes ==6 || mes ==9 || mes ==11 ) && dia >30){
                 throw new NullPointerException("Este mes solo tiene 30 dias");
             }
-            Date date = new Date(año, mes, dia);
+            Date date = new Date(año, mes-1, dia);
             return date;
         }
         throw new NullPointerException("Formato de la fecha desconocido");
