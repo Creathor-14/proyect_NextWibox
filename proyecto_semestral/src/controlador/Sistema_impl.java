@@ -119,9 +119,9 @@ public class Sistema_impl {
             System.out.println(e.getMessage());
         }
         Usuario u = new Usuario("0", "0", "0", "0", date, "0", "0");
-        Vendedor v = new Vendedor("1", "1", "1", "1", "1");
-        Vendedor v1 = new Vendedor("rut vendedor 1", "nombre vendedor 1", "direccion vendedor 1", "correo vendedor 1", "fono vendedor 1");
-        Vendedor v2 = new Vendedor("20.574.150-K", "Thomas Rene Quiroga Espinoza", "callao lacra 1", "th.alf.a@xd.com", "+56 9 1111 1111");
+        Vendedor v = new Vendedor("1", "1", "1", "1", "1","1");
+        Vendedor v1 = new Vendedor("rut vendedor 1", "nombre vendedor 1", "direccion vendedor 1", "correo vendedor 1", "fono vendedor 1","clave 1");
+        Vendedor v2 = new Vendedor("20.574.150-K", "Thomas Rene Quiroga Espinoza", "callao lacra 1", "th.alf.a@xd.com", "+56 9 1111 1111","8811");
         Desarrollador d = new Desarrollador("2", "2", "2", "2", "2");
         VideoJuego vi = new VideoJuego("#3", "3", "3", date, "3", "3", 0, d);
         
@@ -162,7 +162,7 @@ public class Sistema_impl {
         }
         return lUsuario.add(u);
     }
-    public boolean ingresarVendedor(String rut, String nombre, String direccion, String correo, String fono){
+    public boolean ingresarVendedor(String rut, String nombre, String direccion, String correo, String fono, String clave){
     // rut y correo unico
         if(!rut_unico(rut)){
             throw new NullPointerException("El rut ya existe en el sistema.");
@@ -171,7 +171,7 @@ public class Sistema_impl {
             throw new NullPointerException("El correo ya existe en el sistema.");
         }
     // ingresar el vendedor
-        Vendedor v = new Vendedor(rut, nombre, direccion, correo, fono);
+        Vendedor v = new Vendedor(rut, nombre, direccion, correo, fono, clave);
         if(!cargando_base_de_datos && this.conectado){
             bd.agregar_vendedor_BD(v);
         }
@@ -334,18 +334,17 @@ public class Sistema_impl {
         u.setNombre(nombre);
         u.setDireccion(direccion);
         if(this.conectado){
-            //bd.actualizar_usuario_BD(v);
+            bd.actualizar_usuario_BD(u);
         }
     }
     public void actualizarVendedor(int posicionUsuario, String fono, String nombre, String direccion, String clave){
         Vendedor v = lVendedor.get(posicionUsuario);
-        System.out.println(v.getNombre());
         v.setFono(fono);
         v.setNombre(nombre);
         v.setDireccion(direccion);
         v.setClave(clave);
         if(this.conectado){
-            //bd.actualizar_vendedor_BD(v);
+            bd.actualizar_vendedor_BD(v);
         }        
     }
     public void actualizarDesarrollador(int posicionUsuario, String fono, String nombre, String direccion){
@@ -354,7 +353,7 @@ public class Sistema_impl {
         d.setNombre(nombre);
         d.setDireccion(direccion);
         if(this.conectado){
-            //bd.actualizar_desarrollador_BD(v);
+            bd.actualizar_desarrollador_BD(d);
         } 
     }
     public void actualizarVideoJuego(int posicionVideoJuego, String nombre, String version, String fechaD, String categoria, String genero, String valor){
@@ -409,7 +408,7 @@ public class Sistema_impl {
         }
         a.setFecha_entrega(fecha_entrega);
         if(this.conectado){
-            //bd.actualizar_arriendo_BD(v);
+            bd.actualizar_arriendo_BD(a);
         } 
                   
     }

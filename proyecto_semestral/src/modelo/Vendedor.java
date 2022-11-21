@@ -11,10 +11,16 @@ public class Vendedor extends Persona {
         this.clave = this.generarClave();//comprobar error
     }
 
-    public Vendedor(String rut, String nombre, String direccion, String correo, String fono) {
+    /*public Vendedor(String rut, String nombre, String direccion, String correo, String fono) {
         super(rut, nombre, direccion, correo);
         this.fono = fono;
         this.clave = this.generarClave();
+    }*/
+    
+    public Vendedor(String rut, String nombre, String direccion, String correo, String fono,String clave) {
+        super(rut, nombre, direccion, correo);
+        this.fono = fono;
+        this.clave = clave;
     }
     
     public String getFono() {

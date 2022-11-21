@@ -92,7 +92,7 @@ public class Conexion {
     private void crear_tabla_vendedor(){//agregar clave
         try{
             String SQL = "CREATE TABLE vendedor(rut VARCHAR(12) PRIMARY KEY,nombre VARCHAR(60) NOT NULL,direccion VARCHAR(45) NOT NULL,correo VARCHAR(45) NOT NULL,";
-            SQL+="fono VARCHAR(20) NOT NULL,UNIQUE(correo))";
+            SQL+="fono VARCHAR(20) NOT NULL,UNIQUE(correo), clave VARCHAR(20) NOT NULL)";
             PreparedStatement ps = connection.prepareStatement(SQL);
             ps.execute();
             System.out.println("Tabla vendedor creada");
@@ -196,7 +196,7 @@ public class Conexion {
     }
     public boolean agregar_vendedor_BD(Vendedor vendedor){
         try {
-            String SQL = "INSERT INTO vendedor (rut, nombre, direccion, correo, fono) VALUES (?,?,?,?,?)";
+            String SQL = "INSERT INTO vendedor (rut, nombre, direccion, correo, fono, clave) VALUES (?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(SQL);
 
             ps.setString(1, vendedor.getRut());
@@ -204,6 +204,7 @@ public class Conexion {
             ps.setString(3,vendedor.getDireccion());
             ps.setString(4,vendedor.getCorreo());
             ps.setString(5,vendedor.getFono());
+            ps.setString(6,vendedor.getClave());
 
             ps.executeUpdate();
 
@@ -214,7 +215,7 @@ public class Conexion {
             System.out.println("Error al agregar vendedor en la base de datos");
         }
         return false;
-    }//agregar clave
+    }
     public boolean agregar_desarrollador_BD(Desarrollador desarrollador){
         try {
             String SQL = "INSERT INTO desarrollador (rut, nombre, direccion, correo, fono) VALUES (?,?,?,?,?)";
@@ -329,7 +330,7 @@ public class Conexion {
         PreparedStatement ps = connection.prepareStatement(SQL);
         ResultSet rs = ps.executeQuery();
         
-        String rut, nombre, direccion, correo, fono;
+        String rut, nombre, direccion, correo, fono, clave;
         
         List <Vendedor> lista = new ArrayList<>();
         while(rs.next()){
@@ -338,10 +339,10 @@ public class Conexion {
             nombre = rs.getString("nombre");
             direccion = rs.getString("direccion");
             correo = rs.getString("correo");
-                                    
             fono = rs.getString("fono");
+            clave = rs.getString("clave");
          
-            Vendedor vendedor = new Vendedor(rut, nombre, direccion, correo, fono);
+            Vendedor vendedor = new Vendedor(rut, nombre, direccion, correo, fono, clave);
             lista.add(vendedor);
         }
      
@@ -352,7 +353,7 @@ public class Conexion {
             System.out.println("Error al cargar los datos de los vendedores");
         }
         return null;
-    }   //agregar clave
+    }   
     public List <Desarrollador> obtener_desarrolladores_BD(){//(String rut){
         try {
         String SQL = "SELECT * From desarrollador"; //WHERE rut = ?";
@@ -467,14 +468,13 @@ public class Conexion {
         }
         return null;
     }  
-//-------------------------------------ACTUALIZAR-------------------------------------  PROBAR
+//-------------------------------------ACTUALIZAR-------------------------------------  FUNCIONA
     public boolean actualizar_usuario_BD(Usuario usuario){
         try{
             //nombre, direccion, correo, fecha_de_nacimiento, comuna, telefono
-            String SQL = "UPDATE usuario SET nombre = ?, direccion = ?, fecha_de_nacimiento = ?, comuna = ?, telefono = ? WHERE rut = ?";
+            String SQL = "UPDATE usuario SET nombre=?, direccion=?, fecha_de_nacimiento=?, comuna=?, telefono=? WHERE rut=?";
             PreparedStatement ps = connection.prepareStatement(SQL);
 
-            
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getDireccion());
             java.sql.Date sqlDate = new java.sql.Date(usuario.getFecha_de_nacimiento().getTime());
@@ -482,38 +482,57 @@ public class Conexion {
             ps.setString(4, usuario.getComuna());
             
             ps.setString(5, usuario.getTelefono());
-
-            
+            ps.setString(6, usuario.getRut());
             ps.executeUpdate();        
             ps.close();
             System.out.println("Usuario Actualizado en la base de datos.");
             return true;
         }catch(Exception e ){
-            System.out.println("Error al actualizar el usuario en la base de datos");
+            System.out.println("Error al actualizar el usuario en la base de datos\n"+e.getMessage());
         } 
         return false;
-    }  
-    public boolean actualizar_vendedor_BD(Vendedor vendendor){//cambiar la clave
+    } 
+    public boolean actualizar_vendedor_BD(Vendedor vendedor){//cambiar la clave
         try{
             //nombre, direccion, correo, fecha_de_nacimiento, comuna, telefono
-            String SQL = "UPDATE vendendor SET nombre = ?, direccion = ?, fono = ?, clave = ? WHERE rut = ?";
+            String SQL = "UPDATE vendedor SET nombre=?, direccion=?, fono=?, clave=? WHERE rut=?";
             PreparedStatement ps = connection.prepareStatement(SQL);
-
             
-            ps.setString(1, vendendor.getNombre());
-            ps.setString(2, vendendor.getDireccion());            
-            ps.setString(3, vendendor.getFono());
-            ps.setString(4, vendendor.getClave());
+            ps.setString(1, vendedor.getNombre());       
+            ps.setString(2, vendedor.getDireccion());            
+            ps.setString(3, vendedor.getFono());
+            ps.setString(4, vendedor.getClave());
             
+            ps.setString(5, vendedor.getRut());
             ps.executeUpdate();        
             ps.close();
-            System.out.println("Usuario Actualizado en la base de datos.");
+            System.out.println("Vendedor Actualizado en la base de datos.");
             return true;
         }catch(Exception e ){
-            System.out.println("Error al actualizar el usuario en la base de datos");
+            System.out.println("Error al actualizar el vendedor en la base de dato");
         } 
         return false;
-    }  //agregar clave
+    }
+    public boolean actualizar_desarrollador_BD(Desarrollador desarrollador){//cambiar la clave
+        try{
+            //nombre, direccion, correo, fecha_de_nacimiento, comuna, telefono
+            String SQL = "UPDATE desarrollador SET nombre=?, direccion=?, fono=? WHERE rut=?";
+            PreparedStatement ps = connection.prepareStatement(SQL);
+            
+            ps.setString(1, desarrollador.getNombre());       
+            ps.setString(2, desarrollador.getDireccion());            
+            ps.setString(3, desarrollador.getFono());
+            
+            ps.setString(4, desarrollador.getRut());
+            ps.executeUpdate();        
+            ps.close();
+            System.out.println("Desarrollador Actualizado en la base de datos.");
+            return true;
+        }catch(Exception e ){
+            System.out.println("Error al actualizar el vendedor en la base de datos");
+        } 
+        return false;
+    }
     public boolean actualizar_videojuego_BD(VideoJuego videojuego){
         try{
             //nombre, version, fecha_de_desarrollo, categoria, genero, precio, arrendado
@@ -538,6 +557,28 @@ public class Conexion {
         } 
         return false;
     }  
+    public boolean actualizar_arriendo_BD(Arriendo arriendo){//arreglar
+        try{
+            //nombre, version, fecha_de_desarrollo, categoria, genero, precio, arrendado
+            String SQL = "UPDATE arriendo SET fecha_arriendo=?, fecha_entrega=? WHERE codigo_arriendo=?";
+
+            PreparedStatement ps = connection.prepareStatement(SQL);
+
+            java.sql.Date sqlDate1 = new java.sql.Date(arriendo.getFecha_arriendo().getTime());
+            ps.setDate(1,sqlDate1);
+            java.sql.Date sqlDate2 = new java.sql.Date(arriendo.getFecha_entrega().getTime());
+            ps.setDate(2,sqlDate2);
+            ps.setString(3, arriendo.getCodigo_arriendo());
+            
+            ps.executeUpdate();        
+            ps.close();
+            System.out.println("Videojuego Actualizado en la base de datos.");
+            return true;
+        }catch(Exception e ){
+            System.out.println("Error al actualizar el videojuego en la base de datos\n"+e.getMessage());
+        } 
+        return false;
+    } 
 //-------------------------------------ELIMINAR-------------------------------------    FUNCIONA
     public boolean eliminar_usuario_BD(String rut){
         try{
