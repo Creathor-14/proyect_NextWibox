@@ -41,8 +41,6 @@ public class Sistema_impl {
         for(int i=0;i<listaVi.size();i++){
             String [] lVi = listaVi.get(i);
             ingresarVideojuego(lVi[0], lVi[1], lVi[2], lVi[3], lVi[4], lVi[5], lVi[6], lVi[7]);
-            
-            lVideojugo.get(i).setArrendado("true".equals(lVi[8]));
         }
         List <String[]> listaA = bd.obtener_arriendos_BD();
         for(int i=0;i<listaA.size();i++){
@@ -91,6 +89,16 @@ public class Sistema_impl {
             }
         }
         return true;
+    }
+    public boolean usuario_tiene_juego(String rut, String codigo){
+        for(Arriendo a:lArriendo){
+            String rutU = a.getUsuario().getRut();
+            String codigoV = a.getVideoJuego().getCodigo();
+            if(rut.equals(rutU) && codigo.equals(codigoV)){
+                return true;
+            }
+        }
+        return false;
     }
     public boolean login(String usuario,String contraseña){
         for(Vendedor v:lVendedor){
@@ -257,20 +265,24 @@ public class Sistema_impl {
             throw new NullPointerException(e.getMessage());
         }
         VideoJuego videojuego = lVideojugo.get(posicionV);
-        if(videojuego.isArrendado() && !cargando_base_de_datos){
-            throw new NullPointerException("Videojuego no disponible.");
-        }
         Usuario usuario = lUsuario.get(posicionU);
         
-        Arriendo a = new Arriendo(codigo_arriendo,videojuego, usuario,fecha_arriendo,fecha_entrega);
-        lArriendo.add(a);
-        if(!cargando_base_de_datos && this.conectado){
-            videojuego.setArrendado(true);
-            bd.agregar_arriendo_BD(a);
-            bd.actualizar_videojuego_BD(videojuego);
-        }
-        
-        return true;
+        boolean este_usuario_tiene_el_juego = usuario_tiene_juego(rutUsuario, codigoVideojuego);
+        if(!este_usuario_tiene_el_juego){
+            if(buscarArriendo(codigo_arriendo)==-1){
+                Arriendo a = new Arriendo(codigo_arriendo,videojuego, usuario,fecha_arriendo,fecha_entrega);
+                lArriendo.add(a);
+                if(!cargando_base_de_datos && this.conectado){
+                    bd.agregar_arriendo_BD(a);
+                }
+                return true;
+            }
+            else{
+                throw new NullPointerException("Codigo de arriendo no disponible");
+            }  
+        }else{
+            throw new NullPointerException("Este usuario ya tiene este videojuego");
+        } 
     }
 //-------------------------------------BUSCAR-------------------------------------
     public int buscarUsuario(String rut){
@@ -375,9 +387,6 @@ public class Sistema_impl {
             throw new NullPointerException(e.getMessage());
         }
         VideoJuego v = lVideojugo.get(posicionVideoJuego);
-        if(v.isArrendado()){
-            throw new NullPointerException("No se puede modificar un videojuego arrendado.");
-        }
         v.setNombre(nombre);
         v.setVersion(version);
         v.setFecha_de_desarrollo(date);
@@ -634,16 +643,19 @@ public class Sistema_impl {
         }
     }
     public void eliminar_videojuego(String codigo){
+        for(Arriendo a:lArriendo){
+           if(a.getVideoJuego().getCodigo().equals(codigo)){
+               throw new NullPointerException("No se puede eliminar este videojuego\nhasta que se elimine su arriendo.");
+           } 
+        }
         int posicion = buscarVideoJuego(codigo);
         if(posicion != -1){
-            if(!lVideojugo.get(posicion).isArrendado()){
-                if(this.conectado){
-                    bd.eliminar_videojuego_BD(codigo);
-                }
-                lVideojugo.remove(posicion);
-            }else{
-                throw new NullPointerException("No se puede eliminar este videojuego\nhasta que se elimine su arriendo.");
+            
+            if(this.conectado){
+                bd.eliminar_videojuego_BD(codigo);
             }
+            lVideojugo.remove(posicion);
+            
         }
     }
     public void eliminar_arriendo(String codigo_arriendo){
@@ -651,11 +663,6 @@ public class Sistema_impl {
         if(posicion != -1){
             if(this.conectado){
                 bd.eliminar_arriendo_BD(codigo_arriendo);
-            }
-            VideoJuego v = lArriendo.get(posicion).getVideoJuego();
-            v.setArrendado(false);
-            if(this.conectado){
-                bd.actualizar_videojuego_BD(v);
             }
             lArriendo.remove(posicion);
         }

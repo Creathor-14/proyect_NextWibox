@@ -115,7 +115,7 @@ public class Conexion {
     private void crear_tabla_videojuego(){
         try{
             String SQL = "CREATE TABLE videojuego(codigo VARCHAR(12) PRIMARY KEY,nombre VARCHAR(60) NOT NULL,version VARCHAR(45) NOT NULL,fecha_de_desarrollo DATE NOT NULL,";
-            SQL+="categoria VARCHAR(20) NOT NULL, genero VARCHAR(20) NOT NULL, precio INT(20) NOT NULL, rut VARCHAR (12)NOT NULL, arrendado BIT NOT NULL)";
+            SQL+="categoria VARCHAR(20) NOT NULL, genero VARCHAR(20) NOT NULL, precio INT(20) NOT NULL, rut VARCHAR (12)NOT NULL)";
             PreparedStatement ps = connection.prepareStatement(SQL);
             ps.execute();
             System.out.println("Tabla videojuego creada");
@@ -239,7 +239,7 @@ public class Conexion {
     }
     public boolean agregar_videojuego_BD(VideoJuego videojuego){
         try {
-            String SQL = "INSERT INTO videojuego (codigo, nombre, version, fecha_de_desarrollo, categoria, genero, precio, rut, arrendado) VALUES (?,?,?,?,?,?,?,?,?)";
+            String SQL = "INSERT INTO videojuego (codigo, nombre, version, fecha_de_desarrollo, categoria, genero, precio, rut) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(SQL);
 
             ps.setString(1, videojuego.getCodigo());
@@ -251,7 +251,6 @@ public class Conexion {
             ps.setString(6,videojuego.getGenero());
             ps.setInt(7,videojuego.getPrecio());
             ps.setString(8,videojuego.getDesarrollador().getRut());
-            ps.setBoolean(9, videojuego.isArrendado());
 
             ps.executeUpdate();
 
@@ -370,8 +369,7 @@ public class Conexion {
             direccion = rs.getString("direccion");
             correo = rs.getString("correo");
                                     
-            fono = rs.getString("fono");
-         
+            fono = rs.getString("fono");         
             Desarrollador desarrollador = new Desarrollador(rut, nombre, direccion, correo, fono);
             lista.add(desarrollador);
         }
@@ -389,14 +387,13 @@ public class Conexion {
         String SQL = "SELECT * From videojuego"; //WHERE rut = ?";
         PreparedStatement ps = connection.prepareStatement(SQL);
         ResultSet rs = ps.executeQuery();
-        String codigo, nombre, version, categoria, genero, rut, arrendado;
+        String codigo, nombre, version, categoria, genero, rut;
         Date fecha_de_desarrollo = null;
-        int precio;
-        
+        int precio;        
         List <String[]> matriz = new ArrayList<>();
         SimpleDateFormat a = new SimpleDateFormat("dd-MM-yy");
         while(rs.next()){
-            String [] lista = new String [9];
+            String [] lista = new String [8];
             codigo = rs.getString("codigo");
             nombre = rs.getString("nombre");
             version = rs.getString("version");
@@ -405,7 +402,6 @@ public class Conexion {
             genero = rs.getString("genero");
             precio = rs.getInt("precio");
             rut = rs.getString("rut");
-            arrendado = rs.getBoolean("arrendado")+"";
 
             lista[0] = codigo;
             lista[1] = nombre;
@@ -415,7 +411,6 @@ public class Conexion {
             lista[5] = genero;
             lista[6] = precio+"";
             lista[7] = rut;
-            lista[8] = arrendado;
             
             matriz.add(lista);
         }
@@ -434,12 +429,10 @@ public class Conexion {
         PreparedStatement ps = connection.prepareStatement(SQL);
         ResultSet rs = ps.executeQuery();
 
-
         Date fecha_arriendo = null;
         Date fecha_entrega = null;
         String codigo_arriendo, codigo, rut;
-        
-        
+
         List <String[]> matriz = new ArrayList<>();
         SimpleDateFormat a = new SimpleDateFormat("dd-MM-yy");
         while(rs.next()){
@@ -536,7 +529,7 @@ public class Conexion {
     public boolean actualizar_videojuego_BD(VideoJuego videojuego){
         try{
             //nombre, version, fecha_de_desarrollo, categoria, genero, precio, arrendado
-            String SQL = "UPDATE videojuego SET nombre = ?, version = ?, fecha_de_desarrollo = ?, categoria = ?, genero = ?, precio = ?, arrendado = ? WHERE codigo = ?";
+            String SQL = "UPDATE videojuego SET nombre = ?, version = ?, fecha_de_desarrollo = ?, categoria = ?, genero = ?, precio = ? WHERE codigo = ?";
             PreparedStatement ps = connection.prepareStatement(SQL);
 
             ps.setString(1, videojuego.getNombre());
@@ -546,8 +539,8 @@ public class Conexion {
             ps.setString(4, videojuego.getCategoria());
             ps.setString(5, videojuego.getGenero());
             ps.setInt(6, videojuego.getPrecio());
-            ps.setBoolean(7, videojuego.isArrendado());
-            ps.setString(8, videojuego.getCodigo());
+
+            ps.setString(7, videojuego.getCodigo());
             ps.executeUpdate();        
             ps.close();
             System.out.println("Videojuego Actualizado en la base de datos.");

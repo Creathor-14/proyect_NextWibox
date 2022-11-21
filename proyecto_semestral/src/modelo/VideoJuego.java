@@ -12,7 +12,7 @@ public class VideoJuego {
     private String genero;
     private int precio;//
     private Desarrollador desarrollador;//
-    boolean arrendado;
+    //boolean arrendado;
 
     public VideoJuego() {
         this.codigo = "";
@@ -23,7 +23,7 @@ public class VideoJuego {
         this.genero = "";
         this.precio = 0;
         this.desarrollador = null;
-        this.arrendado=false;
+        //this.arrendado=false;
     }
 
     public VideoJuego(String codigo, String nombre, String version, Date fecha_de_desarrollo, String categoria, String genero, int precio, Desarrollador desarrollador) {
@@ -35,7 +35,7 @@ public class VideoJuego {
         this.genero = genero;
         this.precio = precio;
         this.desarrollador = desarrollador;
-        this.arrendado=false;
+        //this.arrendado=false;
     }
 
     public Desarrollador getDesarrollador() {
@@ -101,7 +101,7 @@ public class VideoJuego {
     public void setPrecio(int precio) {
         this.precio = precio;
     }
-
+    /*
     public boolean isArrendado() {
         return arrendado;
     }
@@ -109,7 +109,7 @@ public class VideoJuego {
     public void setArrendado(boolean arrendado) {
         this.arrendado = arrendado;
     }
-    
+    */
     @Override
     public String toString() {
         SimpleDateFormat a = new SimpleDateFormat("dd-MM-yy");
