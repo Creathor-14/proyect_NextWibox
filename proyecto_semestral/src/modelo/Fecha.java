@@ -30,7 +30,7 @@ public class Fecha {
                     mes = Integer.parseInt(datos[1]);
                     año = Integer.parseInt(datos[2]);
                 }catch(NumberFormatException e){
-                    throw new NullPointerException("Error en el formato de la fecha. (tipo_de_datos)"); 
+                    throw new NullPointerException("Error en el formato de la fecha. (dia-mes-año)"); 
                 }
             }else{
                 throw new NullPointerException("Error en el formato de la fecha. (dd"+formato+"mm"+formato+"yy)");
@@ -57,6 +57,6 @@ public class Fecha {
             Date date = new Date(año, mes-1, dia);
             return date;
         }
-        throw new NullPointerException("Formato de la fecha desconocido");
+        throw new NullPointerException("Formato de la fecha desconocido(dia-mes-año)");
     }       
 }
