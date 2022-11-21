@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controlador;
-
 import bd.Conexion;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,33 +11,29 @@ import modelo.Usuario;
 import modelo.Vendedor;
 import modelo.VideoJuego;
 
-
 public class Sistema_impl {
     private List <Desarrollador> lDesarrollador; 
     private List <Usuario> lUsuario; 
     private List <Vendedor> lVendedor; 
     private List <VideoJuego> lVideojugo; 
     private List <Arriendo> lArriendo; 
-    private int contrador_arriendos;
     private Conexion bd = new Conexion();
     private boolean conectado;
     private boolean cargando_base_de_datos = true;
-    
+
     public Sistema_impl(){
         lDesarrollador = new ArrayList<>();
         lUsuario = new ArrayList<>();
         lVendedor = new ArrayList<>();
         lVideojugo = new ArrayList<>();
         lArriendo = new ArrayList<>();
-        contrador_arriendos=0;
         conectado = bd.conectar();
     }
 //-------------------------------------BASE_DE_DATOS-------------------------------------
     public void cargar_datos_BD(){
-        bd.crear_tablas();
         //bd.borrar_tablas(); 
         
-        
+        bd.crear_tablas();
         this.lUsuario = bd.obtener_usuarios_BD();
         this.lVendedor = bd.obtener_vendedores_BD();
         this.lDesarrollador = bd.obtener_desarrolladores_BD();
@@ -50,14 +41,16 @@ public class Sistema_impl {
         for(int i=0;i<listaVi.size();i++){
             String [] lVi = listaVi.get(i);
             ingresarVideojuego(lVi[0], lVi[1], lVi[2], lVi[3], lVi[4], lVi[5], lVi[6], lVi[7]);
+            
+            lVideojugo.get(i).setArrendado("true".equals(lVi[8]));
         }
-        
         List <String[]> listaA = bd.obtener_arriendos_BD();
         for(int i=0;i<listaA.size();i++){
             String [] lA = listaA.get(i);
-            ingresarArriendo(lA[0], lA[1], lA[2], lA[3], lA[4]);
+            ingresarArriendo(lA[0], lA[1], lA[2], lA[3], lA[4]);            
         }
         cargando_base_de_datos = false;
+        
     }
     public boolean isConected(){
         return conectado;
@@ -240,59 +233,7 @@ public class Sistema_impl {
         }
         throw new NullPointerException("No existe el desarrollador con el rut "+rutDesarrollador);
     }
-    public boolean ingresarArriendo(String codigoVideojuego, String rutUsuario,String fechaA, String fechaE){
-        int posicionV = -1;
-        for(int i=0;i<lVideojugo.size();i++){
-            VideoJuego v= lVideojugo.get(i);
-                if(codigoVideojuego.equals(v.getCodigo())){
-                    posicionV = i;
-                    break;
-                }
-        }
-        if(posicionV == -1){
-            throw new NullPointerException("No existe un juego con este codigo.");
-        }
-        int posicionU = -1;
-        for(int i=0;i<lUsuario.size();i++){
-            Usuario u= lUsuario.get(i);
-                if(u.getRut().equalsIgnoreCase(rutUsuario)){
-                    posicionU = i;
-                    break;
-                }
-        }
-        if(posicionU == -1){
-            throw new NullPointerException("No usuario con este rut.");
-        }
-        Fecha f = new Fecha();
-        Date fecha_arriendo = null;
-        try{
-            fecha_arriendo = f.verificarFecha(fechaA);
-        }catch(Exception e){
-            throw new NullPointerException(e.getMessage());
-        }
-        Date fecha_entrega = null;
-        try{
-            fecha_entrega = f.verificarFecha(fechaE);
-        }catch(Exception e){
-            throw new NullPointerException(e.getMessage());
-        }
-        VideoJuego videojuego = lVideojugo.get(posicionV);
-        Usuario usuario = lUsuario.get(posicionU);
-        
-        Arriendo a = new Arriendo(this.contrador_arriendos,videojuego, usuario,fecha_arriendo,fecha_entrega);
-        lArriendo.add(a);
-        if(this.conectado){
-            bd.agregar_arriendo_BD(a);
-        }
-        if(!cargando_base_de_datos && this.conectado){
-            String codigo = lVideojugo.get(posicionV).getCodigo();
-            bd.eliminar_videojuego_BD(codigo);
-        }
-        lVideojugo.remove(posicionV);
-        contrador_arriendos++;
-        return true;
-    }
-    public boolean ingresarArriendo(String nro_arriendo, String fechaA, String fechaE, String codigoVideojuego, String rutUsuario){
+    public boolean ingresarArriendo(String codigo_arriendo, String fechaA, String fechaE, String codigoVideojuego, String rutUsuario){
         int posicionV = buscarVideoJuego(codigoVideojuego);
         if(posicionV == -1){
             throw new NullPointerException("No existe un juego con este codigo.");
@@ -316,19 +257,19 @@ public class Sistema_impl {
             throw new NullPointerException(e.getMessage());
         }
         VideoJuego videojuego = lVideojugo.get(posicionV);
+        if(videojuego.isArrendado() && !cargando_base_de_datos){
+            throw new NullPointerException("Videojuego no disponible.");
+        }
         Usuario usuario = lUsuario.get(posicionU);
         
-        Arriendo a = new Arriendo(this.contrador_arriendos,videojuego, usuario,fecha_arriendo,fecha_entrega);
+        Arriendo a = new Arriendo(codigo_arriendo,videojuego, usuario,fecha_arriendo,fecha_entrega);
         lArriendo.add(a);
-        if(this.conectado){
-            bd.agregar_arriendo_BD(a);
-        }
         if(!cargando_base_de_datos && this.conectado){
-            String codigo = lVideojugo.get(posicionV).getCodigo();
-            bd.eliminar_videojuego_BD(codigo);
+            videojuego.setArrendado(true);
+            bd.agregar_arriendo_BD(a);
+            bd.actualizar_videojuego_BD(videojuego);
         }
-        lVideojugo.remove(posicionV);
-        contrador_arriendos++;
+        
         return true;
     }
 //-------------------------------------BUSCAR-------------------------------------
@@ -368,11 +309,10 @@ public class Sistema_impl {
         }
         return -1;
     }
-    public int buscarArriendo(String nro_arriendo){
+    public int buscarArriendo(String codigo_arriendo){
         for(int i=0;i<lArriendo.size();i++){
             Arriendo a = lArriendo.get(i);
-            String numero_de_arriendo = a.getNumero_de_arriendo()+"";
-            if(nro_arriendo.equalsIgnoreCase(numero_de_arriendo)){
+            if(codigo_arriendo.equalsIgnoreCase(a.getCodigo_arriendo())){
                 return i;
             }
         }
@@ -418,6 +358,7 @@ public class Sistema_impl {
         } 
     }
     public void actualizarVideoJuego(int posicionVideoJuego, String nombre, String version, String fechaD, String categoria, String genero, String valor){
+        
         int precio;
         try{
             precio= Integer.parseInt(valor);
@@ -435,6 +376,9 @@ public class Sistema_impl {
             throw new NullPointerException(e.getMessage());
         }
         VideoJuego v = lVideojugo.get(posicionVideoJuego);
+        if(v.isArrendado()){
+            throw new NullPointerException("No se puede modificar un videojuego arrendado.");
+        }
         v.setNombre(nombre);
         v.setVersion(version);
         v.setFecha_de_desarrollo(date);
@@ -442,7 +386,7 @@ public class Sistema_impl {
         v.setGenero(genero);
         v.setPrecio(precio);
         if(this.conectado){
-            //bd.actualizar_videojuego_BD(v);
+            bd.actualizar_videojuego_BD(v);
         } 
     }
     public void actualizarArriendo(int posicion_arriendo, String fechaA, String  fechaE){
@@ -570,7 +514,7 @@ public class Sistema_impl {
         for(int i=0;i<lArriendo.size();i++){
             Arriendo a = lArriendo.get(i);         
             String [] datos = new String[5];
-            datos[0] = a.getNumero_de_arriendo()+"";
+            datos[0] = a.getCodigo_arriendo();
             datos[1] = a.getUsuario().getRut();
             datos[2] = a.getVideoJuego().getCodigo();
             datos[3] = formato.format(a.getFecha_arriendo());
@@ -632,7 +576,7 @@ public class Sistema_impl {
         String [] datos = new String[5];
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yy");
         Arriendo a = lArriendo.get(posicionArriendo);
-        datos[0] = a.getNumero_de_arriendo()+"";
+        datos[0] = a.getCodigo_arriendo();
         datos[1] = a.getUsuario().getRut();
         datos[2] = a.getVideoJuego().getCodigo();
         datos[3] = formato.format(a.getFecha_arriendo());
@@ -653,7 +597,7 @@ public class Sistema_impl {
             }
             if(!tiene_arriendo){
                 if(this.conectado){
-                    //bd.eliminar_usuario_BD(rut);
+                    bd.eliminar_usuario_BD(rut);
                 }
                 lUsuario.remove(posicion);
             }else{
@@ -665,7 +609,7 @@ public class Sistema_impl {
         int posicion = buscarVendedor(rut);
         if(posicion != -1){
             if(this.conectado){
-                //bd.eliminar_vendedor_BD(rut);
+                bd.eliminar_vendedor_BD(rut);
             }
             lVendedor.remove(posicion);
         }
@@ -682,7 +626,7 @@ public class Sistema_impl {
             }
             if(!tiene_videojuego){
                 if(this.conectado){
-                    //bd.eliminar_desarrollador_BD(rut);
+                    bd.eliminar_desarrollador_BD(rut);
                 }
                 lDesarrollador.remove(posicion);
             }else{
@@ -693,20 +637,27 @@ public class Sistema_impl {
     public void eliminar_videojuego(String codigo){
         int posicion = buscarVideoJuego(codigo);
         if(posicion != -1){
-            if(this.conectado){
-                        //bd.eliminar_videojuego_BD(rut);
+            if(!lVideojugo.get(posicion).isArrendado()){
+                if(this.conectado){
+                    bd.eliminar_videojuego_BD(codigo);
+                }
+                lVideojugo.remove(posicion);
+            }else{
+                throw new NullPointerException("No se puede eliminar este videojuego\nhasta que se elimine su arriendo.");
             }
-            lVideojugo.remove(posicion);
         }
     }
-    public void eliminar_arriendo(String num_arriendo){
-        int posicion = buscarArriendo(num_arriendo);
+    public void eliminar_arriendo(String codigo_arriendo){
+        int posicion = buscarArriendo(codigo_arriendo);
         if(posicion != -1){
             if(this.conectado){
-                //bd.eliminar_arriendo_BD(rut);
+                bd.eliminar_arriendo_BD(codigo_arriendo);
             }
             VideoJuego v = lArriendo.get(posicion).getVideoJuego();
-            lVideojugo.add(v);
+            v.setArrendado(false);
+            if(this.conectado){
+                bd.actualizar_videojuego_BD(v);
+            }
             lArriendo.remove(posicion);
         }
     }

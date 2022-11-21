@@ -12,15 +12,15 @@ import java.util.Date;
  * @author thoma
  */
 public class Arriendo {
-    private int numero_de_arriendo;
+    private String codigo_arriendo;
     private Date fecha_arriendo;
     private Date fecha_entrega;
     
     private VideoJuego videoJuego;
     private Usuario usuario;
 
-    public Arriendo(int numero_de_arriendo, VideoJuego videoJuego, Usuario usuario, Date fecha_arriendo, Date fecha_entrega) {
-        this.numero_de_arriendo = numero_de_arriendo;
+    public Arriendo(String codigo_arriendo, VideoJuego videoJuego, Usuario usuario, Date fecha_arriendo, Date fecha_entrega) {
+        this.codigo_arriendo = codigo_arriendo;
         this.videoJuego = videoJuego;
         this.usuario = usuario;
         this.fecha_arriendo = fecha_arriendo;
@@ -28,19 +28,19 @@ public class Arriendo {
     }
 
     public Arriendo() {
-        this.numero_de_arriendo = 0;
+        this.codigo_arriendo = "";
         this.videoJuego = null;
         this.usuario = null;
         this.fecha_arriendo = null;
         this.fecha_entrega = null;
     }
 
-    public int getNumero_de_arriendo() {
-        return numero_de_arriendo;
+    public String getCodigo_arriendo() {
+        return codigo_arriendo;
     }
 
-    public void setNumero_de_arriendo(int numero_de_arriendo) {
-        this.numero_de_arriendo = numero_de_arriendo;
+    public void setCodigo_arriendo(String codigo_arriendo) {
+        this.codigo_arriendo = codigo_arriendo;
     }
 
     public VideoJuego getVideoJuego() {
@@ -78,7 +78,7 @@ public class Arriendo {
     @Override
     public String toString() {
         SimpleDateFormat a = new SimpleDateFormat("dd-MM-yy");
-        return "Arriendo{" + "numero_de_arriendo=" + numero_de_arriendo + ", fecha_arriendo=" + a.format(fecha_arriendo) + ", fecha_entrega=" + a.format(fecha_entrega) + ", videoJuego=" + videoJuego + ", usuario=" + usuario + '}';
+        return "Arriendo{" + "codigo_arriendo=" + codigo_arriendo + ", fecha_arriendo=" + a.format(fecha_arriendo) + ", fecha_entrega=" + a.format(fecha_entrega) + ", videoJuego=" + videoJuego + ", usuario=" + usuario + '}';
     }
 
 

@@ -89,7 +89,7 @@ public class Conexion {
            System.out.println("Error al crear la tabla usuario, o ya existia"); 
         }
     }
-    private void crear_tabla_vendedor(){
+    private void crear_tabla_vendedor(){//agregar clave
         try{
             String SQL = "CREATE TABLE vendedor(rut VARCHAR(12) PRIMARY KEY,nombre VARCHAR(60) NOT NULL,direccion VARCHAR(45) NOT NULL,correo VARCHAR(45) NOT NULL,";
             SQL+="fono VARCHAR(20) NOT NULL,UNIQUE(correo))";
@@ -115,7 +115,7 @@ public class Conexion {
     private void crear_tabla_videojuego(){
         try{
             String SQL = "CREATE TABLE videojuego(codigo VARCHAR(12) PRIMARY KEY,nombre VARCHAR(60) NOT NULL,version VARCHAR(45) NOT NULL,fecha_de_desarrollo DATE NOT NULL,";
-            SQL+="categoria VARCHAR(20) NOT NULL, genero VARCHAR(20) NOT NULL, precio INT(20) NOT NULL, rut VARCHAR (12)NOT NULL)";
+            SQL+="categoria VARCHAR(20) NOT NULL, genero VARCHAR(20) NOT NULL, precio INT(20) NOT NULL, rut VARCHAR (12)NOT NULL, arrendado BIT NOT NULL)";
             PreparedStatement ps = connection.prepareStatement(SQL);
             ps.execute();
             System.out.println("Tabla videojuego creada");
@@ -126,7 +126,7 @@ public class Conexion {
     }
     private void crear_tabla_arriendo(){
         try{
-            String SQL = "CREATE TABLE arriendo(numero_de_arriendo INT(12) PRIMARY KEY,fecha_arriendo DATE NOT NULL, fecha_entrega DATE NOT NULL,";
+            String SQL = "CREATE TABLE arriendo(codigo_arriendo VARCHAR(12) PRIMARY KEY,fecha_arriendo DATE NOT NULL, fecha_entrega DATE NOT NULL,";
             SQL+="codigo VARCHAR(12) NOT NULL, rut VARCHAR(12) NOT NULL)";
             PreparedStatement ps = connection.prepareStatement(SQL);
             ps.execute();
@@ -214,7 +214,7 @@ public class Conexion {
             System.out.println("Error al agregar vendedor en la base de datos");
         }
         return false;
-    }
+    }//agregar clave
     public boolean agregar_desarrollador_BD(Desarrollador desarrollador){
         try {
             String SQL = "INSERT INTO desarrollador (rut, nombre, direccion, correo, fono) VALUES (?,?,?,?,?)";
@@ -238,7 +238,7 @@ public class Conexion {
     }
     public boolean agregar_videojuego_BD(VideoJuego videojuego){
         try {
-            String SQL = "INSERT INTO videojuego (codigo, nombre, version, fecha_de_desarrollo, categoria, genero, precio, rut) VALUES (?,?,?,?,?,?,?,?)";
+            String SQL = "INSERT INTO videojuego (codigo, nombre, version, fecha_de_desarrollo, categoria, genero, precio, rut, arrendado) VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(SQL);
 
             ps.setString(1, videojuego.getCodigo());
@@ -250,6 +250,7 @@ public class Conexion {
             ps.setString(6,videojuego.getGenero());
             ps.setInt(7,videojuego.getPrecio());
             ps.setString(8,videojuego.getDesarrollador().getRut());
+            ps.setBoolean(9, videojuego.isArrendado());
 
             ps.executeUpdate();
 
@@ -263,10 +264,10 @@ public class Conexion {
     }
     public boolean agregar_arriendo_BD(Arriendo arriendo){
         try {
-            String SQL = "INSERT INTO arriendo (numero_de_arriendo, fecha_arriendo, fecha_entrega, codigo, rut) VALUES (?,?,?,?,?)";
+            String SQL = "INSERT INTO arriendo (codigo_arriendo, fecha_arriendo, fecha_entrega, codigo, rut) VALUES (?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(SQL);
 
-            ps.setInt(1, arriendo.getNumero_de_arriendo());
+            ps.setString(1, arriendo.getCodigo_arriendo());
             java.sql.Date sqlDate1 = new java.sql.Date(arriendo.getFecha_arriendo().getTime());
             ps.setDate(2,sqlDate1);
             java.sql.Date sqlDate2 = new java.sql.Date(arriendo.getFecha_entrega().getTime());
@@ -285,7 +286,7 @@ public class Conexion {
         }
         return false;        
     }
-//-------------------------------------OBTENER------------------------------------- PROBAR
+//-------------------------------------OBTENER------------------------------------- FUNCIONA
     public List <Usuario> obtener_usuarios_BD(){//(String rut){
         try {
         String SQL = "SELECT * From usuario"; //WHERE rut = ?";
@@ -351,7 +352,7 @@ public class Conexion {
             System.out.println("Error al cargar los datos de los vendedores");
         }
         return null;
-    }   
+    }   //agregar clave
     public List <Desarrollador> obtener_desarrolladores_BD(){//(String rut){
         try {
         String SQL = "SELECT * From desarrollador"; //WHERE rut = ?";
@@ -387,14 +388,14 @@ public class Conexion {
         String SQL = "SELECT * From videojuego"; //WHERE rut = ?";
         PreparedStatement ps = connection.prepareStatement(SQL);
         ResultSet rs = ps.executeQuery();
-        String codigo, nombre, version, categoria, genero, rut;
+        String codigo, nombre, version, categoria, genero, rut, arrendado;
         Date fecha_de_desarrollo = null;
         int precio;
         
         List <String[]> matriz = new ArrayList<>();
         SimpleDateFormat a = new SimpleDateFormat("dd-MM-yy");
         while(rs.next()){
-            String [] lista = new String [8];
+            String [] lista = new String [9];
             codigo = rs.getString("codigo");
             nombre = rs.getString("nombre");
             version = rs.getString("version");
@@ -403,6 +404,7 @@ public class Conexion {
             genero = rs.getString("genero");
             precio = rs.getInt("precio");
             rut = rs.getString("rut");
+            arrendado = rs.getBoolean("arrendado")+"";
 
             lista[0] = codigo;
             lista[1] = nombre;
@@ -412,6 +414,7 @@ public class Conexion {
             lista[5] = genero;
             lista[6] = precio+"";
             lista[7] = rut;
+            lista[8] = arrendado;
             
             matriz.add(lista);
         }
@@ -429,25 +432,25 @@ public class Conexion {
         String SQL = "SELECT * From arriendo"; //WHERE rut = ?";
         PreparedStatement ps = connection.prepareStatement(SQL);
         ResultSet rs = ps.executeQuery();
-        //numero_de_arriendo, fecha_arriendo, fecha_entrega, codigo, rut
-        int numero_de_arriendo;
+
+
         Date fecha_arriendo = null;
         Date fecha_entrega = null;
-        String codigo, rut;
+        String codigo_arriendo, codigo, rut;
         
         
         List <String[]> matriz = new ArrayList<>();
         SimpleDateFormat a = new SimpleDateFormat("dd-MM-yy");
         while(rs.next()){
             String [] lista = new String [5];
-            numero_de_arriendo = rs.getInt("numero_de_arriendo");
+            codigo_arriendo = rs.getString("codigo_arriendo");
             fecha_arriendo = rs.getDate("fecha_arriendo");
             fecha_entrega = rs.getDate("fecha_entrega");
             
             codigo = rs.getString("codigo");            
             rut = rs.getString("rut");
 
-            lista[0] = numero_de_arriendo+"";
+            lista[0] = codigo_arriendo;
             lista[1] = a.format(fecha_arriendo);
             lista[2] = a.format(fecha_entrega);
             lista[3] = codigo;
@@ -489,8 +492,53 @@ public class Conexion {
             System.out.println("Error al actualizar el usuario en la base de datos");
         } 
         return false;
-    }   
-//-------------------------------------ELIMINAR-------------------------------------    PROBAR
+    }  
+    public boolean actualizar_vendedor_BD(Vendedor vendendor){//cambiar la clave
+        try{
+            //nombre, direccion, correo, fecha_de_nacimiento, comuna, telefono
+            String SQL = "UPDATE vendendor SET nombre = ?, direccion = ?, fono = ?, clave = ? WHERE rut = ?";
+            PreparedStatement ps = connection.prepareStatement(SQL);
+
+            
+            ps.setString(1, vendendor.getNombre());
+            ps.setString(2, vendendor.getDireccion());            
+            ps.setString(3, vendendor.getFono());
+            ps.setString(4, vendendor.getClave());
+            
+            ps.executeUpdate();        
+            ps.close();
+            System.out.println("Usuario Actualizado en la base de datos.");
+            return true;
+        }catch(Exception e ){
+            System.out.println("Error al actualizar el usuario en la base de datos");
+        } 
+        return false;
+    }  //agregar clave
+    public boolean actualizar_videojuego_BD(VideoJuego videojuego){
+        try{
+            //nombre, version, fecha_de_desarrollo, categoria, genero, precio, arrendado
+            String SQL = "UPDATE videojuego SET nombre = ?, version = ?, fecha_de_desarrollo = ?, categoria = ?, genero = ?, precio = ?, arrendado = ? WHERE codigo = ?";
+            PreparedStatement ps = connection.prepareStatement(SQL);
+
+            ps.setString(1, videojuego.getNombre());
+            ps.setString(2, videojuego.getVersion());
+            java.sql.Date sqlDate = new java.sql.Date(videojuego.getFecha_de_desarrollo().getTime());
+            ps.setDate(3, sqlDate);
+            ps.setString(4, videojuego.getCategoria());
+            ps.setString(5, videojuego.getGenero());
+            ps.setInt(6, videojuego.getPrecio());
+            ps.setBoolean(7, videojuego.isArrendado());
+            ps.setString(8, videojuego.getCodigo());
+            ps.executeUpdate();        
+            ps.close();
+            System.out.println("Videojuego Actualizado en la base de datos.");
+            return true;
+        }catch(Exception e ){
+            System.out.println("Error al actualizar el videojuego en la base de datos\n"+e.getMessage());
+        } 
+        return false;
+    }  
+//-------------------------------------ELIMINAR-------------------------------------    FUNCIONA
     public boolean eliminar_usuario_BD(String rut){
         try{
             String SQL = "DELETE FROM usuario WHERE rut = ?";
@@ -551,11 +599,11 @@ public class Conexion {
         } 
         return false;
     }
-    public boolean eliminar_arriendo_BD(int nro_arriendo){
+    public boolean eliminar_arriendo_BD(String codigo_arriendo){
         try{
-            String SQL = "DELETE FROM arriendo WHERE numero_de_arriendo = ?";
+            String SQL = "DELETE FROM arriendo WHERE codigo_arriendo = ?";
             PreparedStatement ps = connection.prepareStatement(SQL);
-            ps.setInt(1, nro_arriendo);
+            ps.setString(1, codigo_arriendo);
             
             ps.executeUpdate();        
             ps.close();
@@ -567,4 +615,3 @@ public class Conexion {
         return false;
     }       
 }
-

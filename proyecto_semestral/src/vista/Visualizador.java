@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
  * @author thoma
  */
 public class Visualizador extends javax.swing.JFrame {
-    public boolean estado = true;
     /**
      * Creates new form Visualizador1
      */

@@ -205,7 +205,7 @@ public class IngresarRegistros extends javax.swing.JFrame {
 
         categoria_input.setBackground(new java.awt.Color(51, 51, 51));
         categoria_input.setForeground(new java.awt.Color(102, 102, 102));
-        categoria_input.setText("?");
+        categoria_input.setText("shooting");
         categoria_input.setBorder(null);
         ingresarVideoJuego.add(categoria_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 270, -1));
         ingresarVideoJuego.add(jSeparator_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 270, 10));

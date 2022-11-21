@@ -188,7 +188,7 @@ public class ActualizarArriendo extends javax.swing.JPanel {
         jLabel_rut1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel_rut1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_rut1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel_rut1.setText("Numero De Arriendo:");
+        jLabel_rut1.setText("Codigo arriendo:");
         actualizarArriendo.add(jLabel_rut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, -1));
 
         nroArriendo_input.setEditable(false);

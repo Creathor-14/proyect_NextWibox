@@ -31,6 +31,9 @@ public class IngresarArriendo extends javax.swing.JPanel {
 
         ingresarUsuario = new javax.swing.JPanel();
         jLabel_Titulo = new javax.swing.JLabel();
+        jLabel_rut1 = new javax.swing.JLabel();
+        codigoArriendo_input = new javax.swing.JTextField();
+        jSeparator_rut1 = new javax.swing.JSeparator();
         jLabel_rut = new javax.swing.JLabel();
         rutUsuario_input = new javax.swing.JTextField();
         jSeparator_rut = new javax.swing.JSeparator();
@@ -69,6 +72,20 @@ public class IngresarArriendo extends javax.swing.JPanel {
         jLabel_Titulo.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_Titulo.setText("Ingresar Arriendo");
         ingresarUsuario.add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
+
+        jLabel_rut1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel_rut1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel_rut1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_rut1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel_rut1.setText("Codigo arriendo:");
+        ingresarUsuario.add(jLabel_rut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, -1));
+
+        codigoArriendo_input.setBackground(new java.awt.Color(51, 51, 51));
+        codigoArriendo_input.setForeground(new java.awt.Color(102, 102, 102));
+        codigoArriendo_input.setText("1111");
+        codigoArriendo_input.setBorder(null);
+        ingresarUsuario.add(codigoArriendo_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 270, -1));
+        ingresarUsuario.add(jSeparator_rut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 270, 10));
 
         jLabel_rut.setBackground(new java.awt.Color(255, 255, 255));
         jLabel_rut.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -245,6 +262,7 @@ public class IngresarArriendo extends javax.swing.JPanel {
      * @param evt 
      */
     private void jLabel_registrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_registrarMouseClicked
+        String codigo_arriendo = codigoArriendo_input.getText();
         String rutUsuario = rutUsuario_input.getText();
         verificarCamposEnBlanco(rutUsuario, "Rut usuario");
         
@@ -258,7 +276,7 @@ public class IngresarArriendo extends javax.swing.JPanel {
         verificarCamposEnBlanco(fechaE, "fechaE");
 
         try{
-            Visualizador.sistema.ingresarArriendo("#"+codigo_videojuego, rutUsuario, fechaA, fechaE);
+            Visualizador.sistema.ingresarArriendo(codigo_arriendo, fechaA, fechaE, "#"+codigo_videojuego, rutUsuario);
             JOptionPane.showMessageDialog(null,"Arriendo ingresado.");
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e.getMessage(),"Validación",0);
@@ -280,6 +298,7 @@ public class IngresarArriendo extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField codigoArriendo_input;
     private javax.swing.JTextField codigoVideojuego_input;
     private javax.swing.JTextField fechaArriendo_input;
     private javax.swing.JTextField fechaEntrega_input;
@@ -292,6 +311,7 @@ public class IngresarArriendo extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel_nombre1;
     private javax.swing.JLabel jLabel_registrar;
     private javax.swing.JLabel jLabel_rut;
+    private javax.swing.JLabel jLabel_rut1;
     private javax.swing.JPanel jPanel_menu;
     private javax.swing.JPanel jPanel_registrar;
     private javax.swing.JSeparator jSeparator_fechaA;
@@ -299,6 +319,7 @@ public class IngresarArriendo extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator_nombre1;
     private javax.swing.JSeparator jSeparator_nombre3;
     private javax.swing.JSeparator jSeparator_rut;
+    private javax.swing.JSeparator jSeparator_rut1;
     private javax.swing.JTextField rutUsuario_input;
     // End of variables declaration//GEN-END:variables
 }

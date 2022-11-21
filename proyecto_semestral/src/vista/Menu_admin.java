@@ -381,7 +381,12 @@ public class Menu_admin extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Validación", 0);
                 }
             }else{
-                Visualizador.sistema.eliminar_videojuego(rut);
+                try{
+                    Visualizador.sistema.eliminar_videojuego(rut);
+                }catch(Exception e){
+                    eliminado = false;
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Validación", 0);
+                } 
             }
             if(eliminado){
                 JOptionPane.showMessageDialog(null, titulo+" eliminado", "Validación", 1);
