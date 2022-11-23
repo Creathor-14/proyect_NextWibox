@@ -2,6 +2,10 @@ package vista;
 
 import controlador.Sistema_impl;
 import java.awt.Color;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class Visualizador extends javax.swing.JFrame {
@@ -9,6 +13,12 @@ public class Visualizador extends javax.swing.JFrame {
     public static Sistema_impl sistema = new Sistema_impl();
     public Visualizador() {
         initComponents();
+        ImageIcon imagen = new ImageIcon("src/imagenes/LogoNegro.png");
+        Icon icono = new ImageIcon (imagen.getImage(). getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
+        jLabel1.setIcon(icono);
+        this.repaint();
+        
+        
         this.setLocationRelativeTo(null);//hace que la pestaña se vea al centro
         cargar_login();
         
@@ -40,10 +50,10 @@ public class Visualizador extends javax.swing.JFrame {
         cerrar = new javax.swing.JPanel();
         cerrar_text = new javax.swing.JLabel();
         diseño = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         contenido = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(900, 500));
         setMinimumSize(new java.awt.Dimension(900, 500));
         setUndecorated(true);
         setResizable(false);
@@ -53,8 +63,9 @@ public class Visualizador extends javax.swing.JFrame {
 
         cerrar.setBackground(new java.awt.Color(0, 0, 0));
 
+        cerrar_text.setBackground(new java.awt.Color(255, 0, 0));
         cerrar_text.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        cerrar_text.setForeground(new java.awt.Color(255, 255, 255));
+        cerrar_text.setForeground(new java.awt.Color(102, 102, 255));
         cerrar_text.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cerrar_text.setText("X");
         cerrar_text.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -87,6 +98,7 @@ public class Visualizador extends javax.swing.JFrame {
         diseño.setBackground(new java.awt.Color(0, 0, 0));
         diseño.setMaximumSize(new java.awt.Dimension(900, 500));
         diseño.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        diseño.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 240, 160));
 
         contenido.setBackground(new java.awt.Color(51, 51, 51));
         contenido.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -127,6 +139,8 @@ public class Visualizador extends javax.swing.JFrame {
         cerrar.setBackground(Color.black);
     }//GEN-LAST:event_cerrar_textMouseExited
     
+                                    
+
     
     
     
@@ -169,5 +183,6 @@ public class Visualizador extends javax.swing.JFrame {
     private javax.swing.JPanel contenido;
     private javax.swing.JPanel diseño;
     private javax.swing.JPanel header;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

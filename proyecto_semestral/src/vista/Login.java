@@ -49,13 +49,13 @@ public class Login extends javax.swing.JPanel {
         contraseña_texto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         contraseña_texto.setForeground(new java.awt.Color(255, 255, 255));
         contraseña_texto.setText("CONTRASEÑA");
-        login.add(contraseña_texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 203, -1, -1));
+        login.add(contraseña_texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, -1, -1));
 
         contraseña_input.setBackground(new java.awt.Color(51, 51, 51));
         contraseña_input.setForeground(new java.awt.Color(102, 102, 102));
         contraseña_input.setBorder(null);
         login.add(contraseña_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 229, 270, -1));
-        login.add(contraseña_separador, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 245, 270, 10));
+        login.add(contraseña_separador, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 270, 10));
 
         acceder_boton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         acceder_boton.setForeground(new java.awt.Color(255, 255, 255));
@@ -67,7 +67,7 @@ public class Login extends javax.swing.JPanel {
                 acceder_botonMouseClicked(evt);
             }
         });
-        login.add(acceder_boton, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 150, 50));
+        login.add(acceder_boton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 140, 50));
 
         infoAdmin_boton.setText("Admin");
         infoAdmin_boton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -75,7 +75,7 @@ public class Login extends javax.swing.JPanel {
                 infoAdmin_botonMouseClicked(evt);
             }
         });
-        login.add(infoAdmin_boton, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, -1));
+        login.add(infoAdmin_boton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, 80, -1));
 
         infoVendedor_boton.setText("Vendedor");
         infoVendedor_boton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -83,7 +83,7 @@ public class Login extends javax.swing.JPanel {
                 infoVendedor_botonMouseClicked(evt);
             }
         });
-        login.add(infoVendedor_boton, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, -1, -1));
+        login.add(infoVendedor_boton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 410, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
