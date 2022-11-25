@@ -14,7 +14,10 @@ public class Menu_admin extends javax.swing.JFrame {
     
     public Menu_admin() {
         initComponents();
-        
+        ImageIcon imagen = new ImageIcon("src/imagenes/LogoNegro.png");
+        Icon icono = new ImageIcon (imagen.getImage(). getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
+        jLabel1.setIcon(icono);
+        this.repaint();
         
         
         this.setLocationRelativeTo(null);
@@ -53,6 +56,7 @@ public class Menu_admin extends javax.swing.JFrame {
     private void initComponents() {
 
         menu = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         titulo_texto = new javax.swing.JLabel();
         buscar_txt = new javax.swing.JLabel();
@@ -79,21 +83,27 @@ public class Menu_admin extends javax.swing.JFrame {
 
         menu.setBackground(new java.awt.Color(51, 51, 51));
         menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 420));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         titulo_texto.setBackground(new java.awt.Color(255, 255, 255));
         titulo_texto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         titulo_texto.setForeground(new java.awt.Color(255, 255, 255));
         titulo_texto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(titulo_texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 43, 200, -1));
 
         buscar_txt.setBackground(new java.awt.Color(255, 255, 255));
         buscar_txt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buscar_txt.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(buscar_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 73, -1, -1));
 
         buscar_input.setBackground(new java.awt.Color(51, 51, 51));
         buscar_input.setForeground(new java.awt.Color(102, 102, 102));
         buscar_input.setBorder(null);
+        jPanel1.add(buscar_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 93, 270, 20));
+        jPanel1.add(rut_separador, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 113, 270, 10));
 
         buscar_botton.setText("Buscar");
         buscar_botton.addActionListener(new java.awt.event.ActionListener() {
@@ -101,6 +111,7 @@ public class Menu_admin extends javax.swing.JFrame {
                 buscar_bottonActionPerformed(evt);
             }
         });
+        jPanel1.add(buscar_botton, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 93, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,12 +131,15 @@ public class Menu_admin extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 143, -1, 180));
+
         ingresar_botton.setText("Ingresar");
         ingresar_botton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ingresar_bottonActionPerformed(evt);
             }
         });
+        jPanel1.add(ingresar_botton, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 353, -1, -1));
 
         modificar_botton.setText("Modificar");
         modificar_botton.addActionListener(new java.awt.event.ActionListener() {
@@ -133,6 +147,7 @@ public class Menu_admin extends javax.swing.JFrame {
                 modificar_bottonActionPerformed(evt);
             }
         });
+        jPanel1.add(modificar_botton, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 353, -1, -1));
 
         eliminar_botton.setText("Eliminar");
         eliminar_botton.addActionListener(new java.awt.event.ActionListener() {
@@ -140,59 +155,7 @@ public class Menu_admin extends javax.swing.JFrame {
                 eliminar_bottonActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 19, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(titulo_texto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(buscar_txt))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buscar_input, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rut_separador, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
-                        .addComponent(buscar_botton))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ingresar_botton)
-                        .addGap(118, 118, 118)
-                        .addComponent(modificar_botton)
-                        .addGap(89, 89, 89)
-                        .addComponent(eliminar_botton)))
-                .addGap(0, 19, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 44, Short.MAX_VALUE)
-                .addComponent(titulo_texto)
-                .addGap(30, 30, 30)
-                .addComponent(buscar_txt)
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(buscar_input, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(rut_separador, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(buscar_botton))
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ingresar_botton)
-                    .addComponent(modificar_botton)
-                    .addComponent(eliminar_botton))
-                .addGap(0, 44, Short.MAX_VALUE))
-        );
+        jPanel1.add(eliminar_botton, new org.netbeans.lib.awtextra.AbsoluteConstraints(379, 353, -1, -1));
 
         menu.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 490, 420));
 
@@ -260,6 +223,7 @@ public class Menu_admin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void usuarios_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarios_menuActionPerformed
+        jLabel1.setVisible(false);
         titulo_texto.setText("Menu Usuario");
         mostrarInfo();
         buscar_txt.setText("Rut:");
@@ -276,6 +240,7 @@ public class Menu_admin extends javax.swing.JFrame {
     }//GEN-LAST:event_usuarios_menuActionPerformed
 
     private void vendedores_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendedores_menuActionPerformed
+        jLabel1.setVisible(false);
         titulo_texto.setText("Menu Vendedor");
         mostrarInfo();
         buscar_txt.setText("Rut:");
@@ -291,6 +256,7 @@ public class Menu_admin extends javax.swing.JFrame {
     }//GEN-LAST:event_vendedores_menuActionPerformed
 
     private void desarrolladores_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desarrolladores_menuActionPerformed
+        jLabel1.setVisible(false);
         titulo_texto.setText("Menu Desarrollador");
         mostrarInfo();
         buscar_txt.setText("Rut:");
@@ -306,6 +272,7 @@ public class Menu_admin extends javax.swing.JFrame {
     }//GEN-LAST:event_desarrolladores_menuActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        jLabel1.setVisible(false);
         titulo_texto.setText("Menu Videojuego");
         mostrarInfo();
         buscar_txt.setText("Codigo:");
@@ -427,6 +394,7 @@ public class Menu_admin extends javax.swing.JFrame {
     private javax.swing.JMenuItem desarrolladores_menu;
     private javax.swing.JButton eliminar_botton;
     private javax.swing.JButton ingresar_botton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;

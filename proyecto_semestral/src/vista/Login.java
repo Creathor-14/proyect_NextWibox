@@ -54,7 +54,7 @@ public class Login extends javax.swing.JPanel {
         contraseña_input.setBackground(new java.awt.Color(51, 51, 51));
         contraseña_input.setForeground(new java.awt.Color(102, 102, 102));
         contraseña_input.setBorder(null);
-        login.add(contraseña_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 229, 270, -1));
+        login.add(contraseña_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 270, -1));
         login.add(contraseña_separador, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 270, 10));
 
         acceder_boton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
