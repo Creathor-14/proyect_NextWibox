@@ -52,15 +52,15 @@ public class ActualizarArriendo extends javax.swing.JPanel {
         jLabel_Titulo.setBackground(new java.awt.Color(255, 255, 255));
         jLabel_Titulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel_Titulo.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_Titulo.setText("Actualizar Arriendo");
-        actualizarArriendo.add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
+        jLabel_Titulo.setText("ACTUALIZAR ARRIENDO");
+        actualizarArriendo.add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, -1));
 
         jPanel_menu.setBackground(new java.awt.Color(0, 153, 153));
 
         jLabel_menu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel_menu.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_menu.setText("Atras");
+        jLabel_menu.setText("ATRAS");
         jLabel_menu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel_menuMouseClicked(evt);
@@ -71,31 +71,23 @@ public class ActualizarArriendo extends javax.swing.JPanel {
         jPanel_menu.setLayout(jPanel_menuLayout);
         jPanel_menuLayout.setHorizontalGroup(
             jPanel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-            .addGroup(jPanel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_menuLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jLabel_menu, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
         );
         jPanel_menuLayout.setVerticalGroup(
             jPanel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 35, Short.MAX_VALUE)
-            .addGroup(jPanel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_menuLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_menuLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        actualizarArriendo.add(jPanel_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, -1, -1));
+        actualizarArriendo.add(jPanel_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 120, 30));
 
         jPanel_actualizar.setBackground(new java.awt.Color(0, 153, 153));
 
         jLabel_actualizar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel_actualizar.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_actualizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_actualizar.setText("Actualizar");
+        jLabel_actualizar.setText("ACTUALIZAR");
         jLabel_actualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel_actualizarMouseClicked(evt);
@@ -106,94 +98,92 @@ public class ActualizarArriendo extends javax.swing.JPanel {
         jPanel_actualizar.setLayout(jPanel_actualizarLayout);
         jPanel_actualizarLayout.setHorizontalGroup(
             jPanel_actualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_actualizarLayout.createSequentialGroup()
-                .addComponent(jLabel_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabel_actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
         );
         jPanel_actualizarLayout.setVerticalGroup(
             jPanel_actualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_actualizarLayout.createSequentialGroup()
-                .addComponent(jLabel_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_actualizarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        actualizarArriendo.add(jPanel_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 100, 30));
+        actualizarArriendo.add(jPanel_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, 120, 30));
 
         jLabel_rut.setBackground(new java.awt.Color(255, 255, 255));
         jLabel_rut.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel_rut.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_rut.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel_rut.setText("Rut usuario:");
-        actualizarArriendo.add(jLabel_rut, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 130, -1));
+        jLabel_rut.setText("Rut usuario");
+        actualizarArriendo.add(jLabel_rut, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 130, -1));
 
         rutUsuario_input.setEditable(false);
         rutUsuario_input.setBackground(new java.awt.Color(51, 51, 51));
         rutUsuario_input.setForeground(new java.awt.Color(102, 102, 102));
         rutUsuario_input.setBorder(null);
-        actualizarArriendo.add(rutUsuario_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 270, -1));
-        actualizarArriendo.add(jSeparator_rut, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 270, 10));
+        actualizarArriendo.add(rutUsuario_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 270, -1));
+        actualizarArriendo.add(jSeparator_rut, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 270, 10));
 
         jLabel_fechaA.setBackground(new java.awt.Color(255, 255, 255));
         jLabel_fechaA.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel_fechaA.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_fechaA.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel_fechaA.setText("Fecha arriendo:");
-        actualizarArriendo.add(jLabel_fechaA, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 130, -1));
-        actualizarArriendo.add(jSeparator_fechaA, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 270, 10));
+        jLabel_fechaA.setText("Fecha arriendo");
+        actualizarArriendo.add(jLabel_fechaA, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 130, -1));
+        actualizarArriendo.add(jSeparator_fechaA, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 270, 10));
 
         jLabel_nombre1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel_nombre1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel_nombre1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_nombre1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel_nombre1.setText("Codigo videojuego:");
-        actualizarArriendo.add(jLabel_nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, -1, -1));
+        jLabel_nombre1.setText("Codigo videojuego");
+        actualizarArriendo.add(jLabel_nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, -1, -1));
 
         fechaArriendo_input.setBackground(new java.awt.Color(51, 51, 51));
         fechaArriendo_input.setForeground(new java.awt.Color(102, 102, 102));
         fechaArriendo_input.setBorder(null);
-        actualizarArriendo.add(fechaArriendo_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, 270, -1));
-        actualizarArriendo.add(jSeparator_nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 270, 10));
+        actualizarArriendo.add(fechaArriendo_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 270, -1));
+        actualizarArriendo.add(jSeparator_nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 270, 10));
 
         jLabel_fechaE.setBackground(new java.awt.Color(255, 255, 255));
         jLabel_fechaE.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel_fechaE.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_fechaE.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel_fechaE.setText("Fecha entrega:");
-        actualizarArriendo.add(jLabel_fechaE, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 130, -1));
-        actualizarArriendo.add(jSeparator_fechaE, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 270, 10));
+        jLabel_fechaE.setText("Fecha entrega");
+        actualizarArriendo.add(jLabel_fechaE, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 130, -1));
+        actualizarArriendo.add(jSeparator_fechaE, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, 270, 10));
 
         fechaEntrega_input.setBackground(new java.awt.Color(51, 51, 51));
         fechaEntrega_input.setForeground(new java.awt.Color(102, 102, 102));
         fechaEntrega_input.setBorder(null);
-        actualizarArriendo.add(fechaEntrega_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 270, -1));
-        actualizarArriendo.add(jSeparator_nombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 270, 10));
+        actualizarArriendo.add(fechaEntrega_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 270, -1));
+        actualizarArriendo.add(jSeparator_nombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 270, 10));
 
         jLabel_rut1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel_rut1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel_rut1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_rut1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel_rut1.setText("Codigo arriendo:");
-        actualizarArriendo.add(jLabel_rut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, -1));
+        jLabel_rut1.setText("Codigo arriendo");
+        actualizarArriendo.add(jLabel_rut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 150, -1));
 
         nroArriendo_input.setEditable(false);
         nroArriendo_input.setBackground(new java.awt.Color(51, 51, 51));
         nroArriendo_input.setForeground(new java.awt.Color(102, 102, 102));
         nroArriendo_input.setBorder(null);
-        actualizarArriendo.add(nroArriendo_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 270, -1));
-        actualizarArriendo.add(jSeparator_rut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 270, 10));
+        actualizarArriendo.add(nroArriendo_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 270, -1));
+        actualizarArriendo.add(jSeparator_rut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 270, 10));
 
         codigoVideojuego_input1.setEditable(false);
         codigoVideojuego_input1.setBackground(new java.awt.Color(51, 51, 51));
         codigoVideojuego_input1.setForeground(new java.awt.Color(102, 102, 102));
         codigoVideojuego_input1.setToolTipText("");
         codigoVideojuego_input1.setBorder(null);
-        actualizarArriendo.add(codigoVideojuego_input1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 270, -1));
+        actualizarArriendo.add(codigoVideojuego_input1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 270, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(actualizarArriendo, javax.swing.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE)
+            .addComponent(actualizarArriendo, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -55,13 +55,13 @@ public class Menu_vendedor extends javax.swing.JPanel {
         numArriendo_texto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         numArriendo_texto.setForeground(new java.awt.Color(255, 255, 255));
         numArriendo_texto.setText("Numero de arriendo:");
-        menu.add(numArriendo_texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
+        menu.add(numArriendo_texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
         numArriendo_input.setBackground(new java.awt.Color(51, 51, 51));
         numArriendo_input.setForeground(new java.awt.Color(102, 102, 102));
         numArriendo_input.setBorder(null);
-        menu.add(numArriendo_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 270, 20));
-        menu.add(numArriendo_separador, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 270, 10));
+        menu.add(numArriendo_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 270, 20));
+        menu.add(numArriendo_separador, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 460, 10));
 
         buscar_button.setText("Buscar");
         buscar_button.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -69,7 +69,7 @@ public class Menu_vendedor extends javax.swing.JPanel {
                 buscar_buttonMouseClicked(evt);
             }
         });
-        menu.add(buscar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, -1));
+        menu.add(buscar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 90, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,7 +91,7 @@ public class Menu_vendedor extends javax.swing.JPanel {
         jTable1.setShowGrid(false);
         jScrollPane1.setViewportView(jTable1);
 
-        menu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 600, 180));
+        menu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 580, 180));
 
         ingresar_button.setText("Ingresar");
         ingresar_button.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -99,7 +99,7 @@ public class Menu_vendedor extends javax.swing.JPanel {
                 ingresar_buttonMouseClicked(evt);
             }
         });
-        menu.add(ingresar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, -1, -1));
+        menu.add(ingresar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
 
         modificar_button.setText("Modificar");
         modificar_button.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -107,7 +107,7 @@ public class Menu_vendedor extends javax.swing.JPanel {
                 modificar_buttonMouseClicked(evt);
             }
         });
-        menu.add(modificar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, -1, -1));
+        menu.add(modificar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, -1, -1));
 
         actualizar_button.setText("Eliminar");
         actualizar_button.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -115,14 +115,14 @@ public class Menu_vendedor extends javax.swing.JPanel {
                 actualizar_buttonMouseClicked(evt);
             }
         });
-        menu.add(actualizar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 320, -1, -1));
+        menu.add(actualizar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 350, -1, -1));
 
         jPanel_cerrar_sesion.setBackground(new java.awt.Color(204, 0, 0));
 
         cerrarSesion_texto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         cerrarSesion_texto.setForeground(new java.awt.Color(255, 255, 255));
         cerrarSesion_texto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cerrarSesion_texto.setText("Cerrar Sesión");
+        cerrarSesion_texto.setText("CERRAR SECION");
         cerrarSesion_texto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cerrarSesion_textoMouseClicked(evt);
@@ -133,16 +133,16 @@ public class Menu_vendedor extends javax.swing.JPanel {
         jPanel_cerrar_sesion.setLayout(jPanel_cerrar_sesionLayout);
         jPanel_cerrar_sesionLayout.setHorizontalGroup(
             jPanel_cerrar_sesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_cerrar_sesionLayout.createSequentialGroup()
-                .addComponent(cerrarSesion_texto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(cerrarSesion_texto, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
         jPanel_cerrar_sesionLayout.setVerticalGroup(
             jPanel_cerrar_sesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cerrarSesion_texto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_cerrar_sesionLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(cerrarSesion_texto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        menu.add(jPanel_cerrar_sesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 392, 200, -1));
+        menu.add(jPanel_cerrar_sesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, 160, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -150,7 +150,7 @@ public class Menu_vendedor extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 660, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE))
+                .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

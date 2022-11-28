@@ -31,31 +31,31 @@ public class Login extends javax.swing.JPanel {
         titulo_texto.setForeground(new java.awt.Color(255, 255, 255));
         titulo_texto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo_texto.setText("INICIAR SESIÓN");
-        login.add(titulo_texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 102, -1, -1));
+        login.add(titulo_texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, -1));
 
         usuario_texto.setBackground(new java.awt.Color(255, 255, 255));
         usuario_texto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         usuario_texto.setForeground(new java.awt.Color(255, 255, 255));
         usuario_texto.setText("USUARIO");
-        login.add(usuario_texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 145, -1, -1));
+        login.add(usuario_texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, -1, -1));
 
         usuario_input.setBackground(new java.awt.Color(51, 51, 51));
         usuario_input.setForeground(new java.awt.Color(102, 102, 102));
         usuario_input.setBorder(null);
-        login.add(usuario_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 270, 20));
-        login.add(usuario_separador, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 270, 10));
+        login.add(usuario_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 270, 20));
+        login.add(usuario_separador, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 270, 10));
 
         contraseña_texto.setBackground(new java.awt.Color(51, 51, 51));
         contraseña_texto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         contraseña_texto.setForeground(new java.awt.Color(255, 255, 255));
         contraseña_texto.setText("CONTRASEÑA");
-        login.add(contraseña_texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, -1, -1));
+        login.add(contraseña_texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
 
         contraseña_input.setBackground(new java.awt.Color(51, 51, 51));
         contraseña_input.setForeground(new java.awt.Color(102, 102, 102));
         contraseña_input.setBorder(null);
-        login.add(contraseña_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 270, -1));
-        login.add(contraseña_separador, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 270, 10));
+        login.add(contraseña_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 270, -1));
+        login.add(contraseña_separador, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 270, 10));
 
         acceder_boton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         acceder_boton.setForeground(new java.awt.Color(255, 255, 255));
@@ -67,7 +67,7 @@ public class Login extends javax.swing.JPanel {
                 acceder_botonMouseClicked(evt);
             }
         });
-        login.add(acceder_boton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 140, 50));
+        login.add(acceder_boton, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, 140, 50));
 
         infoAdmin_boton.setText("Admin");
         infoAdmin_boton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -75,7 +75,7 @@ public class Login extends javax.swing.JPanel {
                 infoAdmin_botonMouseClicked(evt);
             }
         });
-        login.add(infoAdmin_boton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, 80, -1));
+        login.add(infoAdmin_boton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 80, -1));
 
         infoVendedor_boton.setText("Vendedor");
         infoVendedor_boton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -83,7 +83,7 @@ public class Login extends javax.swing.JPanel {
                 infoVendedor_botonMouseClicked(evt);
             }
         });
-        login.add(infoVendedor_boton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 410, -1, -1));
+        login.add(infoVendedor_boton, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

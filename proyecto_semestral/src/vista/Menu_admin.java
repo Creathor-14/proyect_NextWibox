@@ -83,7 +83,7 @@ public class Menu_admin extends javax.swing.JFrame {
 
         menu.setBackground(new java.awt.Color(51, 51, 51));
         menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 420));
+        menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 440));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -97,13 +97,13 @@ public class Menu_admin extends javax.swing.JFrame {
         buscar_txt.setBackground(new java.awt.Color(255, 255, 255));
         buscar_txt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buscar_txt.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(buscar_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 73, -1, -1));
+        jPanel1.add(buscar_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 73, 20, 20));
 
         buscar_input.setBackground(new java.awt.Color(51, 51, 51));
         buscar_input.setForeground(new java.awt.Color(102, 102, 102));
         buscar_input.setBorder(null);
-        jPanel1.add(buscar_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 93, 270, 20));
-        jPanel1.add(rut_separador, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 113, 270, 10));
+        jPanel1.add(buscar_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 93, 300, 20));
+        jPanel1.add(rut_separador, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 113, 360, 10));
 
         buscar_botton.setText("Buscar");
         buscar_botton.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +111,7 @@ public class Menu_admin extends javax.swing.JFrame {
                 buscar_bottonActionPerformed(evt);
             }
         });
-        jPanel1.add(buscar_botton, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 93, -1, -1));
+        jPanel1.add(buscar_botton, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 93, 70, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,7 +147,7 @@ public class Menu_admin extends javax.swing.JFrame {
                 modificar_bottonActionPerformed(evt);
             }
         });
-        jPanel1.add(modificar_botton, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 353, -1, -1));
+        jPanel1.add(modificar_botton, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 353, 90, -1));
 
         eliminar_botton.setText("Eliminar");
         eliminar_botton.addActionListener(new java.awt.event.ActionListener() {
@@ -155,7 +155,7 @@ public class Menu_admin extends javax.swing.JFrame {
                 eliminar_bottonActionPerformed(evt);
             }
         });
-        jPanel1.add(eliminar_botton, new org.netbeans.lib.awtextra.AbsoluteConstraints(379, 353, -1, -1));
+        jPanel1.add(eliminar_botton, new org.netbeans.lib.awtextra.AbsoluteConstraints(389, 353, 80, -1));
 
         menu.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 490, 420));
 
@@ -212,7 +212,7 @@ public class Menu_admin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+            .addComponent(menu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
