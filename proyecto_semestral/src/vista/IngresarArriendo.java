@@ -23,10 +23,6 @@ public class IngresarArriendo extends javax.swing.JPanel {
         jLabel_fechaA = new javax.swing.JLabel();
         codigoVideojuego_input = new javax.swing.JTextField();
         jSeparator_fechaA = new javax.swing.JSeparator();
-        jPanel_menu = new javax.swing.JPanel();
-        jLabel_menu = new javax.swing.JLabel();
-        jPanel_registrar = new javax.swing.JPanel();
-        jLabel_registrar = new javax.swing.JLabel();
         jLabel_nombre1 = new javax.swing.JLabel();
         fechaArriendo_input = new javax.swing.JTextField();
         jSeparator_nombre1 = new javax.swing.JSeparator();
@@ -34,6 +30,8 @@ public class IngresarArriendo extends javax.swing.JPanel {
         jSeparator_fechaE = new javax.swing.JSeparator();
         fechaEntrega_input = new javax.swing.JTextField();
         formato_txt = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        registrar_button = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(138, 25));
         setMinimumSize(new java.awt.Dimension(138, 25));
@@ -47,7 +45,7 @@ public class IngresarArriendo extends javax.swing.JPanel {
         jLabel_Titulo.setBackground(new java.awt.Color(255, 255, 255));
         jLabel_Titulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel_Titulo.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_Titulo.setText("INGRESAR ARRIENDO");
+        jLabel_Titulo.setText("Ingresar arriendo");
         ingresarUsuario.add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
 
         jLabel_rut1.setBackground(new java.awt.Color(255, 255, 255));
@@ -98,60 +96,6 @@ public class IngresarArriendo extends javax.swing.JPanel {
         ingresarUsuario.add(codigoVideojuego_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 260, -1));
         ingresarUsuario.add(jSeparator_fechaA, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 270, 10));
 
-        jPanel_menu.setBackground(new java.awt.Color(0, 153, 153));
-
-        jLabel_menu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel_menu.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_menu.setText("ATRAS");
-        jLabel_menu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel_menuMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel_menuLayout = new javax.swing.GroupLayout(jPanel_menu);
-        jPanel_menu.setLayout(jPanel_menuLayout);
-        jPanel_menuLayout.setHorizontalGroup(
-            jPanel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel_menu, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-        );
-        jPanel_menuLayout.setVerticalGroup(
-            jPanel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_menuLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        ingresarUsuario.add(jPanel_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 120, -1));
-
-        jPanel_registrar.setBackground(new java.awt.Color(0, 153, 153));
-
-        jLabel_registrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel_registrar.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_registrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_registrar.setText("REGISTRAR");
-        jLabel_registrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel_registrarMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel_registrarLayout = new javax.swing.GroupLayout(jPanel_registrar);
-        jPanel_registrar.setLayout(jPanel_registrarLayout);
-        jPanel_registrarLayout.setHorizontalGroup(
-            jPanel_registrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel_registrar, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-        );
-        jPanel_registrarLayout.setVerticalGroup(
-            jPanel_registrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_registrarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        ingresarUsuario.add(jPanel_registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, 120, -1));
-
         jLabel_nombre1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel_nombre1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel_nombre1.setForeground(new java.awt.Color(255, 255, 255));
@@ -187,6 +131,22 @@ public class IngresarArriendo extends javax.swing.JPanel {
         formato_txt.setBorder(null);
         ingresarUsuario.add(formato_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 10, -1));
 
+        jButton1.setText("ATRAS");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        ingresarUsuario.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 90, -1));
+
+        registrar_button.setText("REGISTRAR");
+        registrar_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrar_buttonActionPerformed(evt);
+            }
+        });
+        ingresarUsuario.add(registrar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 330, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -206,7 +166,11 @@ public class IngresarArriendo extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_menuMouseClicked
+    private void rutUsuario_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rutUsuario_inputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rutUsuario_inputActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Menu_vendedor Menu_vendedor = new Menu_vendedor();
         Menu_vendedor.setSize(660, 460);
         Menu_vendedor.setLocation(0,0);
@@ -215,9 +179,9 @@ public class IngresarArriendo extends javax.swing.JPanel {
         ingresarUsuario.add(Menu_vendedor,new org.netbeans.lib.awtextra.AbsoluteConstraints(0,0,-1,-1));
         ingresarUsuario.revalidate();
         ingresarUsuario.repaint();
-    }//GEN-LAST:event_jLabel_menuMouseClicked
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jLabel_registrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_registrarMouseClicked
+    private void registrar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrar_buttonActionPerformed
         String codigo_arriendo = codigoArriendo_input.getText();
         String rutUsuario = rutUsuario_input.getText();
         String codigo_videojuego = codigoVideojuego_input.getText();
@@ -226,13 +190,7 @@ public class IngresarArriendo extends javax.swing.JPanel {
         
         String fechaE=fechaEntrega_input.getText();
         ingresar_arriendo(codigo_arriendo, fechaA, fechaE, codigo_videojuego, rutUsuario);
-
-        
-    }//GEN-LAST:event_jLabel_registrarMouseClicked
-
-    private void rutUsuario_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rutUsuario_inputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rutUsuario_inputActionPerformed
+    }//GEN-LAST:event_registrar_buttonActionPerformed
     
     public void ingresar_arriendo(String codigo_arriendo,String fechaA,String fechaE,String codigo_videojuego,String rutUsuario){
         if(codigo_arriendo.isBlank()){
@@ -263,21 +221,19 @@ public class IngresarArriendo extends javax.swing.JPanel {
     private javax.swing.JTextField fechaEntrega_input;
     private javax.swing.JTextField formato_txt;
     private javax.swing.JPanel ingresarUsuario;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel_Titulo;
     private javax.swing.JLabel jLabel_fechaA;
     private javax.swing.JLabel jLabel_fechaE;
-    private javax.swing.JLabel jLabel_menu;
     private javax.swing.JLabel jLabel_nombre1;
-    private javax.swing.JLabel jLabel_registrar;
     private javax.swing.JLabel jLabel_rut;
     private javax.swing.JLabel jLabel_rut1;
-    private javax.swing.JPanel jPanel_menu;
-    private javax.swing.JPanel jPanel_registrar;
     private javax.swing.JSeparator jSeparator_fechaA;
     private javax.swing.JSeparator jSeparator_fechaE;
     private javax.swing.JSeparator jSeparator_nombre1;
     private javax.swing.JSeparator jSeparator_rut;
     private javax.swing.JSeparator jSeparator_rut1;
+    private javax.swing.JButton registrar_button;
     private javax.swing.JTextField rutUsuario_input;
     // End of variables declaration//GEN-END:variables
 }

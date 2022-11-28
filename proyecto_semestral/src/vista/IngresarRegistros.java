@@ -116,8 +116,8 @@ public class IngresarRegistros extends javax.swing.JFrame {
         titulo_txt.setBackground(new java.awt.Color(255, 255, 255));
         titulo_txt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         titulo_txt.setForeground(new java.awt.Color(255, 255, 255));
-        titulo_txt.setText("INGRESAR ARRIENDO");
-        ingresar.add(titulo_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
+        titulo_txt.setText("Ingresar");
+        ingresar.add(titulo_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, -1));
 
         registrar_button.setText("REGISTRAR");
         registrar_button.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +125,7 @@ public class IngresarRegistros extends javax.swing.JFrame {
                 registrar_buttonActionPerformed(evt);
             }
         });
-        ingresar.add(registrar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, -1, -1));
+        ingresar.add(registrar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, -1, -1));
 
         Remplazar.setMaximumSize(new java.awt.Dimension(440, 250));
         Remplazar.setMinimumSize(new java.awt.Dimension(440, 250));
@@ -143,70 +143,70 @@ public class IngresarRegistros extends javax.swing.JFrame {
         rut_txt.setForeground(new java.awt.Color(255, 255, 255));
         rut_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         rut_txt.setText("Rut");
-        ingresarPersona.add(rut_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 130, -1));
+        ingresarPersona.add(rut_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 130, -1));
 
         rut_input.setBackground(new java.awt.Color(51, 51, 51));
         rut_input.setForeground(new java.awt.Color(102, 102, 102));
         rut_input.setText("00.000.000-K");
         rut_input.setBorder(null);
-        ingresarPersona.add(rut_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 190, 20));
-        ingresarPersona.add(jSeparator_rut2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 190, 10));
+        ingresarPersona.add(rut_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 190, 20));
+        ingresarPersona.add(jSeparator_rut2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 250, 10));
 
         nombre_txt.setBackground(new java.awt.Color(255, 255, 255));
         nombre_txt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         nombre_txt.setForeground(new java.awt.Color(255, 255, 255));
         nombre_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         nombre_txt.setText("Nombre");
-        ingresarPersona.add(nombre_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 130, 20));
+        ingresarPersona.add(nombre_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 130, 20));
 
         nombre_input.setBackground(new java.awt.Color(51, 51, 51));
         nombre_input.setForeground(new java.awt.Color(102, 102, 102));
         nombre_input.setText("Juan Navarro");
         nombre_input.setBorder(null);
-        ingresarPersona.add(nombre_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 190, 20));
-        ingresarPersona.add(jSeparator_nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 190, 10));
+        ingresarPersona.add(nombre_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 190, 20));
+        ingresarPersona.add(jSeparator_nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 250, 10));
 
         correo_txt.setBackground(new java.awt.Color(255, 255, 255));
         correo_txt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         correo_txt.setForeground(new java.awt.Color(255, 255, 255));
         correo_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         correo_txt.setText("Correo");
-        ingresarPersona.add(correo_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 130, 20));
+        ingresarPersona.add(correo_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 130, 20));
 
         correo_input.setBackground(new java.awt.Color(51, 51, 51));
         correo_input.setForeground(new java.awt.Color(102, 102, 102));
         correo_input.setText("correoFalso@dominioFalso.cl");
         correo_input.setBorder(null);
-        ingresarPersona.add(correo_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 190, 20));
-        ingresarPersona.add(jSeparator_correo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 190, 10));
+        ingresarPersona.add(correo_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 190, 20));
+        ingresarPersona.add(jSeparator_correo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 250, 10));
 
         direccion_txt.setBackground(new java.awt.Color(255, 255, 255));
         direccion_txt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         direccion_txt.setForeground(new java.awt.Color(255, 255, 255));
         direccion_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         direccion_txt.setText("Direccion");
-        ingresarPersona.add(direccion_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 130, 20));
+        ingresarPersona.add(direccion_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 20));
 
         direccion_input.setBackground(new java.awt.Color(51, 51, 51));
         direccion_input.setForeground(new java.awt.Color(102, 102, 102));
         direccion_input.setText("Industrias 111");
         direccion_input.setBorder(null);
-        ingresarPersona.add(direccion_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 190, 20));
-        ingresarPersona.add(jSeparator_comuna1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 190, 10));
+        ingresarPersona.add(direccion_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 190, 20));
+        ingresarPersona.add(jSeparator_comuna1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 250, 10));
 
         comuna_txt.setBackground(new java.awt.Color(255, 255, 255));
         comuna_txt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         comuna_txt.setForeground(new java.awt.Color(255, 255, 255));
         comuna_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         comuna_txt.setText("Comuna");
-        ingresarPersona.add(comuna_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 130, 20));
+        ingresarPersona.add(comuna_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 130, 20));
 
         comuna_input.setBackground(new java.awt.Color(51, 51, 51));
         comuna_input.setForeground(new java.awt.Color(102, 102, 102));
         comuna_input.setText("San Joaquin");
         comuna_input.setBorder(null);
-        ingresarPersona.add(comuna_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 190, 20));
-        ingresarPersona.add(jSeparator_direccion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 190, 10));
+        ingresarPersona.add(comuna_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 190, 20));
+        ingresarPersona.add(jSeparator_direccion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 250, 10));
 
         ingresarUsuario.setBackground(new java.awt.Color(51, 51, 51));
         ingresarUsuario.setMaximumSize(new java.awt.Dimension(660, 460));
@@ -226,7 +226,7 @@ public class IngresarRegistros extends javax.swing.JFrame {
         telefono_input.setText("+56 9 0000 0000");
         telefono_input.setBorder(null);
         ingresarUsuario.add(telefono_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 250, -1));
-        ingresarUsuario.add(jSeparator_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 190, 10));
+        ingresarUsuario.add(jSeparator_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 250, 10));
 
         fechaNacimiento_txt.setBackground(new java.awt.Color(255, 255, 255));
         fechaNacimiento_txt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -240,7 +240,7 @@ public class IngresarRegistros extends javax.swing.JFrame {
         fechaNacimiento_input.setText("dd-MM-yy");
         fechaNacimiento_input.setBorder(null);
         ingresarUsuario.add(fechaNacimiento_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 250, -1));
-        ingresarUsuario.add(jSeparator_fNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 190, 10));
+        ingresarUsuario.add(jSeparator_fNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 250, 10));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -261,7 +261,7 @@ public class IngresarRegistros extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        ingresarPersona.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 390, 60));
+        ingresarPersona.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 390, 60));
 
         Remplazar.add(ingresarPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 

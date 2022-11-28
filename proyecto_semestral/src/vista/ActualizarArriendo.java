@@ -24,10 +24,6 @@ public class ActualizarArriendo extends javax.swing.JPanel {
 
         actualizarArriendo = new javax.swing.JPanel();
         jLabel_Titulo = new javax.swing.JLabel();
-        jPanel_menu = new javax.swing.JPanel();
-        jLabel_menu = new javax.swing.JLabel();
-        jPanel_actualizar = new javax.swing.JPanel();
-        jLabel_actualizar = new javax.swing.JLabel();
         jLabel_rut = new javax.swing.JLabel();
         rutUsuario_input = new javax.swing.JTextField();
         jSeparator_rut = new javax.swing.JSeparator();
@@ -44,6 +40,8 @@ public class ActualizarArriendo extends javax.swing.JPanel {
         nroArriendo_input = new javax.swing.JTextField();
         jSeparator_rut1 = new javax.swing.JSeparator();
         codigoVideojuego_input1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        registrar_button = new javax.swing.JButton();
 
         actualizarArriendo.setBackground(new java.awt.Color(51, 51, 51));
         actualizarArriendo.setPreferredSize(new java.awt.Dimension(610, 460));
@@ -52,62 +50,8 @@ public class ActualizarArriendo extends javax.swing.JPanel {
         jLabel_Titulo.setBackground(new java.awt.Color(255, 255, 255));
         jLabel_Titulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel_Titulo.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_Titulo.setText("ACTUALIZAR ARRIENDO");
+        jLabel_Titulo.setText("Actualizar arriendo");
         actualizarArriendo.add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, -1));
-
-        jPanel_menu.setBackground(new java.awt.Color(0, 153, 153));
-
-        jLabel_menu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel_menu.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_menu.setText("ATRAS");
-        jLabel_menu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel_menuMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel_menuLayout = new javax.swing.GroupLayout(jPanel_menu);
-        jPanel_menu.setLayout(jPanel_menuLayout);
-        jPanel_menuLayout.setHorizontalGroup(
-            jPanel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel_menu, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-        );
-        jPanel_menuLayout.setVerticalGroup(
-            jPanel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_menuLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        actualizarArriendo.add(jPanel_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 120, 30));
-
-        jPanel_actualizar.setBackground(new java.awt.Color(0, 153, 153));
-
-        jLabel_actualizar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel_actualizar.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_actualizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_actualizar.setText("ACTUALIZAR");
-        jLabel_actualizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel_actualizarMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel_actualizarLayout = new javax.swing.GroupLayout(jPanel_actualizar);
-        jPanel_actualizar.setLayout(jPanel_actualizarLayout);
-        jPanel_actualizarLayout.setHorizontalGroup(
-            jPanel_actualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel_actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-        );
-        jPanel_actualizarLayout.setVerticalGroup(
-            jPanel_actualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_actualizarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        actualizarArriendo.add(jPanel_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, 120, 30));
 
         jLabel_rut.setBackground(new java.awt.Color(255, 255, 255));
         jLabel_rut.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -179,6 +123,22 @@ public class ActualizarArriendo extends javax.swing.JPanel {
         codigoVideojuego_input1.setBorder(null);
         actualizarArriendo.add(codigoVideojuego_input1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 270, -1));
 
+        jButton1.setText("ATRAS");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        actualizarArriendo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 90, -1));
+
+        registrar_button.setText("REGISTRAR");
+        registrar_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrar_buttonActionPerformed(evt);
+            }
+        });
+        actualizarArriendo.add(registrar_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -193,7 +153,7 @@ public class ActualizarArriendo extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_menuMouseClicked
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Menu_vendedor menu_admin = new Menu_vendedor();
         menu_admin.setSize(660, 460);
         menu_admin.setLocation(0,0);
@@ -202,13 +162,13 @@ public class ActualizarArriendo extends javax.swing.JPanel {
         actualizarArriendo.add(menu_admin,new org.netbeans.lib.awtextra.AbsoluteConstraints(0,0,-1,-1));
         actualizarArriendo.revalidate();
         actualizarArriendo.repaint();
-    }//GEN-LAST:event_jLabel_menuMouseClicked
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jLabel_actualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_actualizarMouseClicked
+    private void registrar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrar_buttonActionPerformed
         String fechaA = fechaArriendo_input.getText();
         String fechaE = fechaEntrega_input.getText();
         actualizar_arriendo(fechaA, fechaE);
-    }//GEN-LAST:event_jLabel_actualizarMouseClicked
+    }//GEN-LAST:event_registrar_buttonActionPerformed
  
     public void actualizar_arriendo(String fechaA,String fechaE){
         if(fechaA.isBlank()){
@@ -231,16 +191,13 @@ public class ActualizarArriendo extends javax.swing.JPanel {
     private javax.swing.JTextField codigoVideojuego_input1;
     private javax.swing.JTextField fechaArriendo_input;
     private javax.swing.JTextField fechaEntrega_input;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel_Titulo;
-    private javax.swing.JLabel jLabel_actualizar;
     private javax.swing.JLabel jLabel_fechaA;
     private javax.swing.JLabel jLabel_fechaE;
-    private javax.swing.JLabel jLabel_menu;
     private javax.swing.JLabel jLabel_nombre1;
     private javax.swing.JLabel jLabel_rut;
     private javax.swing.JLabel jLabel_rut1;
-    private javax.swing.JPanel jPanel_actualizar;
-    private javax.swing.JPanel jPanel_menu;
     private javax.swing.JSeparator jSeparator_fechaA;
     private javax.swing.JSeparator jSeparator_fechaE;
     private javax.swing.JSeparator jSeparator_nombre1;
@@ -248,6 +205,7 @@ public class ActualizarArriendo extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator_rut;
     private javax.swing.JSeparator jSeparator_rut1;
     private javax.swing.JTextField nroArriendo_input;
+    private javax.swing.JButton registrar_button;
     private javax.swing.JTextField rutUsuario_input;
     // End of variables declaration//GEN-END:variables
 }
